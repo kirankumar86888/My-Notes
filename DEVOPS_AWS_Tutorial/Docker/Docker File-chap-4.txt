@@ -1,0 +1,80 @@
+Docker File
+===========
+	=>Docker file is a text document that contains commands that are used to assemble/create an image
+	=>Docker file contains instructions to build dockeer image
+	=>In Docker file we will use DSL Language (Domain Specific Language) a set of Keywords
+	=>Docker Engine(server) will process docker file instructions to buils docker image
+	=> To create a docker file - D should capital Letter compulsory (Dockerfile.txt)
+	=>First we will create a docker file ->in that we have a keywords and we create a image(docker pull) from that we will create a container(docker run)
+
+KeyWords : all keywords are in CAPITAL LETTER
+
+	1.FROM : it represent base image to create our own image
+	2.MAINTAINER: it reprsent name of the organization or author that who created the docker file (optional)
+	3.CMD : it reprsents the intial command and that should be executed when the container starts(linux commands)
+	4.RUN :It reprsent to runs linux comamnds with in the container , generally helps for installing the software/running the linux commands [RUN yum install maven]
+	5.ADD: It used  to add the files from host machine to conatiner,it is used to download the packages from internet
+	6.COPY : It used  to add the files from host machine to conatiner
+	7.USER : it is used to provide the info of logged user
+	8.WORKDIR :it is used to specify the defualt working directory inside the container
+	9.EXPOSE : it is used to specify the internal port of the container
+	10.ENTRYPOINT : It will instruct, it exceutes whenever the container runs
+	11.ENV :It is used to set the Environment variable(assigning the variables) like key value pairs
+
+Eg:
+	create a file Dockerfile
+	=>vim Dockerfile
+		FROM nginx
+		MAINTAINER madhu
+		CMD ["echo" "myfirstimage"]
+save and exit
+	=>Now create a docker image from base image
+	    docker build -t Mynginx .
+		(docker build -t(tag) <myownimage) and the path(.) root directory)
+
+	=>Now create a docker container from image
+		docker run -it mynginx 
+
+clone the source code
+in host machine avialble all files
+
+vim docker 
+from /home/ec2-user/hello-world-java 
+copy hello-world-java 
+run java compile
+
+
+1. Dockerfile
+-----------------
+FROM ubuntu
+MAINTAINER Madhu
+RUN apt-get update -y
+RUN apt-get install python3 -y
+CMD ["echo" ,"eneterd into container......"]
+CMD ["echo" ,"eneterd into container......"]
+CMD ["echo" ,"eneterd into container......"]
+CMD ["echo" ,"eneterd into container......"]
+CMD ["echo" ,"eneterd into container......"]
+CMD ["echo" ,"eneterd into container......"]
+ENTRYPOINT echo "I aam Madhu"
+CMD ["echo" ,"eneterd into container......10"]
+ENTRYPOINT echo "I aam Madhu"
+ENTRYPOINT echo "I aam Madhu"
+ENTRYPOINT echo "I aam Madhu"
+ENTRYPOINT echo "I aam Madhu"
+ENTRYPOINT echo "I aam Madhu"
+
+
+Last entrypoint will be run in the container
+
+2.Dockerfile
+
+ARG NGINX_VERSION = latest
+FROM NGINX:${NGINX_VERSION}
+ADD index.html /usr/share/nginx/html/index.html
+WORKDIR /usr/share/nginx/html/index.html
+CMD ["nginx", "-g" ,"daemon off;"]
+EXPOSE 80
+LABEL maintainer ="Madhu"
+ENV APP_VERSION =1.0
+

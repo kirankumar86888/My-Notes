@@ -1,0 +1,51 @@
+Kubernetes-YT-Architecture
+--------------------------
+
+k8s Architecture : short hand Kubernetes keyword(k 8 letters s)
+
+->Docker - we have container by docker run (we run the container) but in depth we have - we have a container run time which is Docker shim (for eg we habe java applicationn, we need havaruntime to run java similiarly we have container to run container we need container runtime)
+
+-> Kubernetes - lets say We have  Master and   Worker (we can have multiple master and multiples workers too)
+
+here the Requests are not sent to worker , but the request sent to master which is called as Control plane
+
+
+
+Worker node /Data plane  :- Running the actions
+Components : Kubelet,KubeProxy,Container runtime
+
+1. Pod -for depoyment we use pod(has some advance capabilities) in kubernertes wheres as we use contaienr in docker]
+
+2. kublet - is responsible for running the pod [even it can have container d , cri-o ,container runtime] - if applicatoin is not running kubelet inform one of the component in control plane that some thing going wrong
+dockershim/container runtime - is responsilble for running container
+
+
+3. Kube-proxy - is responsible for networking [it alloated with ip address, load balancing capabilities ]
+bridge-docker-0 :-is responsible for networking
+
+Control plane /Master Node: controlling the actions
+
+Why we need Control plane,when muliple user doing action like where pod can be used in node1 ,node2...
+
+1. API server : Is a component and take all the request it expose to the external world ,It is Core component of the kubernetes
+
+2. Sheduler  :Shedules the pods in kubernetes(shedules the resources)
+
+3. etcd : keyvalue store/Data store ,has the cluster related info (backup)
+
+4. controller manager : To support auto scaling , it has controllers(replica sets)[Manager for your Kunernetes in built Controller]
+
+5. Cloud Controller Manager :  Kubernetes runs on EKS /AKS 
+there is request to create a load balancer/storage server - Kubernetes translates the request from the user and to the cloud provider
+
+lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
+
+
+
+
+
+
+
+
+
+

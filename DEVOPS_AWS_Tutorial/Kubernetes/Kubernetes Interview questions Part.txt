@@ -1,0 +1,121 @@
+K8s Interview questions Part-1
+------------------------------
+
+1. Difference between Docker and Kuberentes
+ 
+	Docker:
+	------
+	a. Docker is contaienr platform (containers are ephimeral nature)
+
+	Kubernetes:
+	-----------
+	a. Kubernetes is a container orcahestration envirinment that provide auto healing, auto scaling , clustering and Enter prise support like Load balancing 
+
+2. What are the main components of Kubernetes architecture
+  On a broad level , we can divide the kuberetes components in two parts
+
+	1.Control pane :
+		a.API server : handling the api's, talking to the end users
+		b.Sheduler : shedules the resources on  the kubernetes cluster
+		c.Controller Manager : takes care of the defualt the controllers like ReplicaSet in kuberentes
+		d.Cloud Controller Manager : Load bamlcer service type - we get the load balnacer ip address this is done by cloud control manager
+		e.etcd : Key value store or data store or for logs or object store
+	2.Data plane:
+		a.Kubelet -responsible for managing the pods on the nodes 
+		b.Kube-proxy - networking components in kubernetes (takes care of updating the ipaddress, the sevice of node port the request has to be sent to the pod)
+		c.Container runtime - for conatnienr to run we have container runtime(docker shim)
+
+
+
+3.What are the main difference between the Docker swarm and Kubernetes
+
+Docker swarm :It is used for small scale solutions
+
+Kubernetes :It is better suited for large organizations as it offers more scability capabilities like policies and huge third part ecosystem support
+Advance networki capibilities are there
+
+
+4.difference betwwen the Docker Container amd Kubernetes pod
+
+A pod in kubernetes is a runtime specification of a container in docker 
+A pod provides more declarative way of defining using the yaml and you can run more than one container in a pod
+
+
+5.What is a namespace in kubernetes
+	->physicall there there in same kubernetes cluster but logically they have separaeted by a namespace
+
+In kuberentes namespace is a logical isolation of resources,network policies,rbac and everything. For example there are two projects using the same k8s cluster. one project can use ns1 and the other project can use ns3 without any overlap and authentication problems
+
+
+6.What is the role kube proxy?
+
+Kube-proxy works by maintaining a set of network rules on each node in the cluster which are updatyed dynamically as services are added or removed,When a client sends a request to a service, the request is intercepted by kube-proxy on the node where ut was recieved. Kube-proxy then looks up the destination endpoint for the service and routes the request accordingly
+
+Kube-proxy is an essential component of the kubernetes cluster as it ensures trhat the services acan communicate with each other
+
+Just simply tell abbout node port Mode
+
+7.What are the different types of services wuth in the kubernetes
+
+There rae three different ytpes of services
+
+	1.Cluster IP Mode :pods will cluster ip - acceseible with nthe kubernetes cluste
+	2.Node Port Mode : accessble with all the worker  nodes ip's
+	3.Load Balancer Mode :accesbile outside the organinzation - it creates a public ip address by Load balancer this can be done by ingress too
+
+
+8.What is difference between NodePort and Load B/alancer type service
+
+When a service us craeted a NodePort type, the kube-proxy updates the IPTables with Node Ip address and port that is chosen in the service soncfiguration to acces sthe pods.
+
+Wheras if you create a Service as type Load Balancer , the cloud control manager creates a external load balancer Ip  using the underlying cloud provider logic in the C-CM . Users can access services using the external Ip
+
+
+
+9.What is role of Kubelet
+
+Kubelet manages the containers that are scheduled to run on that node. It ensures that the containers are running and healthy, and that the resources they need are avaialble.
+
+Kubelet communicates with the Kubernetes APi server to get information about the containers that should be running on the node, and then starts and stops the containers as needed to maintain the desired state, it aslo monitors the containers to ensure that they are running correctly and restrats then if neccessary
+
+
+
+10.Day to Day activities on Kubernetes
+
+	->We mange the kubernetes cluster for our organization
+	->We ensure that , the the applications are deployed onto the kubernetes cluster and there are no isuues with the application
+	->We have set up monitoring on our kubernetes cluster
+	->We ensure that whenveer there are bugs on the kubernetes cluster for eg , the developers are not able to triubleshoot some issue with respect to pods/services/not able roye the traffice inside the kubernetes cluster in such cases we solve there problems
+
+	->We also do lot of Maintainence activities for eg we have kubernetes cluster with 3 master nodes and 10 worker nnodes so we have continous maintainance activities on this worker nodes and upgarding the version sof this worker nodes or installing some default mandatory packages and ensuring that these worker nodes are not exposed to security vulnerabilities
+	->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

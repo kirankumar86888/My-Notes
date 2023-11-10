@@ -1,0 +1,45 @@
+Ansible-Vault Commands
+-----------------------
+
+It is used for encyrption and decryption
+
+We can create the vault file - encryption
+
+We can view , edit,encrypt  the encrypted file
+
+And we can decrypt the file
+
+Noew we wil create vault file
+
+ansible-vault create mysample.txt
+It will ask the password give the passowrd
+
+enter the data in the file and save and exit
+
+cat mysample.txt
+
+It will display the content in encypted form
+
+Edit operation
+
+ansible-vault edit mysample.txt
+provide the vault password
+
+add the content into the file
+save nad exit
+
+View operation
+ansible-vault mysample.txt
+vault password:
+displays the content of that file
+
+Decryption operation
+
+ansible-vault decrypt mysample.txt
+vault password:
+
+Now it will decrypt the data and without password it will display the data
+
+
+
+same use for jenkins.yml file or apache.yml file  

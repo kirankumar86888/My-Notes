@@ -1,0 +1,49 @@
+Ansible tags
+==============
+	by using tags we execute selected task only
+For Example if we have larger tasks
+now we need to run only a specific task so we use the concept Ansible tags
+
+For
+vim tags.yml
+
+	---#ANSIBLE TAGS
+	- hosts: dev
+	  user: ansible
+	  become: yes
+	  connection: ssh
+	  tasks:
+	   - name: INSTALL MAVEN
+	    action: yum name= maven state=present
+	    tags: a
+	   - name :INSTALL DOCKER
+	    action: yum name= docker state=present
+	    tags: B
+	   - name :INSTALL TREE
+	    action: yum name= tree state=present
+	    tags: c
+	   - name :INSTALL GIT
+	    action: yum name= git state=present
+	    tags: d
+	   - name :UNINSTALL GIT
+	    action: yum name= git state=absent
+	    tags: e
+	   - name :UNINSTALL TREE
+	    action: yum name= tree state=present
+	    tags: f
+
+save and exit
+
+ansible-playbook tags.yml --sybtax-check
+now to install tree package we use the command
+
+ansible-playbook tags.yml --skip-tags "a,b,d,e,f"
+
+
+Now if we 100 tags we cant skip all the tags by specifying all the tags
+So we use ansible roles
+
+
+
+
+

@@ -1,0 +1,82 @@
+DevOps Intro
+============
+1. Waterfall Model :
+-------------------
+ ->has 7 phases
+->Sequential Model/Linear Model
+->In Middle of the project- No Requirements are not allowed
+-> Modifications cannot be done
+->for small time projects
+
+Phases :
+
+1.Requirement Gaathering
+2.Planning - 1 year
+3.Design - documentation creation
+4.Development - Source Code creation
+5.Testing - 
+6.Deployment
+7.Maintainence - 24/7 - Monitoring 
+
+2. Agile Model:
+----------------
+->Divided into SubModels
+->Scrum Model
+->in betwwen the requirements are gathered
+->Development cost is less
+->Continous Process
+->Thre is no collibaration between the developrs and Operators
+
+3.DevOps:
+-----------
+Total phases
+PLAN
+CODE
+BUILD
+TEST
+MONITOR
+OPERATIONS
+DEPLOY
+RELEASE
+
+
+->Dev+Ops -it is methodology/framework
+->dev- 
+		PLAN
+		CODE
+		BUILD
+		TEST
+->Ops-
+		Deploy
+		Operations
+		Monitoring
+		Release
+
+->IN 2012 DEVOPS is available in market
+
+PLAN,CODE - SOURCE CODE DEVLOPMENT - GIT
+BUILD - ANT,GRADLE,MAVEN tools are used
+TEST
+
+DEPLOY,OPERATE- DOCKER,ANSIBLE.. tools are used
+MONITOR-NAGGIOS,SPLUNK.. tools are used
+
+BOTH INTEGRATE - JENKINS TOOLS(CICD..Process)	
+
+
+To know DevOps
+
+1.LINUX
+2.GIT 
+3.MAVEN
+4.JENKINS
+5.ANSIBLE
+6.DOCKER
+7.NAGIOS		
+EXTRA TOOLS WE LEARN -NEXUS,JFROG,SONARQUBE,PROMETHEUSN,GRAFANA
+
+
+8.AWS - 
+9.TERRAFORM
+10.KUBERNETES
+11.SHELL SCRIPT

@@ -1,0 +1,25 @@
+Users -Jenkins
+===============
+reddymadhumitha
+Aeroplane9@
+Madhumitha
+Aeroplane9@
+
+To add users in jenkins
+
+1.Manage Jenkins
+2. Under Security ->Users
+3.Click on Create User
+4.Provide the details
+5.Click on add
+6. User is succesfully added
+
+Authorizations
+=============
+
+	->Mangage Jenkins
+	->Security
+	->Authentication
+	->Matrx-based Security - to provide the security
+	->under this user can bed added
+	->We can provide the access based on the requirement

@@ -1,0 +1,137 @@
+
+NAGIOS INSTALLATION COMMANDS 
+===============================================
+1. Update the system packages
+
+ sudo apt update
+
+2. Install all the required packages.
+
+sudo apt install wget unzip curl openssl build-essential libgd-dev libssl-dev libapache2-mod-php php-gd php apache2 -y
+
+3.Download Nagios Core Setup files
+
+sudo wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.6.tar.gz
+
+4. Extract the downloaded files.
+
+   sudo tar -zxvf nagios-4.4.6.tar.gz
+
+5. Navigate to the setup directory.
+
+  cd nagios-4.4.6
+
+6. Run the Nagios Core configure script.
+
+sudo ./configure
+
+7. Compile the main program and CGIs.
+
+   sudo make all
+
+8. Make and install group and user.
+
+   sudo make install-groups-users
+
+9. Add www-data directories user to the nagios group.
+
+   sudo usermod -a -G nagios www-data
+
+10. Install Nagios.
+
+   sudo make install
+11. Initialize all the installation configuration scripts.
+
+   sudo make install-init
+12. Install and configure permissions on the configs' directory.
+
+   sudo make install-commandmode
+13. Install sample config files.
+
+  sudo make install-config
+14. Install apache files.
+
+ sudo make install-webconf
+
+15. Enable apache rewrite mode.
+
+  sudo a2enmod rewrite
+16. Enable CGI config.
+
+ sudo a2enmod cgi
+
+18. Restart the Apache service.
+
+ sudo systemctl restart apache2
+19. Create a user and set the password when prompted.
+
+  sudo htpasswd -c /usr/local/nagios/etc/htpasswd.users admin
+
+20 Install Nagios Plugins
+Download the Nagios Core plugin. 
+
+cd ~/
+
+sudo wget https://nagios-plugins.org/download/nagios-plugins-2.3.3.tar.gz
+
+21. Extract the downloaded plugin.
+
+   sudo tar -zxvf nagios-plugins-2.3.3.tar.gz
+22. Navigate to the plugins' directory.
+
+   cd nagios-plugins-2.3.3/
+
+23. Run the plugin configure script.
+
+ sudo ./configure --with-nagios-user=nagios --with-nagios-group=nagios
+
+24.Compile Nagios Core plugins.
+
+   sudo make
+25. Install the plugins.
+
+  sudo make install
+
+
+26. Verify Nagios Configuration
+
+ sudo /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+
+27. Start the Nagios service.
+
+   sudo systemctl start nagios
+28. Enable Nagios service to run at system startup.
+
+   sudo systemctl enable nagios
+
+open web browser copy PUBLICIP:/nagios
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Monitoring Hosts with Nagios
+
+sudo vi /usr/local/nagios/etc/servers/your_monitored_server_host_name.cfg
+
+define host {
+        use                             hostname
+        host_name                       <<server-name>>
+        alias                           My client server
+        address                         <<privete-ip>>
+        max_check_attempts              3
+        check_period                    24x7
+        notification_interval           30
+        notification_period             24x7
+}

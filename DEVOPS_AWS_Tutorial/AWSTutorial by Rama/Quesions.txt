@@ -1,0 +1,42 @@
+EC2 instance:
+Configure instance
+add storage
+add tags
+configure security group 
+review and lunch
+
+1.What is a security group
+	It is a virutual firewall
+	Its provide security to the server level
+2.Difference between Security group and NACL
+	Security Groups secures server level
+	NACL secures subnet level
+3.Explain tell me port numbers
+	1.FTP-21
+	2.SSH-22
+	3.HTTP-80
+	4.HTTPS-443
+	5.RTP-3389
+	6.SMB-139
+	7.NFS-2049
+5.What are the instance type used in ur real time
+	t2-xlarge
+	m4-xlarge
+	r4-xlarge
+	m5-large
+	c4-xlarge
+	for databases we use 5 like m5,r5
+6.Security group and key pair 
+	It is region based
+7.I have Window instance, one of the application continuosly restarting where we check the logs -Event Viever - applications logs 
+
+8.How to install one particular service in windows service explain the navigation
+	server manager ->Select add roles and features
+9.Why we change instance type and is their any downtime required, If yes what is the feasible time to instance resizing activating for hig her and lower environments
+	
+	due to memeory
+	cd /var/log/dmesg - hardware logs - insuffiecient memory
+	free -mh (memory host) it will tell the memory 
+	low -high - insufficient memory - deployment failure
+	High -low - cost opt - Cloudwatch - last 3 months/6 months 
+ 

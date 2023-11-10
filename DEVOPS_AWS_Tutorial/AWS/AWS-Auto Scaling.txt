@@ -1,0 +1,13 @@
+AWS-Auto Scaling
+-----------------
+Based on the requirement traffic it may increase or decrease the servers
+Auto scaling - Monitors our application and automaticallu adjust capacity to maintain and predictable performance to lowset cost
+	-Easy setup application for muliple resources
+Benifits:
+
+1.Fault Tolerance - unhealthy server terminate and lainch the instance and replace it
+2.Availability - application has right amount of capacity to handle the current traffic demand
+3.Cost Managment -save money , useless servers will terminate automically
+
+Launch Template - can be reused, shared and luanched at later time
+AutoScaling - createe a auto scaling and attach the template - and all ithe instance configuration

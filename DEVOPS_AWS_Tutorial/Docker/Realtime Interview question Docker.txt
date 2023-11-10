@@ -1,0 +1,9 @@
+Realtime Interview question in Docker:
+--------------------------------------
+
+-What steps would you take to secure containers
+	1.Use Distro less or images with not too many packages as your final image in multi stage build , sotheat there is less chance of CVE or security issues
+
+	2.Ensure that the networking is configured properly.This is one of the most common reasons for security issues. If required configure custom bridge network and assign them to isolate containers
+
+	3.Use utilities like Sync to scan your containet images (will have no vulverabilities) 

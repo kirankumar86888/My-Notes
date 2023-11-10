@@ -1,0 +1,89 @@
+Docker Compose:
+===============
+
+Monolythic :
+------------
+Here all modules are in one application
+So we create only one single image
+Here one module is dependent on another module(interdepemcy)
+If one module is not working other also will not work impact is there 
+
+MicroService:
+-------------
+Here each and and every module is a separate application
+So we create multiple images( we will create a image for each and every application) 
+Here each and every module is independent to ach other
+If one module is not working it will not effect the other module
+
+To manage multiple images is difficult so we use Docker Compose
+
+->Docker Compose is a tool which user to manage the multi container based application
+->By using Docker compose we can easily setup and deploy rthe multi containers based application
+->Docker Compose,can be created by using 
+		1.yaml files
+->Docker Compose yaml file should have all the info related to container creation like
+		version - to define the version of application
+		services -
+		network - to establish the connection
+		volumes - Docker volumes are used to store the data permentatly
+->Docker Compose default file name is 'docker-compose.yml'
+
+
+
+Installation of Docker Compose: (docker should be instally initially and then docker compose)
+---------------------------------
+	->serach for docker compose - install dockerr compose(https://docs.docker.com/compose/install/)
+	->Go for tab Install Compose Standalone 
+	->follow the instalaltion commands
+	1.curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+	2.Add the executable permission
+	 sudo +x /usr/local/bin/docker-compose
+	3.Create a soft link sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+	4.docker-compose --version (check the version)
+
+
+Let us create a simple python application
+(go the file DOCKER-COMPOSE-APP-DEPLOYEMNT)
+
+		->to excute the docker compose we use Run the docker-compose command
+		docker-compose up
+		->docker-compose start (to start the stopped application)
+
+in browser then ipaddrees:5000
+application runs
+
+-----------------------------------------------------------
+Docker Compose : With volumes
+	1.Sign in to github and copy the url
+	2.create a directory and shift to that directory (mkdir myapp ,cd myapp)
+	3. Go to putty server(docker) and yum install git -y
+	4.git clone https://github.com/MadhumithaRedy/Docker-Compose.git
+ 
+docker-compose.yml
+		services:
+  application:
+    image: reddymadhumitha/madhu_repository
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot-db-net
+    depends_on:
+      - mysqldb
+    volumes:
+      - /data/springboot-app
+
+  mysqldb:
+    image: mysql:5.7
+    networks:
+      - springboot-db-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=sbms
+    volumes:
+      - /data/mysql
+networks:
+  springboot-db-net:
+
+
+	
+

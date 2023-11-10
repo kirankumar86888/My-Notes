@@ -1,0 +1,72 @@
+[Your Name]
+[Your Address]
+[City, State, ZIP Code]
+[Your Email Address]
+[Your Phone Number]
+LinkedIn: [Your LinkedIn Profile URL]
+GitHub: [Your GitHub Profile URL]
+
+Objective:
+---------
+Experienced DevOps Engineer with a proven track record of 3 years in designing, implementing, and managing DevOps and cloud solutions. Seeking an opportunity to leverage my skills in Linux, Git, Maven, Jenkins, Docker, Nagios, Ansible, Kubernetes, Terraform, AWS (EC2, ELB, S3, IAM, CloudWatch, EBS), SonarQube, and Shell Scripting to contribute to a dynamic team and drive continuous improvement.
+
+Professional Summary:
+---------------------
+Results-driven DevOps Engineer with a strong background in automating, optimizing, and securing cloud-based infrastructure. Proficient in troubleshooting real-time issues and delivering practical solutions. Adept at collaborating with cross-functional teams to ensure efficient software development and deployment.
+
+
+
+
+
+
+Technical Skills:
+-----------------
+ Operating Systems: Linux 
+ Source Control: Git
+ Build and Dependency Management: Maven
+ CI/CD: Jenkins, Docker
+ Monitoring and Alerting: Nagios
+ Configuration Management: Ansible
+ Container Orchestration: Kubernetes
+ Infrastructure as Code: Terraform
+ Cloud Platforms: AWS (EC2, ELB, S3, IAM, CloudWatch, EBS)
+ Code Quality Analysis: SonarQube
+ Scripting: Shell Scripting (Bash)
+ Database: MySQL
+ Agile Methodologies: Scrum
+
+Professional Experience:
+-------------------------
+**DevOps Engineer | [Company Name] | [Dates of Employment]**
+- Designed, implemented, and maintained CI/CD pipelines using Jenkins, Docker, and Kubernetes, reducing deployment times by 40%.
+- Leveraged Terraform to automate AWS infrastructure provisioning, resulting in cost savings and improved scalability.
+- Managed AWS services (EC2, ELB, S3, IAM, CloudWatch, EBS) for high availability, security, and performance, resolving real-time issues promptly.
+- Conducted routine health checks with Nagios, identifying and addressing system problems, ensuring uninterrupted operations.
+- Collaborated with development teams to implement Git-based version control strategies, improving code collaboration and traceability.
+- Streamlined configuration management with Ansible, reducing manual work and ensuring consistent environments.
+- Implemented SonarQube for code quality checks, reducing technical debt and enhancing code reliability.
+- Developed Bash scripts for automating routine tasks, saving hours of manual effort.
+- Provided on-call support for critical production issues, showcasing strong troubleshooting skills in real-time scenarios.
+- Participated in disaster recovery planning, ensuring minimal downtime during incidents.
+
+Education:
+----------
+Bachelor of Science in Computer Science | [University Name] | [Year of Graduation]
+
+Certifications:
+--------------
+- AWS Certified DevOps Engineer - Professional
+- Kubernetes Certified Administrator (CKA)
+- Docker Certified Associate
+- Certified Jenkins Engineer (CJE)
+- Terraform Associate
+- [List any other relevant certifications.]
+
+Additional Information:
+------------------------
+- [List any personal projects or contributions to open-source projects related to DevOps or Cloud.]
+- [Highlight any awards, recognitions, or specific achievements during your tenure.]
+
+References:
+-----------
+Available upon request.

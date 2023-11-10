@@ -1,0 +1,83 @@
+Terraform Workspace
+===================
+=>No.of resources can run parrallely without destroying the previous resource
+
+=> Here we have two environments and we have created stage.tfvars and prod.tfvars
+In stage.tfvars we have instance type and environment_name
+and in the same second way too
+Here if we want to do run any one we want to destroy the that previous terraform and then run the second env_name var file
+
+=> So by using the terraform workspace we can run both the resources
+
+	=>In main.tf
+	=> In terraform if we want create wprkspace  we use locals block
+
+==
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+locals {
+ instance_name ="${terraform.workspace}-instance"
+}
+
+}resource "aws_instance" "example" {
+        ami     = "ami-067c21fb1979f0b27"
+        instance_type   = var.instance_type
+        tags    = {
+        Name    =local.instance_name
+}
+}
+	2.variable.tf
+	==
+
+variable "instance_type" {
+}
+
+	3.stage.tfvars
+	==
+instance_type = "t2.micro"
+
+	4.prod.tfvars
+	===
+instance_type   = "t2.medium"
+
+	===
+	=>terraform init
+	=>terraform workspace list
+		* default
+	now create the new workspace and switch to stage workspace from default 
+	terraform workspce new <workspace name>
+	=>terraform workspace new stage
+	=>terraform workspace list
+		default
+	      * stage
+	=>terraform workspace new prod (it will create prod workspace and switch to prod workspace)
+	=>terraform workspace list
+	        default
+	        stage
+	       * prod
+	 =>terraform workspace show (it will show the prsent workspace)
+		prod
+	=>terraform workspace select stage (it wiil switch specified workspace)
+	=>terraform plan -var-file="stage.tfavrs"
+	=>terrfaorm apply -var-file="stage.tfvars" --auto-approve
+	Now without destrying the previpus resource we will run the other resource by shifting thw workspace
+	=>terraform workspace show
+		stage
+	=>terraform workspace select prod
+	=>terraform workspace show
+		prod
+	=>terraform plan -var-file="prod.tfvars"
+	=>terrfaorm apply -var-file="prod.tfvars"
+
+=>to delete the workspace we use
+	terrform workspace delete stage
+
+
+
+
+
+
+

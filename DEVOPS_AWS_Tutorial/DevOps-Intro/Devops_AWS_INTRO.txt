@@ -1,0 +1,97 @@
+Om Sai Ram
+
+==========
+
+DevOps + AWS Tutorial:
+======================
+Day 01:-5th July
+
+AWS :
+
+Without Cloud : May loose the Data - If any trouble occurs in Sysmtem like Crush 
+
+With Cloud : Stored in drive and retrived
+
+Cloud computing Delivery of computing services networks
+servers,database,storage,networks,Softwares-
+
+
+Renting the services from Cloud as per the usage will get the bill
+
+Types of Cloud computing:
+1.Deployment Model
+2.Service Model :
+
+Service Model :
+==============
+Iaas: Infrastructure as a Service
+Paas :Platform as a Service
+Saas:Sofftware as a Service
+
+OnPremises - full responsibility of particular owner -like they have all servers, networking etc...
+(Application,Data,Ruuntime,Middleware,Os,Virtualization,Serveers,Storage,Networking)
+
+Iaas : Hardware as a service(Some of the services will be ours and some of the services from cloud)
+(Application,Data,Ruuntime,Middleware,Os,)
+(Virtualization,Serveers,Storage,Networking)
+Eg :GitHub
+Eg:Prepare the biryani - and buy some ingredients
+
+Paas:
+(Application,Data)
+(Ruuntime,Middleware,Os,Virtualization,Serveers,Storage,Networking)
+Eg:Buy the order and eat
+Eg : Easy to Service, VPC Service
+
+Saas : Fully will be managed by cloud service
+(Application,Data,Ruuntime,Middleware,Os,Virtualization,Serveers,Storage,Networking)
+Eg : S3 service (simple Storage Service )
+
+
+Deployment Model :
+================
+1.Public Cloud - Is open to all yo store and access data through internet
+Managed by third parties
+Eg : Google Drive, List of Companies
+
+2.Private Cloud : Internal Cloud - to build and managed their data centres
+Maintained by Single Organization
+
+3.Hybrid Cloud:
+Combination of public and private cloud 
+Eg: GitHub
+
+4.Community Cloud :
+Same service are sharing and using by the resources 
+It allows multiple orginaztions to stotr the data
+and rent the same service
+
+
+Cloud Providers:
+================
+AWS -market share - 34%
+Azure - market share -22%
+google Cloud - 11%
+Alibabe Cloud
+IBM Cloud
+Salesforce
+Tencent Cloud
+Oracle
+
+
+AWS :  Amazon Web Services
+=====
+First Cloud Provider - 2006 - S3 service is provided
+Intially launched - 2004 and closed and again relaunched at 2006
+In 190 + countries avaiable
+-200 + services are avaialble
+-Pay as you go model is frequently used
+Data Centre(availability zones) and Regions
+
+In a region we have availability zones
+
+Total:
+31 Regions 
+99 Availability Zones
+ Most avaibility zones are in N Viriginia - are 6
+Minimum availability zone required are 2

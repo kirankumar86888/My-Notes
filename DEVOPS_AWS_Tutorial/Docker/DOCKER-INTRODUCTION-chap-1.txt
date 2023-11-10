@@ -1,0 +1,56 @@
+Docker Introduction
+===================
+=> In Docker we have containers which are independent to each other
+
+=>Docker is a Containerization software
+By using Docker we will create container for our applications
+
+=>By using Docker we will create images for our applications
+
+=>By using Docker Image we can create docker containers
+and we can exceute it
+
+=>Docker is developed in Go Language by Sebstian paul
+
+Simply->
+
+ container :application code + dependencies +librares
+
+ docker :platform for packageing,deploying and run application
+
+ docker methodology advantage is for  shipping ,deploying ,testing and run the application 
+
+
+
+=>For Eg: In application developement (we have frontend,backend,database and the languages we use are dependencies like react js, java springbot,mysql) - they use some version and for deployment some other version so there may be version compaitibility issues
+
+
+=>VIRTUALIZATION:
+ 
+	. Using Multiple OS in the same machine
+
+	. We use HYPERVISOR software for virtualization process
+
+	. To overcome virtualization (compatibility version issues(like different applications has softwares which we use different versions in different applications)) we us Containerization
+
+
+Host OS : 'Window OS' which is there in my laptop
+	
+In Host Os we can install only one version of software (for Eg:Java)
+
+
+=>CONTAINERIZATION : 
+
+	. It is used to package all the software and application code in one container for execution
+
+	. Container will take care of everything which is required to run our application
+
+	. We can run the containers in multiple machines
+
+
+
+
+
+Docker architecture:
+
+

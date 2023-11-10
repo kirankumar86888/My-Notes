@@ -1,0 +1,133 @@
+Jenkins Deployement Project -Manually
+====================================
+
+1.Launch the EC2 instance -Jenkins Server
+2. Git clone
+3. Maven build
+4. Deploy the war file in apache tomcat server
+
+Now First
+
+1. Through EC2 instance create a jenkins server
+	->launach an instance
+	->open through putty
+	->to install jenkins we need java so install java
+	->sudo amazon-linux-extras install java-openjdk11 -y
+	->check java -version
+	->install jenkins repositority and key from redhat package manager
+	-> sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+         sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+	->systemctl status jenkins
+	->systemctl restart jenkins
+	->then unlock the jenkins
+
+2. Git clone [Create a job in jenkins] 
+
+	-> FreestyleProject -JobName <JenkinsDeploymentProject>
+	->Source code Management - give the url of spring project for Eg:https://github.com/iominh/SpringMVC.git
+	->apply and save
+	->come to putty and install git
+	->sudo yum install git
+	->now run the job should display success
+
+3.Maven build 
+	->to build maven we need install maven in putty
+	->to install maven we need stanadard version of java
+	->sudo yum install java-1.8.0-openjdk -y
+	->java -version
+	->sudo yum install maven -y
+	->mvn --version
+	->NOW  go to jenkins tool
+	->Manage Jenkins - Tools -Maven installation - add maven
+	->Name  : Maven3
+	->MAVEN_HOME : /usr/share/maven (the path can be displayed in mvn version command)
+	->apply and save
+	-> Now go to that job
+	->click on configure
+	-> Build Steps : choose Invote top-level Maven targets
+	-> Maven version - select the added maven versiom
+	->Goals - give the command - clean package - which the create the war file
+	->apply and save
+	->run the job should display SUCCESS 
+
+4. Deploy the war file in apache tomcat server
+
+	-> To deploy the war file in tomcat server we need one more instance that apache tomcat server
+	->so luamch the server -amazaon linux kernal - name as apache tomcat server
+	->To install tomcat server we need java v
+	->sudo yum install java-1.8.0-openjdk -y
+	->check java -version
+	-> get the tomcat tar file from dlcdn website 
+	-> in bin folder get the file apache-tomcat-9.0.80.tar.gz
+
+	->use to install the tomcat - wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomc                                                                                                         at-9.0.80.tar.gz
+	-> untar the tomcatserver file
+	->tar -zxvf apache-tomcat-9.0.80.tar.gz
+	-> remove the tar file
+	-> rm -rf apache-tomcat-9.0.80.tar.gz
+	->Now one untar file is present 
+	-> cd apache-tomcat-9.0.80
+	->ll
+	->cd webapps
+	->ll
+	->cd manager
+	->ll
+	->cd META-INF
+	->ll
+	->vim context.xml
+	->here remove the the valve and allow lines
+	->again give cd - come ou the directort
+	->ll
+	-> cd apache-tomcat-9.0.80
+	->ll
+	->cd conf
+	->ll
+	->vim tomcat-users.xml
+	-> in this file u need add the tomcat user and password and rolename
+	->add three lines at last
+	-> <role rolename ="manager-gui"/>
+	   <role rolename ="manager-script"/>
+	   <user username ="tomcat" password ="tomcat" roles = "manager-gui,manager-script" />
+	->save and exit the file
+	->Now get out of the directory 
+	->cd apache-tomcat-9.0.80
+	->ll
+	->cd bin
+	->ll
+	->now the start the server apache tomcat server
+	->./startup.sh
+	->now to go the apache tomcatserver instance ip address followed by 8080
+	-> it will launach the website and give the tomcat the credentials
+
+
+	->Now to go jenkins job
+	->configure
+	->Build steps
+	->post build action: choose : Deploy  war/ear to a container
+	->WAR/EAR files :**/*.war
+-	->Context path(which will display in website path) :springmvc3
+	->Containers
+	->Credentials :tomcat user and password
+	->Tomcat URL :http://13.235.76.47:8080/
+	->apply and save
+	->run the job :display the SUCCESS
+                                                                                                
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

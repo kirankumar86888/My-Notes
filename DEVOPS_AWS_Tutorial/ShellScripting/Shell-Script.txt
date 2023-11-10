@@ -1,0 +1,102 @@
+Shell Script:
+============
+	=>Shell is responsible to read commands provided by the user
+	=>Shell will check whether the command is valid or not
+	=>If shell command is valid, the interpreter will pass the command to kernel
+	=>If everything is ok,kernel convert into understandble format
+	=>Kernel will execute the commamds
+	=>Shell is the interface between user and interpreter
+	=>Most frequently used shell in linux is bash
+	=>we have different type of shell
+	=>In shell script every value is treated as string type or text type
+1.Bash shell
+2.Boure shell
+3.Korn shell
+4.Cshell
+5.Tshell and Z shell
+
+1.Bash shell
+---------------
+	->It is developed by stephen Bourne shell (advance of Boune Shell)
+	->it is default shell in linux is bash 
+	->cat /etc/shells
+
+Script
+======
+-> A sequence of commands saved to a file and this file is nothing but shell script
+->To define the script we use
+	#!/bin/bash
+	here '#' is the sharp 
+	here '!' is the bang
+	->sharpbang/shebang/shebang
+	->it means the script should be exceuted by bash
+->#!/bin/bash
+  touch a.txt
+  mkdir mydir
+->For python script we use like
+	#!/usr/bin/python3
+->Inside the shell scripts we use programming statements(decision statements,operators...)
+	->cat /etc/shells(will display different types of shell)
+	->echo $0 (display  bash shell)
+	->echo $SHELL (Displays bin/bash)
+
+Eg :vim mproj.sh
+#!/bin/bash
+touch myfile
+yum install tree -y
+mv myfile a.txt
+
+to execute the file  through ./<filename> we need add executue permission
+chmod 777 myproject.sh
+->./myproject.sh or simpply give sh myproject.sh
+
+Eg: vim file1.sh
+
+#!/bin/bash
+echo "I am madhu ">sample.txt
+
+chmod 777 file1.txt
+./file
+
+Eg : myfile1
+
+#!/bin/bash
+a=20
+b=10
+course ="linux"
+action ="sleep"
+echo "values of a and b are : $a and $b"
+echo "mycourse is : ${course}"
+echo "my favutorite action is :$action
+
+	->Variables is of two types
+		1.Predefined variables	2.User defined variables
+	->User defined variables- based on progreamming requirment user can create the variables
+	->to access the values of variables we need to use '$' sign symbol Eg : '$variable' or '${variable}'
+	
+->To read the data dynamically from the user we use <read num1> 
+	vim myfile3
+	echo "enter the first number"
+	read num1
+	echo "enter the second number"
+	read num2
+	echo "first is :$num1 and second number is $num2"
+->execute the file	->sh myfile3
+
+Eg :vim myfile4
+ 
+read -p "enter username:" user
+read -s -p "enetr password:" password
+echo
+echo "Hello $user, thanks for your info"
+	here '-s' to hide the data (sensitive data)
+ sh myfile4
+
+enter username:madhu
+enetr password:
+Hello madhu, thanks for your info
+--------------------------------------------
+
+
+
+

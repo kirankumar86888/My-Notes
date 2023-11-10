@@ -1,0 +1,6 @@
+VPC Interview Questions
+-----------------------
+1.By defualt we has the default VPC
+2.Can we delete the defualt vpc - yes
+3.Can it deleted VPc- actions -restore VPC
+4.

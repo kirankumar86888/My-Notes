@@ -1,0 +1,33 @@
+Terraform
+=========
+	=>Terraform is a IAC Tool(Infrastructure as Code)
+	=>Terraform is open source
+	=>It was created by hashicorp
+	=>It automates the infrastructure on any cloud platform(Eg:AWS)
+	=>By using IAC tool we can automate creation of infrastructure
+	=>Popular IAC/Provisional tool is Terraform and AWS REsources we use Cloud Formation(IAC tool)
+	=>In CLoud Formation - the script is written JSON format
+	=>Terraform supports all cloud platdorm
+	=>Cloud Formation is only in AWS
+	=>Terraform has used hashicorp language.
+It has very simple syntax and general English format
+	=>We can reuse the templates in other project(with little modifications) too once the template is developed
+	=>We can easily troubleshoot infrastructure related issues.
+	=>In Terraform we have major components/life cycle
+
+		-TERRAFORM INIT - it will initialize required plugins in backend (it is first command will use)
+		-TERRAFORM VALIDATE - it is used to verify the created script (like syntax errors exists or not)
+		-TERRAFORM PLAN	- Is display the preview (shows changes done in the current configuaration ) like dry run
+		-TERRAFORM APPLY - It is used to create/ update the infrastucture like script  
+			Terraform APPLY [-AUTO-APPROVE] (optional auto-approve)
+		-TERRAFORM DESTROY -It used to delete the created infrastructure
+
+
+
+
+
+
+
+
+
+

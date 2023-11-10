@@ -1,0 +1,64 @@
+AWS VPC-4
+---------
+
+
+Private subnet - wothout using Nat gateway or Nat instance
+
+Need to provide the S3 bucket access
+
+By using Endpoints(without intterne we can provide access for S3,dynamo DB)
+`-Mulitpile Endpints are there
+	1.VPC Endpoint/Gateway Endpoint - free data transfer cost (aws manages)
+	2.Interface Endpoint - by inetrface traffic is charges
+
+1.Endpoint - Services - ServiceName - Type (Gateway/Interface)
+Select Gateway
+2.Select VPC
+3.Route Table - Pricate Route table
+4.Policy - full access
+ then click on create end point
+
+Now in private route table - a end point is added
+
+
+
+VPC Peering
+-------------
+Allow us to enable communication betwwen multiple VPC'ss (same Region,Diff region,Different aws account VPC's)
+
+
+	Requestor VPC - Creating VPC
+	Acceptor VPC -Accessing VPC
+->The Requestor VPC and Accepting VPC should not be in same range (IP address(CIDR range-IPV4)) for the communication establishment
+->VPC Peering is not tansitive peering
+->Update both the VPCs route tables with another VPC CIDR blocks via peering connection
+
+Let us create an Instance- with defualt vpc
+For EG - Mumbai VPc
+	 Hyd- VPc 
+
+
+	 	Requestor VPC (HyD) 	Acceptor VPC (Mumbai)
+VPC CIDR	 192.16.8.0.0./21	10.0.0.0/16
+VPC ID 		vpc-78786876		vpc-jhg787hg786
+Region		ap-south-2		ap-south-1	
+ACC ID		6756756757		6756756757
+
+Let us create peering connection in Requestor VPC
+1.Name
+2.Select a local VPC to peer with -created requstor vpc
+3.Select another vpc to peer with -(same account or another account), Same region or another region select it(mumbai VPC and VPC Id) then create peering connection
+
+Now status it will show pending acceptance for Requestor VPC
+
+Now we have to got to the mumbai vpc - slect the vpc- action -accept request
+Now peering connectivity is done
+
+For communication we have to do
+
+In hyd region - rouute table - should add mumbai vpc CIDR via private route(select any route table)
+Edit routes- add route - paste cidr of mumbai target - peering connection - save changes
+
+In Mumbai region - rouute table - should add hyd vpc CIDR via private route(select any route table)
+Edit routes- add route - paste cidr of hyd target - peering connection - save changes
+

@@ -1,0 +1,39 @@
+Project Explanation:
+====================
+
+1.A Product Owner is there agile development team - they prepare user stories talks with the Client
+2.Devlopers used to write the code and debug and unit test
+3.JIRA - Here the features are present -Planning step
+4.Now the developers used to assign the user stories, feature, bug , change request 
+5.All the code comes to SCM , we use SCM is GitLab
+6.Build the Code (the code writeen is java)-Maven tool 
+7.Here we use Jenkins tool for Build, here we produce the artificat like jar/ear/war file 
+8.Now packaging the code,-----CI Completes deploying the code in nexus
+9.Sonar Qube for code quality for security
+10.For artifiact jar we use the docker image
+
+a.Check in
+b.Scanning - Sonarqube(anylsis,quality gates,vulnerabilities,Code coverage)
+3.Build
+4.Package
+
+Till here Continution Integration
+
+
+NoW we have environments
+	dev
+	QA-Functional Testing,IntegrationTesting,Performance Testing,Regression Testing
+	UAT
+	Pre-Prod
+	Prod- live environment 
+
+
+1.Product Ownere
+2.developer
+3.SCM
+4.Build Trigger - 
+5.Jenkins
+Sonarqube,Build(maven),package,deployment
+6.Dev,QA,UAT,PreProd,Prod
+
+

@@ -1,0 +1,85 @@
+AWS VPC-1
+=========
+Vitual Private Cloud : Networking part in AWS
+
+In real Environmenet we use custom VPC becuase all the default VPC are public
+
+Public IP: Unique accros the globe.(internet)
+Private IP: Unique with in the network.(internal)
+
+Two types of IP address
+
+IPv4 :32 bit :2^ 32
+IPv6 : 128 bit :2^128
+
+Below commands are used to get the Private IP info :
+
+ipconfig/all -->Windows
+ifconfig ---> Linux
+
+
+To know the public Ip of your network goto any of these instance
+
+what is my ip address website
+
+IPv4 : 5 classes
+
+CLass A : 0.0.0.0 - 126.255.255.255	(0-126)
+CLass B : 128.0.0.0 - 191.255.255.255	(128-191)
+CLass C : 192.0.0.0 - 223.255.255.255	(192-223)
+
+CLass D : 224.0.0.0 - 239.255.255.255	: Braoadcasting/multicasting
+CLass E : 240.0.0.0 - 255.255.255.255	:R&D
+
+127  : loopback /localhost
+
+10 laptops : Enable Internal communication  : Using private IP address wont cost us anything
+
+CLass A : 10.0.0.0 - 10.255.255.255	
+CLass B : 172.16.0.0 -172.31.255.255	
+CLass C : 192.168.0.0 - 192.168.255.255	
+
+Network : groups interconnected hosts, which can be communicated to each other
+Host : Device we have with in network
+
+
+How many networks we required?
+How many hosts you required in each network?
+
+CLass A : N.H.H.H : 127 Networks, Each network supports 16M hosts
+CLass B : N.N.H.H : 16000 Networks, Each network supports 65000 hosts
+CLass C : N.N.N.H : 2M Networks, Each network supports 256 hosts
+
+
+N.N.N.H :
+192.168.0.(0-255) : 192.168.0.1/2/3/4..255
+192.168.1.(0-255) : 192.168.1.1/2/3/4..255
+192.168.2.(0-255) : 192.168.2.1/2/3/4..255
+
+As AWs resersves 5 IPs
+/32 ==> 32-32 = 0 -> 2^0 =1
+/31 ==> 32-31 = 1 -> 2^1 =2
+/30 ==> 32-30 = 2 -> 2^2 =4
+/28 ==> 32-28 = 4 -> 2^4 =16 - 5 = 11 Usable IPs
+/24 ==> 32-24 = 8 -> 2^8 =256 - 5 = 251 Usable IPs
+/23 ==> 32-23 = 9 -> 2^9 =512 -5 = 507 Usable Ips
+/16 ==> 32-16 = 16 -> 2^16 =655536 - 5 = 65531 Usable Ips
+
+==>AWS supports Min - 28 Subnets
+   and Max - 16 subnets
+
+Minimum : 32-28 = 4 -> 2^4 =16 - 5 =    Usable IPs
+Maximum : 32-16 = 16 -> 2^16 =655536 - 5 = 65531 Usable Ips
+
+For subnet calculator we use websie called Visual Subnet Calculator
+
+
+____________
+
+In regular networks , 2 Ips are reserved .. We cannot use these (First Ip /Network Id and Last ip /Broadcast ip)
+In AWS , AWS Reserves three more Ips ..So Total 5 IPs are not usable
+
+--> 2 regular network (Network Id and Broadcost ID)
+-->2 for DNS servers
+--> 1 For Future use
+

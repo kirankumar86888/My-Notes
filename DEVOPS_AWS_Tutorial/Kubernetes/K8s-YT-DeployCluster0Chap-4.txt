@@ -1,0 +1,87 @@
+K8s-YT-DeployCluster-Chap-4
+---------------------------
+1.Kunerenetes provides- cluster,autohealing,autoscaling,enterprise
+2.Instead of a container we will deploy the pod in kubernetes
+pod can be a single/multiple container
+pod with single container (docker run -d -port --network....for docker but all thi sare maintained in yaml of pod)
+Pod -as a defination of how to run a acontainer
+we have pod.yaml
+->everything is written in yaml files
+->pod is a group of containers or a single container
+->if we put group of containers in a single a pod the advantages are -shared network, shared storage
+->kubernestes does a cluster ip address to a pod but not the container(kubeproxy will generate the cluster ip address)
+
+->kubectl is a command line for kubernetes (similarly for doker we have docker cli to run the comamnds)
+
+->minikube,k3s...are the kunernetes cluster which are local are of free cost whereas kops is paid if u have free credits we can go with that...
+
+->kubectl installation(go kubernetes installation website for kubectl install and check the version kubectl version)
+
+->Now installation of local kubernetes cluster(minikube,k3s,kind,microk8s)
+
+->We can create 100 of kubernetes cluster with kind but wheras with minikube its possible
+
+->Install minikube(official website instalaltion steps )
+(allow to create a kuberenete cluster is minikube)
+
+->minikube start(create a one kubernetes cluster)
+
+->minikube start --memory=4096 --driver=hyperkit(it used to cretae if morethan one cluster)
+
+->kubectl get nodes (gives info nodes worker nodes and manager nodes)
+
+->pod is nothing but yaml file
+
+apiVersion : v1
+kind: Pod
+metadata:
+  name: mynginx
+spec:
+  containers:
+    -name:munginx
+     image: nginx:latest
+     ports:
+      -containerPort: 80
+
+we use in docker as below
+docker run -d --name nginx -p 80:80 ngnix:latest
+
+kubectl create -f pod.yml (pod is created)
+docker ps
+kubectl get pods
+kubectl get pods -0 wide
+login in kuberentes cluster
+minikube ssh -->for real time we use like 
+
+reference kubectl cheat sheet which all the kubernetes commands
+
+kubectl delete pod nginx(to delete the pod)
+
+we need to use deployment yaml file in kubernetes  which will provide the autoscaling, auto healing
+
+
+
+Difference between container , Pod, Deployment
+
+Container - to run the container we use like
+docker run -d --name nginc -p 80:80 --network=bridge nfinx:latest
+
+pod -Insread of thes all the we can write in yaml file (like port,voulme,network,container)
+running specification is a pod
+pod can have a single or multiple container(in multiple container they can shre the network)
+
+Deployment- autohealing and autoscaling behaviour  becuase of this we go for deployment (end of this it is a pod only)
+Deployment will have the ReplicaSet which is a kubernetes comtroller
+End of this it wil create Pod only
+
+Difference between Deployment and Replicaset
+
+replicaset - a kuberentes controller it does the auto healing feature
+
+Deployment :when we create deployment it will create the replicaset and does actual state in deployemnt should be same in the cluster (yaml file to actual)
+
+
+
+
+
+

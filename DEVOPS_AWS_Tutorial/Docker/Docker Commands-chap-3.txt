@@ -1,0 +1,129 @@
+Docker Commands :
+===============
+
+=>docker info 
+	display the client and server info
+=>docker images
+	display the list of docker images
+=>docker ps
+	display the running container info
+
+=> docker registry /docker hub
+              It is used to store the docker images for future purpose that is docker hub
+	     Here in aws we use ECR(Elsatic Container Registry)
+
+
+=>docker pull ubuntu
+	  to download the image ubuntu(first it will check in docker host ,if it is not available it pull from docker registry)
+
+	=>docker search ubuntu
+	=>docker pull ubuntu
+		it download latest version ubuntu image
+	=>docker pull ubuntu:21.04
+		it download the specifi version of ubuntu image
+	=>docker pull alpine
+		it download latest version of alpine
+	=>docker pull jpetazzo/clock
+	=>docker run -it(interactive terminal/input terminal) jpetazzo/clock
+		It create the container of image jpetazzo/clock
+	=>ctrl+p+q to run container in background
+	=>docker ps (to display running container info)
+	=> docker ps -a | grep Exited  (stopped container info)
+	=>docker ps -a (all running ad stopped containers)
+	
+	=>docker rm <containerId>/<containername>
+			remove the container (only in stopped stage not in running stage container)
+	   Eg:docker rm 6af6a2290fbd
+	=>docker rm -f <containerId>
+		Removes forcebally which is running stage
+	=>docker stop <containerId>
+		It will stop the container which is running
+	=>docker rm <containerId>
+		It will remove the container wgich is stopped
+
+	=>docker run -it --name myubuntu ubuntu
+		it create a container myubuntu by specifying --name myubuntu
+	root@ef65e380499e:/#
+
+	=>now will be in ubuntu containerdocker 
+
+	=>docker ps -a | grep Exited (it will display the stopped container)
+
+	=>docker ps -a | grep Exited |docker rm $(awk '{print $1}')
+	-it will remove the container which are stopped
+
+	=>docker rm -f $(docker ps -aq)
+		It will remove the containers which are in running and stopped stage
+
+	=>docker image save ubuntu:latest -o myubuntu.tar
+			(save ubuntu image latest tag and output format is myubuntu in tar format)
+		It will store the image which will be deleted 
+
+	=>docker ls
+	=>docker image load -i myubuntu.tar
+		It will restore the image from tar file and available in docker images
+	=>docker image import https://dlcdn.apache.org/httpd/httpd-2.4.57.tar.bz2
+
+		Import the contents from a tarball to create a filesystem image
+		But image has no name and tag (dangling image) -untagged docker imagess
+		So dangling image we can not create container
+		It occupies space in the our drive
+
+	=>docker system prune
+		Remove unused images( all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache)
+
+till now we created a docker image from docker container
+	like docker run -it ubuntu
+Now let create a docker container from docker image
+
+	let go inside the container
+		=>docker exec -it <containetId>
+		touch sample.txt
+		ctrl+p+q
+	Now ,create a docker container from docker image
+		=>docker container commit -m "Myownimg"  <containerid> <imagename>
+	docker container commit -m "Myownimg" ewwwesd codinggrad 		
+	
+
+
+	=> docker run -it -d(detach mode -to run the container in background) -p(assigning port mapping) 90 --name webapp1 hello-world
+		(it gernerates random port number)
+0f769131696e   tutum/hello-world   "/bin/sh -c 'php-fpm…"   6 seconds ago   Up 5 seconds   0.0.0.0:32770->80/tcp, :::32770->80/tcp 
+
+	=>docker run -it -d -p 80:80 --name app2 tutum/hello-world  (with assigned portnumber,we have host port number and container port number)
+	creating the container in detatch mode(backgroung running) with host port number and container port number and then past the ip address of docker followed by container portnumber in browser
+	http://3.110.119.103/:80 we will get helloworld tutum page with the host name
+	
+	=>Create a account in docker hub
+	=>docker tag hello-world madhu_repository/mynewtagimage:v10
+	(create a tag TARGET_IMAGE that refers to SOURCE_IMAGE)
+	=>docker push
+	  Push an image or a repository to a registry
+	  madhu_repository/mynewtagimage
+        first to push the image we have create a tag to that image and push to the docker hub
+		=>docker tag hello-world reddymadhumitha/mynewtagimage1:v10
+docker tag <existing image name> <dockerhubname>/<newtagname>:<tagversion>
+		=>docker push reddymadhumitha/mynewtagimage1:v10
+
+
+
+
+Log File - gives the info of who ever performed the commands (like a history)(user authentication detaisls)
+If container go down then logfile will b edeleted
+	
+
+
+
+
+
+
+
+	
+
+
+
+	
+

@@ -1,0 +1,65 @@
+MultiStage Dockerfile
+=====================
+
+git clone https://github.com/Milky19/my-python-caluator
+
+
+FROM ubuntu:latest As builder
+WORKDIR /app
+RUN apt-get update && apt-get install -y python3 python3-pip
+COPY requirement.txt .
+RUN pip3 install --no-cache-dir -r requirement.txt
+COPY app.py /app/
+COPY templates/ ./templates
+COPY static ./static
+FROM python:3.9-slim
+COPY --from=builder /app .
+RUN pip3 install --no-cache-dir Flask
+EXPOSE 5000
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+CMD ["python3", "-m" ,"flask" ,"run"]
+
+
+	Here  we have two stages bt referring 'FROM' required
+It completes first stage completes and then next stage starts
+		=>docker build -t mycal1 .
+		=>docker run -it -d -p 5000:5000 --name mycal1 mycal1:latest
+
+
+
+=========================================================
+From ubuntu
+
+---- 
+ -----
+ ----
+This the base image (rich image)
+
+If we use java,react,mysqlin one file - may yakes large size
+We can avoid by using multi stage
+We can build multi stages and the final stage is mimal size 
+
+
+From ubuntu
+From openjdk:11
+copy -- From build
+Entrypoint [app.car]
+
+
+Distroless Docker image :
+--------------- --------
+Distroless images contains only your application and its runtime dependencies with a very minimum os librarries
+They are very small and lightweight images
+They do not contains package managres,shells/any other proframs you would expect to find in a standard linux distribution
+
+
+It is a very minimalistic image 
+It provides highest security and less vunlerable to threats
+python distroless image has only python run time
+
+
+"scratch" is the mimialistic image for golang (distroless)
+
+OpenJDK 11 (gcr.io/distroless/java11-debian11) and its dependencies.
+OpenJDK 17 (gcr.io/distroless/java17-debian12, gcr.io/distroless/java17-debian11) and its dependencies.

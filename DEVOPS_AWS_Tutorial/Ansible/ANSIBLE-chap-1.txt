@@ -1,0 +1,245 @@
+ANSIBLE
+========
+	->Ansible is a Configuration Management tool
+
+For Eg : we have 100 servers, in all those servers we need to install apache software in all those servers by manually process it tooks 10 days to do that So it is acomplex processs
+
+So we use configuration automation management tool to install apache software in 100 servers in minutes
+
+The configuration management tools are :-
+	ANSIBLE - agent less architeture(Ansible is installed in manager node and not installed in target node)
+	CHEF - agent archtitecture(chef is installed in manager node and target nodes)
+	PUPPET - agent architecture(puppet is installed in manager node and target node)
+		->Ansible is an free and open source configuration management tool and also deployment tool
+		->It is maintained by REDHAT Company
+		->Ansible tools is developed in 2012 by Michael Dehan
+		->Ansible is supported by all the environments alike linux,ubuntu,centos...
+		->The main components in Ansible are Ansible PlayBooks to deploy,manage,test,build,configure for the customised compile source for the application
+		->Devops role is too create the playbooks
+		->Ansible is develpoed by using python programming lanaguage
+		->Ansible is a push based mechaninsm where as puppet and chef are pull based mechanisms
+		->Push based mechanisms are alert notifications
+		->Pull based mechanisms we will not get alert notifications we need to go to server and check and check for updates
+		->In Ansible we create playbooks where as use cookbooks
+		->to create playbooks we use YAML script
+		->TO CREATE cookbooks we use- DSL(domain specific Language) -groovy script
+		->the ansible contains main server -ACM -this is master and n number of nodes
+		->ansible have n no of modules
+		->ansible modules are developed by developers and developed in python language 
+		->Ansible GUI Is called as Tower(Drag and Drop)
+		->ansible to setup Inventory file for configuaration
+
+===
+to install 
+CREATE A INSTANCE a master instance
+two dev1 and dev2 istances
+Master node 1
+Target node 2
+
+for task Master node 1
+Target Node 4
+
+For master node 
+first install ansible2 
+	sudo amazon-linux-extras install ansible2
+automatically python is enabled
+	yum install git python-pip python-level openssl
+For target node that is dev1 node connect the instance
+for target node 2 that dev2 node connect the instance
+
+in master node
+	-vi /etc/ansible/hosts
+
+here need to configure group of instance
+and private ip address/DNS name of 2 instances dev-1,dev-2
+
+[dev]
+172.31.36.132
+172.31.43.220
+
+and 	-vi /etc/ansible/ansible.cfg 
+uncomment inventory 
+uncommnet sudo_user
+
+Now create a user
+useradd ansible
+passwd ansible
+*****
+*****
+visudo - provide password less authenetication
+
+under allow root to run any commands anywhere
+add the ansible user here
+ansible ALL=(ALL) NOPASSWD: ALL
+
+
+vim /etc/ssh/sshd_config - password aurthentication need to changed to yes
+Passwordauthentication yes
+
+Now connect to target node _go to _dev-1
+sudo -i
+useradd ansible
+passwd ansible
+*****
+*****
+
+vi sudo
+under allow root to run any commands anywhere
+add the ansible user here
+ansible ALL=(ALL) NOPASSWD: ALL
+
+vim /etc/ssh/sshd_config - password aurthentication need to changed to yes
+Passwordauthentication yes
+
+
+Now connect to target node _go to _dev-2
+sudo -i
+useradd ansible
+passwd ansible
+*****
+*****
+
+vi sudo
+under allow root to run any commands anywhere
+add the ansible user here
+ansible ALL=(ALL) NOPASSWD: ALL
+
+vim /etc/ssh/sshd_config - password aurthentication need to changed to yes
+Passwordauthentication yes
+
+In all servers (master node,dev-1,dev-2)
+systemctl restart sshd
+systemctl status sshd
+
+
+go to In master node
+now login to ansible user
+su - ansible
+ 
+go to In dev-1 node
+now login to ansible user
+su -ansible
+
+go to In dev-2 node
+now login to ansible user
+su -ansible
+
+to view the host group info that is created
+to see inventory file for all groups
+ansible all --list-hosts 
+
+
+
+to get particular group info 
+ansible dev --list-hosts
+
+to get first ipaddress in group
+ansible dev[0] --lists-hosts
+to get second ipaddress in group
+ansible dev[1] --lists-hosts
+
+
+Now generate ssh-keygen in master node
+Now we are ansible server node
+ssh-copy-id ansible@localhost for connection establishment to local
+
+again connecting to ansible server node- ansible@localhost
+give exit
+
+now connect to node-1(dev-1)
+ssh-copy-id ansible@privateipaddress1
+provide passwd
+
+ssh ansible@privateipaddress1(for connect node-1)
+exit
+
+now connect to node-2(dev-2)
+ssh-copy-id ansible@privateipaddress2
+provide passwd
+
+ssh ansible@privateipaddress1(for connect node-2)
+exit
+
+
+to display list of files
+ansible dev -a "ls"
+
+
+now create a file node-1
+touch a.txt
+ll
+
+ansible dev -a "ls"
+a.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			ACM
+--------------------------------------------------
+;		;		;		;
+;		;		;		;
+;		;		;		;
+;		;		;		;
+;		;		;		;
+Node 1		PlayBook	Node2		Node..n
+		
+		
+	->Here nodes are target server/target machine
+	->ACM and Node 1  are communicated by ssh type connection
+	->Playbooks are created in ACM and they are performed in Nodes
+	->For Ansible configuration PYTHON come by default
+	->Ansible is Agent less architecture because ansible is installed in Manager Node (Control Manager i.e, ansible)
+
+
+
+
+
+
+
+
+
+
+
+

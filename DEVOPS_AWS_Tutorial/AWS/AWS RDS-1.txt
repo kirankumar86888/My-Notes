@@ -1,0 +1,75 @@
+AWS RDS-1
+----------
+
+Create a Database :
+
+While create - We have Stanadard Craete 
+		In Easy create - aws will give the defualt options
+
+1.Engine options -aurora MysQL
+		-Aurora Postgresql
+		-Mysql
+		-Maria DB
+		-PostgreSQL
+		-oracle
+		-Microsoft SQL server
+
+Choose Mysql
+
+2.Templates - Free tier
+3.Settings - DB isntance identifier - give name-
+4.Master username - dbadmin like that
+5.check Manage master credentials in AWS secret (cost) / manual master password -provide
+
+Instance Configurations-db instance class - t4g-micro for eg
+Storage type - like general purpose - allocated storage(20 gb) 
+auto scaling - automatically will provide the storage 10% of existing storage or 5 gb
+
+Connectivity - to connect to an ec2 instance (automatic)
+for maunally - dont connect ec2 instance
+VPC - not able to select the preferedd subnet
+
+left pane - subnet groups - name (vpc-db)- descriptoion-VPC- add subnet s- availibility zones (1a,1b)- now select the created db subnets  and  create
+Db subnet group -  now two subnets will display and rds will run in those 2 subnets
+public access - no (contains lots of sensitive informatoion)
+VPC Security group - create new -name 0 provide availibility zone(1a,1b)- 
+Additional configuaration for mysql - database port is 3306
+
+Database Authentivation -Password authentication
+
+Monitoring - Enable Enhanvced Monitoring
+Monitoring role - default
+
+Additional configuaration-
+Initial databse name - provide the name
+Db Parameter group - db level setting - having some properties -
+Option group
+
+Backup - 
+enable automated backups
+Backup retenion period - max 35 days
+Backup window  - daily time range during which rds takes automated backups
+backups will created in that region
+backup replication - destination region - replicated backup retention period
+
+Encryption - enable
+AWS KMS key
+
+Log Wxports 
+select the logs audit,error,general,slow query logs
+
+Maintainence -minor version
+Maintaience window - pending modifications/ maintainence applied to the database time period
+
+Estimated monthyly Costs: psy as you go 
+Create the database
+
+
+How to connect the databse which in private subnet 
+
+VPC -
+
+Jump server instance(public) should be same subnet that is public
+
+
+

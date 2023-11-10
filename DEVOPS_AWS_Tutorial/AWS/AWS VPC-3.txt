@@ -1,0 +1,48 @@
+AWS VPC-3
+---------
+To provide the internet in private server 
+
+Sow we use NAT gateways(nat gatweay instanve it is outadated)
+
+Nat gateways - create nat gateway - select the public subnet - connectivity -public- elastic IP(assign) - create nat gatweay
+
+
+
+So now we need to add route tablle in private route table
+route -edit routes- add rote - all traffic(0.0.0.0/0) - nat gaetway -save changes
+---
+the other way to coonect the internet in private server
+NAT Instance ( launach Instance - community AMIS - nat ami,)
+Let us launch instance -for public subnet -private server - ami nat - t3 micro - public subnet- vpc- let us create security group(http.https) - anywhere- luanch instance - then only it works
+
+To allow the network from outside to side this must
+nat instance -action - networking - change source and destination -save
+
+route tables - private route table - edir routes- add route - 0.0.0.0./0- target - Instance - Nat instance -save
+
+
+
+----
+app subnet server need to connect with the local laptop 
+so we create the load balancer to do this 
+
+-create load balancer - 
+
+first - target group - tar get group name - select vpc - app server attach - create group
+
+create load balncer -application load balancer - name - vpc - ataach the public two subnets (load balancer runs in the public subnet)
+create a security group for load balancer - created
+
+Now using load balancer dns name  we will connect the instance 
+
+
+Network ACL :
+
+to filter the uneccessary traffic we 
+- we have by default - 6 subnets
+
+create network acl - name - vpc attach -create
+now add two public subnets and add in network acl
+and add inbound(http,https,rdp,ssh)(temporarily ports can be added 1024- 65535) and outbound rules(http,https,rdp,ssh)(temporarily ports can be added 1024- 65535) i network acl 
+
+lowest rule number highest pripority

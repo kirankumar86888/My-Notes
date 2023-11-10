@@ -1,0 +1,59 @@
+AWS Services :
+==============
+server-are the computers which serve the services to serve needs of other computer
+
+Types of services
+-----------------------
+1.Web server:aapache server (httpd),nginx server ,iis(used in windows OS)
+2.Application server :aapache tomcat server,f5nginx,ibm sphere
+
+Virtual Machine :
+-----------------
+
+In single OS- we use multiple OS
+
+EC2 -  Elastic Compute Cloud
+-Web service that provide security and resizable computer capacity
+-Region based service
+-it is used for virtual machine
+-based on our requirement services/instance are resizable
+-Minimum billing period is 1 hr
+
+To create an EC2 instance - had 7 steps
+
+1.Choose AMI(Amazon Machine Image) - It is template contains software configuaration (like Os) required to ur instance
+						-we have different types of instanses
+						-region specific service(it has own Id)
+						- simply AMI is OS
+						
+2.Instance Type configure - like t2.micro contains CPU and Memory (t2.micro- free )
+3.Instance Details configure
+				- with same OS multiple instances can be created
+4. Storage configure  - by defualt it provided some ram based on instance and more than that it is payable
+
+5.Add tags 
+			for naming convention 
+6.Security group - just like firewall which control traffic of instance
+			-INBOUND
+			-OUTBOUND
+			-region specific service
+			- a created security group can be used for multiple OS
+ 			-SSH(SECURED SOCKET HOST) - PORT -22 used in linux env
+			-HHTP()-80
+			-HHTPS()-443
+FOR compueter - VPC(VIRTUAL PRIVATE CLOUD) - WHICH PROVIDES NETWORKING
+A KEY PAIR IS NEEDED TO CONNECT TO SERVER
+	-COMBINATION OF PUBLIC(AWS) & PRIVATE KEY(USER)
+	-.PEM FORMAT (PRIVATE KEY WILL BE IN .PEM FORMAT)
+	-SAME KEYPAIR cann be used for any OS based on virtual machine
+
+to connect server we use different tools
+-PUTTY
+-GITBASH
+-MOBAXTERM
+-WINSCP
+-SUPER PUTTY
+
+------------------------------------------------------
+
+We need to create ec2Instance through GitBash,Putty,MobaxTerm

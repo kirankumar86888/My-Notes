@@ -1,0 +1,160 @@
+Maven Tool
+----------
+jar file :- Java archive file
+		
+	Jar contains a group of .class files (java convert into java files to byte code files(.class) compilationa ->javac.demo.java
+run->java demo
+	To deploy .class the we have to package the jar files or war file
+	Standalone java projects will be packaged as jar
+	the project which run on only one computer
+Eg:Notepad,Cal
+
+war file :- Web archive file
+	It represent one web applications
+like jsp,servelts,xml,html etc are packaged are packaged together as war file
+Multiple users can accees web application at a time
+
+-> Maven is a automation project management tool or Build tool
+-> Developed by apache software foundation team
+-> It is free and open source software
+-> It is developed based on java language
+-> It is mostly used for java project
+-> It can build no of projects into desired o/p as jar or war files
+-> maven is based on POM.xml
+->It can manage dependencies
+-> By using this,it creates project structure
+
+For example- for a db project we need some dependencies and libraries are to be added, again if some feature related to that we need to again add some dependencies/libraries required to that we need to again
+
+To overcome we use Maven
+
+When ever we create a maven project which will provide pom.xml file (Project Object Model)
+It can manage deprndies,it generates reports,plugins..
+
+Maven Architecture
+----------------
+->Whenever maven project is created an local repositories are created i.e, .m2 folder
+-> Maven will download from central or Remote (mvnrepos.com) and store in local repo (.m2)
+
+
+Build Life CyCle /Project Structure :
+------------------------------------
+1. generate resource -  It maintains dependencies
+
+2. compile code - mvn compile (compiles the src code) a .class is generated
+
+3. unit test - mvn test - for testing
+
+4. package - build process - creates .jar /.war files - mvn package
+
+5. install - In local repository it add the artifacts(final code) - mvn install
+
+6. deploy - mvn deploy - to deploy the particular software
+
+7. clean - mvn clean - to delete all runtime files (removes the target folder)
+
+
+Key words
+---------
+
+archetype :- It reprsents type of project
+maven-archetype-quickstart (it reprsenet standlone 
+maven-archetype-webapp(it reprsents web application)
+application)
+
+It can provide 1500 + archetype
+
+groupId   :- It represents name of the project name/company 
+artifactId :-It reprsents project module name /project name
+packaging :- In pom.xl 
+
+mvn archetype:generate a sample project will be created
+
+which has App.java and AppTest.java
+first will compile - mvn compile
+and then package - mvn package 
+ 
+We have 3 repository
+
+1.local repo - resprsented by .m2 in local folder by created when maven project created
+If we want jar files maven will search in local repo 
+
+2.Central repository - default repository in maven in particular url from website(internet)
+                     - provided by apache software this central repository
+
+3.Remote repository (18 min)
+
+
+Install maven in putty
+
+->yum install maven -y 
+	        
+When  maven installed automatically java got installed(inbuilt)
+->mvn --version
+->java --version
+
+those 2 sofwares are availables
+
+to remove -->yum remove maven -y ( it will remove the java automatically)
+
+Now setup the maven
+
+mvn archetype:generate - for standalone and website
+by default-mvn archetype:generate quickstart - standlone
+give groupId 
+     arctifactId
+
+go inside the groupId- javaconsole
+ll
+will have pom.xml
+and src - main (app.java) and test(apptest.java)
+give mvn compile
+- one more target folder is created
+
+check by tree - the structure
+ give mvn package - for standlone - jar files will do
+
+to run the jar file we use this command under the javaconsole(groupId)
+copy the jar file under target folder and put the artifactId
+java -cp target/javaconsole-1.0.jar com.madhu.mavenproj.App
+
+
+
+
+to create wenapplication
+we use mvn archetype:generate
+and add +5 for webapplication 
+mvn package
+root/javaweb/target/javaweb.war
+now need to deploy the war file in the private repository(nexus or artifact)
+ mvn install - local repository is added
+
+ Installing /root/javaweb/pom.xml to /root/.m2/repository/com/sai/web/javaweb/1.0/javaweb-1.0.pom
+
+deployment war will do in jenkins 
+
+<groupId>com.sai.web</groupId>
+  <artifactId>javaweb</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
+
+
+  <groupId>com.hcl.madhu</groupId>
+  <artifactId>mavenproj</artifactId>
+  <version>1.0</version>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

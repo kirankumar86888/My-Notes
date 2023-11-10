@@ -1,0 +1,71 @@
+Shell Script -Functions
+----------------------
+	->Function is a self contained block /sub program
+	->Function can perform one or more task
+	->Repeated code we have to define inside the block and we can that block whenevr required that is function
+	->So function is a block of repetable commands
+
+Advantages:
+1.Reduces the length of the code
+2.It improves redabillity
+3.it improves maintainability
+4.it promotes 'DRY' principle(Dont Repeat Yourself)
+
+1st way :
+---
+
+function function_name()
+{
+commands
+}
+
+2nd way :
+-------
+
+function_name()
+{
+commands
+}
+
+Eg:1 vim function
+
+#!bin/bash
+function demo()
+{
+echo "1st param : $1"
+echo "2nd param : $2"
+echo "3rd param : $3"
+echo "total num of  params : $#"
+echo  "all param with @ : $@"
+echo "all param with *: $*"
+echo "script name : $0"
+}
+demo 10 20 30 40 50
+
+o/P
+1st param : 10
+2nd param : 20
+3rd param : 30
+total num of  params : 5
+all param with @ : 10 20 30 40 50
+all param with *: 10 20 30 40 50
+script name : function
+
+Eg: 2
+#!/bin/bash
+f1()
+{
+        echo "I am f1 function"
+}
+f2()
+{
+        echo "I am f2 function"
+}
+f1
+f2
+
+o/p:
+I am f1 function
+I am f2 function
+
+

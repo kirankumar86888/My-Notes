@@ -1,0 +1,59 @@
+Terraform -Jenkins
+================
+	=>First install terraform in the instance(check terraform installation file)
+	=>terraform version
+	=>let us install jenkins
+	=>sudo amazon-linux-eextras install java-openjdk11 -y
+	=>jenkins redhat packages
+	=>   sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  	=>sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+	=>sudo yum install jenkins -y
+	=>java -version
+	=>systemctl status jenkins
+	=>systemctl restart jenkins
+	=>unlock jenkins
+	=>vim main.tf
+	=>write the sample script of terraform
+	=>Now a create a repository in git hub
+	=>sudo yun install git
+	=>git version
+
+	=>git init
+	=>git add main.tf
+	=>git commit -m "terrform jenkins"
+	=>git remote origin ""
+	=>git push origin master
+          Now in git we have main.tf file
+
+	=>let us create a job in jenkins tool
+	=> pipeline script 
+		pipeline {
+    agent any
+     stages{
+         stage('SCM'){
+             steps{
+                 git 'https://github.com/MadhumithaRedy/terrraform-jenkins.git'
+             }
+         }
+         stage('terraform init'){
+             steps{
+                 sh ("terraform init");
+             }
+         }
+         stage('terrform action'){
+             steps{
+                 echo "terraform action parameter is ${action}"
+                 sh ("terraform ${action} --auto-approve");
+             }
+         }
+     }
+}
+
+		=>build configure
+		(select the project is paramaterized tab)
+		=>Name:action
+		  Choices :plan
+			   apply
+			   destroy
+		=>apply and save
+	=>build the job

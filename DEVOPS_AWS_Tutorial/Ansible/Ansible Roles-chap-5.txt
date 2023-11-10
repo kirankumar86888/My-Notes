@@ -1,0 +1,193 @@
+Ansible Roles
+================
+
+Now if we 100 tags we cant skip all the tags by specifying all the tags
+So we use ansible roles
+
+	->We can use two techniques for resulting a set of tasks they includes roles
+	->Roles are good for organizing tasks and  encapsulation data needed the tasks
+	->We can organize the playbooks into directory structure is called as Ansible roles
+
+
+for Eg: We have a playbook and has n number of tasks for the required specific task to run we need to go through all the tasks 
+
+To add an extra task also we need to read entire playbook we go through
+
+It becomes difficult to add or search the particular task in the entire playbook, so we split in directory structure
+
+So we orgainize the playbooks in directory structure(ansible roles)
+
+By default, the ansible role contains the following:
+
+	default
+	files
+	meta-data
+	templates
+	handler
+	tasks
+	vars 
+
+Frst we will create a directory  -> mkdir playbook
+				 -> cd playbook
+				 -> ll
+
+Nowe we will create a playbook
+
+vim parent.yml
+
+	---
+	- hosts: dev
+	-become: yes
+
+save and exit
+
+Now we will create ome more directory ->mkdir roles
+				      -> cd roles
+				      -> ll
+
+
+Now we will create ome more directory ->mkdir git
+				      -> cd git
+				      -> ll
+Now we will create ome more directory ->mkdir git/tasks
+				      -> cd 
+				      
+Now give the tree command
+
+.
+ |playbook
+   |-parent.yml
+   |-roles
+      |-git
+	 |tasks
+
+
+
+
+Now create a file in tasks
+
+	vim playbook/roles/git/tasks/main.yml
+	
+	-name: INSTALL GIT
+	 yum: name=git state=present
+save and exit
+
+give tree command
+ .
+ |playbook
+   |-parent.yml
+   |-roles
+      |-git
+	 |tasks
+	     |main.yml
+
+Now cd playbook/roles
+
+tree
+	.
+	|-git
+	   |tasks
+	      |main.yml
+
+
+in roles -> mkdir -p httpd/tasks
+	 -> mkdir -p tree/tasks
+tree
+
+.
+--------|-git
+	   |tasks
+	      |main.yml
+--------|httpd
+	   |tasks
+--------|tree
+	   |tasks
+
+
+vim httpd/tasks/main.yml
+	-name: INSTALL HTTPD
+	 yum: name=httpd state= present
+tree
+
+--------|-git
+	   |tasks
+	      |main.yml
+--------|httpd
+	   |tasks
+	      |main.yml
+--------|tree
+	   |tasks
+
+vim tree/tasks/main.yml
+
+         -name: INSTALL TREE
+	  yum: name=tree state= present
+
+Now in 
+cd playbook
+ll
+vim parent.yml
+
+   ---	
+   -hosts: dev
+    become: yes
+    roles:
+     -httpd
+     -tree
+
+ansible-playbook parent.yml --syntax-check
+
+ansible-playbook parent.yml --check
+
+ansible-playbook parent.yml
+
+(Now it will install httpd and tree) in target nodes
+
+
+In Ansible Galaxy we will have default
+
+	-> Ansible Galaxy is a website where user can tore the roles
+	-> It is command line tool - it will store roles for managing,installing,creating 
+
+	
+Now will we create the roles
+	ansible-galaxy init madhu
+(it will create a role)
+ls madhu/
+
+now we cans see
+
+default
+	files
+	meta-data
+	templates
+	handler
+	tasks
+	vars 
+cd madhu
+ll
+cd vars/
+ll
+we will have main.yml
+cat main.yml
+
+
+cd ..
+ls madhu
+cd madhu
+ll
+check all the folders like cd files and ll....
+
+now create a playbook
+
+vim jenkins.yml
+vim apache.yml
+
+
+
+
+
+
+
+
+

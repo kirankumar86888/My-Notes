@@ -1,0 +1,77 @@
+Docker Network
+==============
+
+	=> If the conatiners run in the same network then only communication is established
+	=>If the conatiners run in the different network then the communication is not established 
+
+For Eg:
+
+My book store application(application container) - it stores diff types of books
+the data is stored in database(database container)
+
+	=>Docker network is used to provide the isolated netowrk to the container
+	=>In docker we have different types default networks
+		=>docker network ls
+			-bridge (it is default network)- till now whatwever the container created in bridgr network only
+			-host
+			-none
+docker network COMMAND
+
+Manage networks
+
+Commands:
+  connect     Connect a container to a network
+  create      Create a network
+  disconnect  Disconnect a container from a network
+  inspect     Display detailed information on one or more networks
+  ls          List networks
+  prune       Remove all unused networks
+
+	=>In docker we have different type of drivers
+			-bridge
+			-host
+			-none
+			-overlay ---it network is used in docker swarm
+			-macvlan
+	->Bridge network driver -if we running standlone containers it will assign the one IP address to the container
+	->Host network driver -it is also used for standlone application,the ip address is not assigned to the container(problemtic approach)- here host and container has same type of ip address(so not used - nor  securable)
+	->none - it will provided by docker container, no communication is over container
+	->overlay network driver - It is used for orchestration services(Creating,updatiing,,modifying,deleting) -  here we use docker swarm
+	->macvlan network driver - it makes our container as physical
+
+		=>to create a docker network
+			->docker network create codingrad
+		=>docker network ls 
+			(list the networks)
+		=>docker network inspect codingrad
+			(entire info the conatiner/image/network)
+		=>docker network rm madhu
+			(to the deleted the created network)
+		Connect to the container through custom network which is created (has the different network)
+		=>docker run -d --name <container name> --network=<custom network name> <base image>
+		docker run -d --name finance --network=secure-network nginx:latest
+
+		Connect to the container through host network(it does assign any ip address)
+		=>docker run -d --name host-demo --network=host nginx:latest
+		
+
+
+
+
+
+Total we have 3 container
+If u want to cimmunicate with one container to the other - through docker 0(bridge) network will be communicated to host (eth 0)
+We have one more container which need to be isolated (no connection with the other network)so we use custom network/virtual network to communicate with the host (eth 0)
+		
+
+
+
+
+
+
+
+
+
+
+
+

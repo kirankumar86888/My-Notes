@@ -1,0 +1,29 @@
+AWS-EC2-ELB
+===========
+1.If we deploy our application in one server then burden will increased on that server
+2.Load Balancer - here we use application on multiple servers 
+to implement we use ELB in AWS
+	here we use Round Robbin Algorithm
+	Take the req from the users and sent the req to different multiple servers
+
+3.ELB is different types
+	a.application Load Balancer- here we use two types of http and https port it will run nad we need create the "Target Group " server- it is the group of servers which are running in our application
+	then automatically a DNS name will created
+By using DNS we access our application 
+	EC2- Create for eg 2 instances
+		1.VPC - subnet - 1 availaibility zone say is-east-1a
+		2.VPC - subnet - 2nd availability zone say-us-east-1b
+	after creating 2 instances
+	Now create a target groyp - add the 2 servers containg the application
+	Select Load Balancers - Application Load Balancer -select the avaialbility zones and target group and create
+ 		then automatically a DNS name will created
+By using DNS name we access our application 
+
+
+
+	b.Network Load Balancer
+	c.Gateway Load Balancer
+	d.Classic Load Balancer(retired aug 15 2020)
+
+
+

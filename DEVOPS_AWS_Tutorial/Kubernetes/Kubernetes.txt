@@ -1,0 +1,397 @@
+Kubernetes -Introduction
+========================
+
+->Micro Service : Maintained each and every module
+		  Doesn't have any dependency on the other modules
+		  Independent services
+  Monolythic Service :all the modules are combined to one service
+		     :Depends on each on the other module
+
+Kubernetes :
+--------------
+	->It is also called as k8s
+	->k8s ia an orchestration engine ,it will manage the containers
+	->k8s ia an open source platform
+	->By using k8s,used to manage the containerazation application
+	->manage means - creating,recreating,deleting the containers and scale up,scale down the process
+	->k8s developed in google using GO language
+	->Google donated k8s to CNCF (Cloud Foundary Organization) in 2014
+	->K8s v1.0 released in 2015
+	->k8s is replacement of docker swarm
+	-> To manage the containers we use the kuberenete tool (like in docker we create the images and by using image we create container and in container we execute in th application)
+	->In K8s we have Master-Worker node architecture
+	-<Kubernetes is nothing  but a cluster ( a group of master and worker nodes simply group of servers)
+	->Manager node/master node is known as Control -plane
+	->the control plane can be accesed bu UI or CLI mode
+	->In Master node we have components like API SERVER, /sheduler,CONTOLLER MNG,ETCD CLUSTER
+		->API SERVER - It is responsible for handle the incoming requests
+		-> To know the worker node info /pods(collection of containers)/nodes we use 'Kubectl'
+		->ETCD- it is called as 'key-value data store',it stores the cluster info.(it is internal databse in k8s cluster)
+		->SHEDULER -It is responsible for sheduling the pending task available in ETCD ,It will decide in which worker node our task sholud be excecuted
+		->Control Manager -once the sheduling is completed Will manage task execution in worker node 
+	
+	->Worker Node :- KUBELET maintains all the info of the worker nodes
+		->The main components are in Worker Node are KUBLET ,Kube-Proxy,Docker Engine ,Containers ,Pods
+		->By inbuilt we have Kubelet
+		-> We have Kube-proxy - it provide the network communications for master and worker node
+		->dOCKER Engine -To  run our containers we need docker engine
+		->Containers -Runtime instance instance of our applications 
+		->Pods - collections of containers (a smallest blocks used to create containers)
+
+
+Set Up Kubernetes
+-----------------
+
+slect the instance - ubuntu and instabce type -t2 large
+
+1.Install aws cli 
+	Go to browser aws cli  -select linux  (https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+	a:- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+	b.sudo yum install unzip
+	c:- unzip awscliv2.zip
+	d:- sudo ./aws/install
+2.set the path in .bashrc
+	add the below in bashrc file
+		
+        export PATH=$PATH:/usr/local/bin
+3.run source.bashrc
+4.Check aws version
+	aws --version
+5.Install kubectl and  kops(kunernetes os)
+	sudo apt update
+	 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+	curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+
+6. Make the kops binary executable
+	chmod +x kops-linux-amd64  
+	chmod +x kubectl
+ 
+
+7.Move the kops binary in to your PATH.
+	mv kubectl /usr/local/bin/kubectl
+	mv kops-linux-amd64 /usr/local/bin/kops
+8. check kubectl and kops version
+	kubectl version
+	kops version
+9. In AWs create a IAM user 
+	IAM -> Create User -username<>->next->select attach pololicies -> next -> select adminstartor access ->next -> create user -> In security credentails tab ->create access key ->select command line interace - >Check I understood ->Next ->Copy acces and secret key
+
+10 . In putty ,give command aws configure 
+	AWS Access Key ID [None]: AKIAVO3XMLTOBP5YCNE7
+	AWS Secret Access Key [None]: 	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
+	Default region name [None]: us-east-1
+	Default output format [None]: table
+
+11. Create the Infrastructe by using cLI
+	->creating s3 bucket
+		aws s3api create-bucket --bucket madhu-k8s --region us-east-1
+	->enable bucket versioning
+		aws s3api put-bucket-versioning --bucket madhu-k8s --versioning-configuration Status=Enabled
+	->cluster
+		export KOPS_STATE_STORE=S3://madhu-k8s
+	->create the cluster in aws
+		  kops create cluster --name madhu-cluster.example.com --zones us-east-1a --master-size t2.medium --node-size t2.micro
+		 
+kops get cluster
+	
+kubectl get no =>provide the details of nodes
+
+kops rolling-update cluster =>updates the cluster  
+
+POD:
+----
+->Pod is a Collection of containers
+->Pod is smallest build block in k8s
+->in K8s , every container will be created inside the pod
+->pod always runs on the node (worker nodes server)
+->pod reprsenting running process
+->pod is a group of one or more containers
+->each pod will have unique Ip in cluster
+->In k8s , pod can be craeted in 2 ways
+	1.Interactive approach( through command)
+	2.Declarative approach(we use yaml script)
+
+
+1.Interactive approach - 
+
+	creating the pods by commands
+	->kubectl run swiggy --image nginx:alpine
+
+	to get pods info
+	->kubectl get pods or kubectl get po
+
+	to get entire info of pods
+	->kubectl get po -o wide (-o is output)
+
+	to remove the pod
+	->kubectl delete pod/swiggy
+		kubectl delete pod/<podname>
+	->kubectl logs pods nginx (provide the log info)
+
+	->kubectl describe pod nginx (give the entire resource web info)
+
+	->kubectl get deploy (list deploy fileS) 
+
+	->kubectl get all (list deploy,services,pods..)
+	
+	->kubectl get all -a (for all the namsepaces and for all the application in the cluster)
+
+
+For debug we use kubectl log,kubectl describe
+		
+2.Yaml  - Declarative approach
+
+vim nginx.yml
+
+apiVersion : v1
+kind: Pod
+metadata:
+  name: mynginx
+spec:
+  containers:
+    -name:madhu
+     image: nginx:latest
+
+
+here are the details...
+apiVersion:indicates the api version of k8s,it i sthe core version
+
+kind - [indicates the type of kunerenetes resource]it is the purpose of the file(creating the pod)
+
+metadata - [provides the about resource such as name,labels and annotations] to provide the name of the pod like mynginx
+
+spec- [it specifies the desired state of resource, like pod containers and their configauration ] specifcation, how are the containers created  through images
+
+containers : specifies the arrauy of containers to run inside the Pod.
+
+name: specifies the name of the container
+
+image : specifies the Docker image to use for the container
+
+ports : specifies an arrauy of port mappings to configure for the container
+
+containerPort: specifies the port number that the container exposes. like 80
+
+
+	->kubectl create -f nginx.yml (to create the pod through yaml and nginx.yml is the file name)
+
+	->kubectl delete pod/mynginx (to delete pod)
+
+
+create a yaml file replicas.yml
+
+apiVersion : apps/v1
+kind: ReplicaSet
+metadata:
+  name: mynginx-replicaset
+  labels:
+    run:mynginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       run: mynginx
+  template:
+    metadata:
+       labels:
+         run: mynginx
+    spec:
+        containers:
+          -name:madhu
+           image: nginx:latest
+
+
+replicas:3 - Replicaset should maintain three replicas of the Pod
+
+Selector:- specifies how the replicaSet should select the Pods to manage.In this case, it is using the run:mynginx label to match the Pods
+
+template :- contains the template for the Pods creted by the ReplicaSet, including metadata and specification
+
+metadata.labels :- this field matches the label selector in the spec.selector files
+
+spec.containers:- this field specifies the container specifications for the Pod, including the container name and image it should run 
+
+Noew thsa ve file and exit
+
+=>kubectl create -f replica.yml(craeted a pod)
+=>kubectl get po (get info of the pods)
+=>kubectl get rs (to check the replicca set info)
+=>
+Now delete one of the pod, automatically a pod will created
+
+=>kubectl delete rs/mynnginx-replicaset ( to delete the replicaset )
+
+
+Deployment:
+===========
+
+->The main goal of a Deployment is to ensure that a aspecified number of replicas of a given application are running at all the times
+
+->If replicas go downtime, the Deployment automatically replaces it with a new one to maintain the desired number of replicas
+
+->Deployments also allow you to update the status of yoyr application by rolling oyt changes to iys replicas
+
+
+->A deployment is made up of two primary components
+		1.Replicaset (mananging the replicas of your applications)
+		2.Pod template(specifies the contaienr to run in each replica)
+
+
+->By Deployments u can achieve high avialability, scability,manage updates and roll backs with ease, and also like update your application with zer downtime, and rolling back to a previous version in case of issues 
+
+
+Eg:vim nginx.deployment.yml
+
+
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: mynginx-deployment
+  labels:
+    app:nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       run: nginx
+  template:
+    metadata:
+       labels:
+         run: nginx
+    spec:
+        containers:
+          -name:mynginx
+           image: nginx:latest
+
+kubectl create -f nginx-deployment.yml
+kubectl get rs
+kubectl get po
+
+to delete the deploymentyml file we use 
+kubectl delete deployment/nginx-deployment
+afetr delete check once 
+now check kubectl get rs and  kubectl get po and kubectl get deployment - no resource found
+
+to access from  the outside we need to create the services
+
+let vim pod.yml
+apiVersion : apps/v1
+kind: Pod
+metadata:
+  name: javawebapp
+  labels:
+    app:javawebapp
+spec:
+   containers:
+     -name:javawebapp
+      image: hanvitha/myjava-webapp (which pull from docker hub)
+       ports:
+	-containerPort: 8080
+
+
+kubectl get po (will not see info pod.yml)
+kubectl apply -f pod.yml
+kubectl get po
+kubectl describe pod javawebapp (give the entire resource web info)
+kubectl delete pod/javawebapp
+
+kunernetes service:-
+----------------------
+Kunernetes pods are accesible only witrh in the cluster
+
+To provide the pod access outside the cluster we need to expose them 
+
+To expose pods we need to use k8s service
+
+We have few types of services in k8s
+	1.cluster ip
+	2.node port
+
+->cluster ip will assign one ip for the service to access the pods  
+
+->cluster ips will provide pod access only with in the cluster we cannot access outside
+
+->For end user to access the application we use the node port
+
+
+let vim pod.yml
+
+apiVersion : v1
+kind: Pod
+metadata:
+  name: javawebapppod
+  labels:
+    app:javawebapp
+spec:
+   containers:
+     -name:javawebappcontainer
+      image: hanvitha/myjava-webapp (which pull from docker hub)
+      ports:
+	-containerPort: 8080
+
+let craete vim service.yml
+apiVersion : v1
+kind: Service
+metadata:
+  name: javawebapp
+spec:
+   type: NodePort
+   selector:
+      app : javawebapp
+   ports:
+      - ports: 80
+        targetPort: 8080
+	nodePort: 30002
+
+save and exitt the file
+
+kubectl apply -f  service.yml (we can use create / apply for creation of the pod)
+kubetctl get po
+kubectl get svc( provide the details of services)
+
+
+Kubernetes namespace
+--------------------
+
+->namespace are used to group the components
+	it represents the cluster insilde the cluster
+->In k8s we can create n number of namespace
+->kubectl get ns (to displsy the list of namespace and by default we have some namespace
+-> kubectl create ns madhu (to create our own namespace)
+
+
+
+For pod yml file
+------------------
+1.step :
+kubectl apply -f pod.yml
+2.step
+kubectl get pods
+3.step for ip address
+kubectl get pods -o wide
+4.need to login to kuberenetes cluster
+ssh -i <identity name> <ipaddress of the node> / minikube ssh (for minikube)
+
+5.kubectl delete pod nginx
+
+
+
+For deployment file:
+--------------------
+1.step
+kubectl apply -f deployment.yml
+2.step
+Kubectl get deploy
+3.When we do th edeployment it will automativally ctreate replicasset and re[plicaset create the pods
+so no need to create the pods 
+4,step
+kubectl get pods
+will get th info of pods too
+Deploy ->replicaSets->Pods
+5.kubectl get rs
+replicaset is also get created
+
+
+If any one delete the pod automaticall the the pod will be recreated
+
+

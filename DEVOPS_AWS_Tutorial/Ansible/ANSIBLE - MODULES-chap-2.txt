@@ -1,0 +1,86 @@
+ANSIBLE ADHOC COMMANDS
+======================
+
+To complete the task in quick way we use adhoc commands
+
+ansible adhoc commands can be run invidually to perform quick operations
+
+ansible adhoc commands can perform single task only
+
+these are temporary commands
+
+Modules -
+
+
+ping - to check the connectvity of servers
+shell - to exceute the commands
+yum - to install/uninstall the software/packages
+service - start the server
+copy - copy the files
+command - command in linux
+
+state=present - to perform the installation
+state=absent - to remove the installation
+state = started/start - to start the service
+
+for install package -> present
+for remove package->absent
+for update package ->latest
+ 
+
+In ansible server
+
+=>ansible dev -m(module) ping -o(output)
+
+-to display the output in single line 
+
+=>ansible <privateipaddress> -m ping -o
+
+-to display the particular node info
+
+=>ansible all -m shell(execute) -a(argument)    date
+
+- to display date from all host machine(node servers)
+
+=>ansible all -m shell -a uptime
+
+-to display the uptime of all node servers(system how much on time)
+
+=>ansible dev -m yum -a "name=git state=present" --become
+
+-to install git server (--become for root user promotion we use become)
+
+=> ansible dev -m yum -a "name=httpd state=present" --become
+
+-to install httpd server (--become for root user promotion we use become)
+
+
+=>ansible dev -m service -a "name =httpd state=started" --become
+
+=>ansible dev -m copy -a "src=/home/ansible/index.html dest=var/www/html" --become
+
+(Now it will copy the index.html file to apache server var/ww/html)
+
+=>ansible dev -m command -a 'ifconfig' --become
+
+(it display the ipaddress of the node servers)
+
+=>ansible dev -m command -a 'fdisk -l' --become
+
+(it display the number of volumes in the node server)
+
+=>ansible dev -m command -a 'uname -a' --become
+(to display the kernal info)
+
+=>ansible dev -m command -a 'free -mh' --become
+(to display the memorary)
+
+emptyfile in ansible server
+
+target node server to copy
+
+ansible my_remote_node -m ansible.builtin.shell/lineinfile(only one line) -a "echo 'New content to add' >> /path/to/remote/file"------->add content in to that file from ansible server
+ansible <target_host> -m shell -a "ansible localhost -m blockinfile -a 'path=/path/to/remote/file block='''Your Content Block''' insertbefore=^marker$'"
+
+
+

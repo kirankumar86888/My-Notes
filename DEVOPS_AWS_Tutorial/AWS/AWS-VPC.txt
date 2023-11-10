@@ -1,0 +1,84 @@
+AWS -VPC
+===========
+=>VPC stand for Virtual Private Cloud
+=>VPC is one of the AWS customer managed service
+=>VPC is free service
+=>For every AWS root account one default VPC will be provided by AWS Cloud
+=>Based on the requirement we can create on our own VPC
+=>VPC will provide isolated network for cloud services
+=> to luanch the virtual server we need
+	RAM
+	core processor
+	EBS volumes(Elastic Block Storage)
+	HDD (Hard desk)
+	VPC (for network)
+=> VPC the components required are
+	subnets
+	route tables
+	Internet gateway	
+	VPC Sizing
+
+For Eg we have : Compund wall and has a main gate
+	-> Inside that we have main door
+	->Inside the house we have 4 rooms
+	->each room is connected to another room by doors (subnets)
+->Subnets :the rooms are called as subnets
+->Public Subnets : the room which the resource can enter
+->Private subnets : no able to enter into all the rooms
+->Routing tables: conection for all the rooms (doors)
+->Internet gateway : Can approach the main gate
+
+
+SUBNET : Breaking the large network into smaller networks
+PUBLIC SUBNETS : the subnet which has internet connection
+PRIVATE SUBNETS: the subnet which doesnot have the internet connection
+
+We can create per region 5 VPC's (and can extend to 100 VPC's)
+We can create 200 subnets for one VPC
+
+IP address: Internet Protocol
+	->it is considered as address
+	->for every machine IP address is mandatory
+
+IP address can be two categorized
+	->IPv4 and IPv6
+
+IPv4- 32 bit address format (for eg : 10.0.0.1)	
+	here we have 4 parts
+	every octect(part) have 8 bits
+	total size= 32 bits (4*8)
+
+IPv6- it containes alphanumeric (for eg :192.ewwer.ewrwe)
+	here we have 8 parts
+	every octects(part) have 16 bits
+	total size = 128 bits (16* 8)
+
+VPC Sizing :
+
+	It is the process of allocating IP address for the VPC
+For Eg:IPv4 CIDR (172.31.0.0/16) -classless Inter Domain Range
+	/16 -> indicates range of IP address
+10.0.0.0/16=>2 power (32-16)= 2^16 = 65536
+10.0.0.0/32=2 power(32-32)= 1
+10.0.0.0/28 = 2 power(32-28) = 2^4 =16
+
+When we install the the aws provide default VPC
+Now let us create a own VPC
+
+Create VPC
+	select VPC only
+name tag -myVPC
+IPv4 CIDR(28.0.0.0/16) range specifybased on the requirement
+
+
+cleck on create VPC
+
+when we craete the vpc automatically a private route table is getting craeted by default
+
+now let us create the subnets
+
+public subnet
+private subnet
+
+
+

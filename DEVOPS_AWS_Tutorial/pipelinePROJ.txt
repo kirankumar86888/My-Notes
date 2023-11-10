@@ -1,0 +1,52 @@
+pipeline{
+agent any
+tools {
+jdk 'jdk11'
+maven 'maven3'
+}
+stages{
+stage ('clean Workspace'){
+steps{
+cleanWs()
+}
+}
+stage ('checkout scm') {
+steps {
+checkout scmGit(branches: [[name: '*/master']], extensions: [], 
+userRemoteConfigs: [[url: 'https://github.com/Milky19/amazon-eks-jenkinsterraform-aj7.git']])
+stage ('maven compile') {
+steps {
+sh 'mvn clean compile'
+}
+}
+stage ('sonarqube Analysis'){
+steps{
+script{
+withSonarQubeEnv(credentialsId: 'Sonar-token') {
+sh 'mvn sonar:sonar'
+}
+}
+}
+}
+stage("quality gate"){
+steps {
+script {
+waitForQualityGate abortPipeline: false, credentialsId: 'Sonartoken'
+}
+}
+}
+stage ('Build war file'){
+steps{
+sh 'mvn clean install package'
+}
+}
+stage ('Build and push to docker hub'){
+steps{
+script{
+withDockerRegistry(credentialsId: 'docker', toolName: 
+'docker') {
+sh "docker build -t petclinic1 ."
+sh "docker tag petclinic1 sevenajay/pet-clinic123:latest"
+sh "docker push sevenajay/pet-clinic123:latest"
+}
+}

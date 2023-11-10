@@ -1,0 +1,62 @@
+Kubernetes :
+------------
+
+Difference between Docker and Kubernetes
+
+	1.Docker is container platfom (Ephermeral in nature)
+	2.Kubernetes is  a container orachestration platform
+
+
+
+Problems in Docker :
+=======================
+1.Sigle host of nature of your docker Container :
+ 
+Containers are epherminal nature(short life span)-Conatiiner 1 occupies more memory so other container may die baecuase one of the container mainly becuase of single host
+
+2. Auto healing:
+If Some one kills the container , the application in the container is not accessible
+
+Auto healing - without user manual intervention - your container start by itself
+
+3.Auto scaling :
+
+for example we have created a container and has 4CPU and 4GB
+Manually you increase the same type of containers to 100 containers when there is a heavy load
+Now Load balaacer need to automatically increase the container when there is heavy load
+
+4.Docker is a simple platform
+
+	Docker does not provide Enetrprise Level suppport(Load balancer ,firewall ,Auto scaling ,Auto healing ,Api gateways...)
+
+
+Here all four problems 
+	1.Single host
+	2.Auto Healing
+	3.Auto Scaling
+	4.Enterprise
+All these problems can be solved by Kubernetes
+
+	how the Kubernetes solves these problems
+
+1. Kubernetes installed as Cluster(Master Node or slave nodes)
+	If there is faulting node which is imapcting the other cotaienr it automatically keeps the other container in soome other node
+
+	2.Auto scaling : Kubernetes has the Replication Controller - Replication contaienr yaml , whenever there is a load just incraese the containers
+
+	3.Autohealing :Kubernetes controls and fix the damage - One of your container is down - Kubernetes ha s the auto healing feauture - When the container go down , it will rollout the new container(so user even doesnt know the container is down)
+
+	4.Enterprise - Kubernetes has Enterprise feature(has fire wall support,Load balancing,advance Networking..)
+
+
+
+
+
+
+
+
+
+
+
+
+

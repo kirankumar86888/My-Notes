@@ -1,0 +1,14 @@
+Playbook commands:
+==================
+	->ansible-playbook <playbook-name> - to run playbook
+
+	->ansible-playbook <playbookname> --syntax-check                                 - to check the playbook indentationa and syntax
+
+	->ansible-playbook <playbook-name> --check -for dry run (what are the resources added in target node) but will not execute
+
+	->ansible-playbook <playbook-name> -v -it displays small information
+
+	->ansible-playbook <playbook-name> --v -it displays huge amount information
+	
+	->ansible-playbook <playbook-name> ---v -it displays very huge amount information
+	 

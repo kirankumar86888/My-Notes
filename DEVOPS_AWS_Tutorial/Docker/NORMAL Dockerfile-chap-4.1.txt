@@ -1,0 +1,61 @@
+NORMAL Dockerfile
+=================
+FROM ubuntu:latest
+WORKDIR /app
+RUN apt-get update && apt-get install -y python3 python3-pip
+COPY requirement.txt .
+RUN pip3 install --no-cache-dir -r requirement.txt
+COPY requirement.txt .
+RUN pip3 install --no-cache-dir -r requirement.txt
+COPY app.py /app/
+COPY templates/ ./templates
+COPY static ./static
+EXPOSE 5000
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+CMD ["flask","run"]
+
+========================================
+
+docker build -t normal-cal .
+  docker images
+  docker run -d -p 5000:5000 --name mycal normal-cal:latest
+   docker ps
+
+============================================================================
+
+
+
+MULT-STAGE Dockerfile
+====================
+FROM ubuntu:latest As builder
+WORKDIR /app
+RUN apt-get update && apt-get install -y python3 python3-pip
+COPY requirement.txt .
+RUN pip3 install --no-cache-dir -r requirement.txt
+COPY requirement.txt .
+RUN pip3 install --no-cache-dir -r requirement.txt
+COPY app.py /app/
+COPY templates/ ./templates
+COPY static ./static
+FROM python:3.9-slim
+WORKDIR /app
+COPY --from=builder /app .
+RUN pip3 install --no-cache-dir Flask
+EXPOSE 5000
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+CMD ["python3","-m","flask","run"]
+
+
+==================================================
+
+     docker build -t cal-multi .
+    docker images
+     docker run -d -p 5001:5000 --name cal-mul cal-multi:latest
+     docker ps
+   
+
+
+
+   

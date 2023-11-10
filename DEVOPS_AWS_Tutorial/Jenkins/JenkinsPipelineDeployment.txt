@@ -1,0 +1,38 @@
+JenkinsPipelineDeployment
+=========================
+task - need 3 stages
+	-stage 1:source code clone
+	-stage 2: compile the source code
+	-stage 3 :generate the war file
+	-stage 4 :deployment
+
+In PiplineScript give the below steps
+
+pipeline{
+    agent any
+    stages
+    {
+        stage('Clone Repo'){
+            steps{
+                git "https://github.com/iominh/SpringMVC.git"
+            }
+        }
+        stage('compile the source code'){
+            steps{
+                echo "Compile Source Code"
+                sh "mvn compile"
+            }
+        }
+        stage('generate the war file'){
+            steps{
+                echo "Generate the war file"
+                sh "mvn package"
+            }
+        }
+        stage('Deploy the war file'){
+            steps{
+                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.235.76.47:8080/')], contextPath: 'webapp', war: '**/*.war'
+            }
+        }
+    }
+}

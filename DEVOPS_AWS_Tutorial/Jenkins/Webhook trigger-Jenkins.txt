@@ -1,0 +1,21 @@
+Webhook trigger: It will automatically run the job when the code commit is done
+===============
+Need to configure the following tools
+
+1.Jenkins
+2.Git
+
+
+1.In Jenkins ->job ->Configure 
+	->Build /triggers
+	->choose :GitHub hook trigger for GITScm polling
+	->apply andd save 
+2.In Git
+	->Settings
+	->left side - click -Webhooks
+	->Payload URL 
+		Need to give the jenkins url 
+	->http://3.109.209.41:8080/github-webhook/
+	->contenttype : application/json
+	->Add webhook
+	->should get success 

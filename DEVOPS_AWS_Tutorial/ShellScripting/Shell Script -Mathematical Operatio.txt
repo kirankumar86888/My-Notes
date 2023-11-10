@@ -1,0 +1,345 @@
+Shell Script -Mathematical Operations
+=====================================
+	->By using 'expr' / 'let' / '(())' / '[]' / keywords are used for mathematicals operations
+		1.expr
+		2.let
+		3.(())
+		4.[]
+
+1.By using expr
+Eg: vim mysample1 -by using expr keyword
+
+#!/bin/bash
+read -p "enetr first number:" a
+read -p "enetr second number: " b
+s= expr $a + $b
+echo "the sum is :$s"
+ 
+exectute teh file sh sample1 or ./sample1(after giving execute permission)
+
+3. By using (())
+
+#!/bin/bash
+read -p "enetr first number:" a
+read -p "enetr second number: " b
+s=$((a+b))
+echo "the sum is: $s"
+
+4. By using [] 
+
+read -p "enetr first number:" a
+read -p "enetr second number: " b
+s=$[a+b]
+echo "the sum is: $s"
+---------------------------------------------------------------------
+
+ -> Operator is  a symbol which is used to perform some operation
+	For Eg : A + B,here + is a Operator
+			 and A and B -Constant values/variables/
+ ->Operators of different types which supports shell script
+	Arthimetic
+	Logical Operator
+	Conditional/Relational Operator
+	Boolean Operator
+ ->Arthmetic
+	+-additio
+	--subtrac
+	*-mul
+	/-div(quotient)
+	%-modulous division(remainder)
+	++- increment the value by one
+	-- decrement the value by one
+	Eg:
+
+ #!/bin/bash
+ a=32
+ b=23
+ add=$((a+b))
+ echo sum is $add
+ sub=$((a-b))
+ echo sub is $sub
+ mul=$((a*b))
+ echo mul is $mul
+ div=$((a/b))
+ echo div is $div
+ mod=$((a%b))
+ echo mod is $mod
+ ((++a))
+ echo a = $a
+ ((--b))
+ echo b =$b
+
+	->Relational/Condiational -Checking for the two conditions
+		>  greater than (in shell script we use -gt)
+		<  less than ((in shell script we use -lt)
+		>= greter than equal to ((in shell script we use -ge)
+		<= less than equal to (in shell script we use -le)
+		== equal to((in shell script we use -eq)
+		=! not equal to((in shell script we use -ne)
+
+	->Logical Operator -are of three type
+		-a =>logical AND (both are true then true)
+		-o =>logical OR ((both are false then false)
+		!  => Logical NOT (opposite of the given value)
+	->Statements
+		1.Decision Control Statements
+			a. simple if :
+			  Syntax :-
+				if [condition] then
+					statements
+				fi
+
+			b. If else Statements:
+			    Syntax :-
+				if [condition] then 
+					Statements
+				else 
+					Statements
+				fi
+Eg: 
+ 
+ #!/bin/bash
+ n=10
+ if [$n -lt 8 ];
+ then
+        echo "it is one digit number"
+ else
+        echo "it is two digits number"
+ fi
+
+-----------------
+if [condition] then
+				statement-1
+			elif [condition] then							statement
+			elif  [condition] then
+				statament
+				-----------
+				-----------
+				-----------
+			else
+				statement
+			fi
+-----------------------------
+#!/bin/bash
+read -p "enter 1st sub : " a
+read -p "enetr 2nd sub : " b
+read -p "enter 3rd sub : " c
+if [ $a -lt 35 ]
+then
+        echo "Student FAiled"
+
+elif [ $b -lt 35 ]
+then
+        echo "Student FAiled"
+
+elif [ $c -lt 35 ]
+then
+        echo "Student FAiled"
+else
+        echo "passed"
+fi
+---------------------------------------------------
+			
+
+Eg :
+-------------------------------------
+c. nested If :-
+
+#!/bin/bash
+read -p 'Enter file name : ' FileName
+
+if [ -e $FileName ]
+then
+        echo File Exists
+else
+        echo File not Exists
+fi
+
+
+if [ -s $FileName ]
+then
+        echo File not Empty
+else
+        echo File Empty
+fi
+
+
+if [ -r $FileName ]
+then
+        echo File has read access
+else
+        echo File not have read access
+fi
+
+if [ -w  $FileName ]
+then
+        echo File has write access
+else
+        echo File not have write access
+fi
+
+
+if [ -x $FileName ]
+then
+        echo File has execute access
+else
+        echo File not have execute access
+fi
+
+------------------------------------------
+	
+			d. Case Statement:
+				->statements wnd with ';;'
+				->Synatx: 
+			case [condition]
+			option1
+			   statements;;
+			option2
+			   statements;;
+			default
+			statement;;
+Eg :
+#!/bin/bash
+read -p "enter a digit from 0 to 9 : " n
+case $n in
+0) echo "0"
+;;
+1) echo "1"
+;;
+2) echo "2"
+;;
+3) echo "3"
+;;
+4) echo "4"
+;;
+5) echo "5"
+;;
+6) echo "6"
+;;
+7) echo "7"
+;;
+8) echo "8"
+;;
+9) echo "9"
+;;
+*) echo "plesae enter a digit from 0 to 9"
+esac
+
+
+
+-----------------------------------------------------------
+		2.Looping Statements
+ 			->iterative statements(multiple time we need to execute the condition)
+			a.while
+			b.for loop
+			c. do..while or until loop
+
+a.while loop :
+	->not knowing the number of iterations in advance we use while loop
+	->to start the statements we use do and for end we use done
+	->Syntax :
+		while [cond]
+		
+		do
+		  statements
+		done
+
+Eg:
+ #!/bin/bash
+ i=1
+ while [ $i -le 10 ]
+ do
+        echo $i
+ let  i++
+ done
+---------------------------------------------------------
+c.do..while
+--
+#!/bin/bash
+while  [ true ]
+do
+read -p "enter the file name : " fname
+#check whether file exists or not and whether regular file or not
+if [ -f $fname ]; then
+echo "the content of $fname : "
+echo "-----------------------"
+cat $fname
+else
+echo "$fname does not exits"
+fi
+read -p "do u want to display to another file [yes/no]: " option
+case $option in
+[yY]|[Yy][eE][sS])
+continue
+;;
+[nN]|[nN][oO])
+break
+;;
+esac
+done
+echo "thannks for using application"
+-------------------------------------------------------------
+
+for loop :
+=========
+Syntax :
+	for(initialvalue;cond;inc/dec)
+		statements
+
+			or
+	for i in range
+
+Eg:1 for second method
+ #!/bin/bash
+ for i in 1 2 3 4 5
+ do
+ echo "current number:" $i
+ done
+
+Eg:2
+#!/bin/bash
+for course in devops aws py testing ds
+do
+        echo "course name: $course"
+done
+
+Eg:3
+#!/bin/bash
+count=0
+for num in {1..100}
+do
+        if [ $[ num%10 ] -eq 0 ]; then
+                echo "$num"
+                let count++
+        fi
+done
+
+Eg:4
+
+#!/bin/bash
+read -p "eneter a value: " n
+for ((i=1; i<=10; i++))
+do
+        echo "$n * $i = $[n*i]"
+done
+--------------------------------
+Eg :
+For Fractional numbers(float numbers)
+
+#!/bin/bash
+read -p "enter 1st number:" a
+read -p "enetr 2nd number:" b
+sum=$(echo $a+$b | bc)
+echo "the sum :$sum"
+echo "the difference : $(echo $a-$b | bc)"
+echo "the product : $(echo $a*$b | bc)"
+
+			
+			
+				
+			
+			
+
+
+
+

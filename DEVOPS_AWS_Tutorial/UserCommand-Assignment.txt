@@ -1,0 +1,625 @@
+[root@ip-172-31-16-215 ~]# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+Rama:x:1005:1005::/home/Rama:/bin/bash
+[root@ip-172-31-16-215 ~]# exit
+logout
+[ec2-user@ip-172-31-16-215 ~]$
+[ec2-user@ip-172-31-16-215 ~]$ useradd Sita
+useradd: Permission denied.
+useradd: cannot lock /etc/passwd; try again later.
+[ec2-user@ip-172-31-16-215 ~]$ userdel Rama
+userdel: Permission denied.
+userdel: cannot lock /etc/passwd; try again later.
+[ec2-user@ip-172-31-16-215 ~]$ sudo useradd Sita
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+Rama:x:1005:1005::/home/Rama:/bin/bash
+Sita:x:1006:1006::/home/Sita:/bin/bash
+[ec2-user@ip-172-31-16-215 ~]$ sudo useradd Lakshmana
+[ec2-user@ip-172-31-16-215 ~]$ id Lakshmana
+uid=1007(Lakshmana) gid=1007(Lakshmana) groups=1007(Lakshmana)
+[ec2-user@ip-172-31-16-215 ~]$ sudo paaswd Rama
+sudo: paaswd: command not found
+[ec2-user@ip-172-31-16-215 ~]$ sudo passwd Rama
+Changing password for user Rama.
+New password:
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[ec2-user@ip-172-31-16-215 ~]$ sudo passwd Sita
+Changing password for user Sita.
+New password:
+Retype new password:
+Sorry, passwords do not match.
+New password:
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[ec2-user@ip-172-31-16-215 ~]$ sudo passwd Lakshmana
+Changing password for user Lakshmana.
+New password:
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[ec2-user@ip-172-31-16-215 ~]$ sudo userdel Lakshmana
+[ec2-user@ip-172-31-16-215 ~]$ id Lakshmana
+id: ‘Lakshmana’: no such user
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+Rama:x:1005:1005::/home/Rama:/bin/bash
+Sita:x:1006:1006::/home/Sita:/bin/bash
+[ec2-user@ip-172-31-16-215 ~]$ sudo groupadd Ramanayam
+[ec2-user@ip-172-31-16-215 ~]$ sudo /etc/group
+sudo: /etc/group: command not found
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user
+cdrom:x:11:
+mail:x:12:
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+users:x:100:
+nobody:x:65534:
+utmp:x:22:
+utempter:x:35:
+dbus:x:81:
+input:x:104:
+kvm:x:36:
+render:x:105:
+sgx:x:106:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+systemd-oom:x:999:
+systemd-resolve:x:193:
+ssh_keys:x:998:
+sshd:x:74:
+rpc:x:32:
+libstoragemgmt:x:997:
+systemd-coredump:x:996:
+systemd-timesync:x:995:
+chrony:x:994:
+rpcuser:x:29:
+ec2-instance-connect:x:993:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+tcpdump:x:72:
+screen:x:84:
+ec2-user:x:1000:
+Rama:x:1005:
+Sita:x:1006:
+Ramanayam:x:1007:
+[ec2-user@ip-172-31-16-215 ~]$ sudo usermod -aG Ramanayam Rama
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user
+cdrom:x:11:
+mail:x:12:
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+users:x:100:
+nobody:x:65534:
+utmp:x:22:
+utempter:x:35:
+dbus:x:81:
+input:x:104:
+kvm:x:36:
+render:x:105:
+sgx:x:106:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+systemd-oom:x:999:
+systemd-resolve:x:193:
+ssh_keys:x:998:
+sshd:x:74:
+rpc:x:32:
+libstoragemgmt:x:997:
+systemd-coredump:x:996:
+systemd-timesync:x:995:
+chrony:x:994:
+rpcuser:x:29:
+ec2-instance-connect:x:993:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+tcpdump:x:72:
+screen:x:84:
+ec2-user:x:1000:
+Rama:x:1005:
+Sita:x:1006:
+Ramanayam:x:1007:Rama
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+Rama:x:1005:1005::/home/Rama:/bin/bash
+Sita:x:1006:1006::/home/Sita:/bin/bash
+[ec2-user@ip-172-31-16-215 ~]$ id Rama
+uid=1005(Rama) gid=1005(Rama) groups=1005(Rama),1007(Ramanayam)
+[ec2-user@ip-172-31-16-215 ~]$ id sita
+id: ‘sita’: no such user
+[ec2-user@ip-172-31-16-215 ~]$ id Sita
+uid=1006(Sita) gid=1006(Sita) groups=1006(Sita)
+[ec2-user@ip-172-31-16-215 ~]$ sudo usermod -aG Ramanayam Sita
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user
+cdrom:x:11:
+mail:x:12:
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+users:x:100:
+nobody:x:65534:
+utmp:x:22:
+utempter:x:35:
+dbus:x:81:
+input:x:104:
+kvm:x:36:
+render:x:105:
+sgx:x:106:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+systemd-oom:x:999:
+systemd-resolve:x:193:
+ssh_keys:x:998:
+sshd:x:74:
+rpc:x:32:
+libstoragemgmt:x:997:
+systemd-coredump:x:996:
+systemd-timesync:x:995:
+chrony:x:994:
+rpcuser:x:29:
+ec2-instance-connect:x:993:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+tcpdump:x:72:
+screen:x:84:
+ec2-user:x:1000:
+Rama:x:1005:
+Sita:x:1006:
+Ramanayam:x:1007:Rama,Sita
+[ec2-user@ip-172-31-16-215 ~]$ id Sita
+uid=1006(Sita) gid=1006(Sita) groups=1006(Sita),1007(Ramanayam)
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+Rama:x:1005:1005::/home/Rama:/bin/bash
+Sita:x:1006:1006::/home/Sita:/bin/bash
+[ec2-user@ip-172-31-16-215 ~]$ sudo gpasswd -d Rama Ramanayam
+Removing user Rama from group Ramanayam
+[ec2-user@ip-172-31-16-215 ~]$ id Rama
+uid=1005(Rama) gid=1005(Rama) groups=1005(Rama)
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user
+cdrom:x:11:
+mail:x:12:
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+users:x:100:
+nobody:x:65534:
+utmp:x:22:
+utempter:x:35:
+dbus:x:81:
+input:x:104:
+kvm:x:36:
+render:x:105:
+sgx:x:106:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+systemd-oom:x:999:
+systemd-resolve:x:193:
+ssh_keys:x:998:
+sshd:x:74:
+rpc:x:32:
+libstoragemgmt:x:997:
+systemd-coredump:x:996:
+systemd-timesync:x:995:
+chrony:x:994:
+rpcuser:x:29:
+ec2-instance-connect:x:993:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+tcpdump:x:72:
+screen:x:84:
+ec2-user:x:1000:
+Rama:x:1005:
+Sita:x:1006:
+Ramanayam:x:1007:Sita
+[ec2-user@ip-172-31-16-215 ~]$ sudo gpasswd -d Sita Ramanayam
+Removing user Sita from group Ramanayam
+[ec2-user@ip-172-31-16-215 ~]$ id Sita
+uid=1006(Sita) gid=1006(Sita) groups=1006(Sita)
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user
+cdrom:x:11:
+mail:x:12:
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+users:x:100:
+nobody:x:65534:
+utmp:x:22:
+utempter:x:35:
+dbus:x:81:
+input:x:104:
+kvm:x:36:
+render:x:105:
+sgx:x:106:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+systemd-oom:x:999:
+systemd-resolve:x:193:
+ssh_keys:x:998:
+sshd:x:74:
+rpc:x:32:
+libstoragemgmt:x:997:
+systemd-coredump:x:996:
+systemd-timesync:x:995:
+chrony:x:994:
+rpcuser:x:29:
+ec2-instance-connect:x:993:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+tcpdump:x:72:
+screen:x:84:
+ec2-user:x:1000:
+Rama:x:1005:
+Sita:x:1006:
+Ramanayam:x:1007:
+[ec2-user@ip-172-31-16-215 ~]$ sudo groupdel Ramanayam
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+Rama:x:1005:1005::/home/Rama:/bin/bash
+Sita:x:1006:1006::/home/Sita:/bin/bash
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user
+cdrom:x:11:
+mail:x:12:
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+users:x:100:
+nobody:x:65534:
+utmp:x:22:
+utempter:x:35:
+dbus:x:81:
+input:x:104:
+kvm:x:36:
+render:x:105:
+sgx:x:106:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+systemd-oom:x:999:
+systemd-resolve:x:193:
+ssh_keys:x:998:
+sshd:x:74:
+rpc:x:32:
+libstoragemgmt:x:997:
+systemd-coredump:x:996:
+systemd-timesync:x:995:
+chrony:x:994:
+rpcuser:x:29:
+ec2-instance-connect:x:993:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+tcpdump:x:72:
+screen:x:84:
+ec2-user:x:1000:
+Rama:x:1005:
+Sita:x:1006:
+[ec2-user@ip-172-31-16-215 ~]$ sudo userdel Rama
+[ec2-user@ip-172-31-16-215 ~]$ id Rama
+id: ‘Rama’: no such user
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/Rama
+cat: /etc/Rama: No such file or directory
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+Sita:x:1006:1006::/home/Sita:/bin/bash
+[ec2-user@ip-172-31-16-215 ~]$ sudo userdel Sita
+[ec2-user@ip-172-31-16-215 ~]$ id Sita
+id: ‘Sita’: no such user
+[ec2-user@ip-172-31-16-215 ~]$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/usr/sbin/nologin
+systemd-oom:x:999:999:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/usr/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:997:997:daemon account for libstoragemgmt:/:/usr/sbin/nologin
+systemd-coredump:x:996:996:systemd Core Dumper:/:/usr/sbin/nologin
+systemd-timesync:x:995:995:systemd Time Synchronization:/:/usr/sbin/nologin
+chrony:x:994:994:chrony system user:/var/lib/chrony:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:993:993::/home/ec2-instance-connect:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash

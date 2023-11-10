@@ -1,0 +1,72 @@
+Terraform Loops
+===============
+	=>It supports two types of loop statements
+			1.count
+			2.for_each
+	=>Both of these loop statements can be used to create multiple resources with similar configurations, but they work differently
+
+1.count loops:
+	=>It is used to create a fixed number of resources based on the value of a counter
+	=>the value of counter can be either number /list of values
+	=>We can use the count parameter to specify the number of instances u eant to create
+
+	eg:
+	vim main.tf
+	==
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+ resource "aws_instance" "example" {
+        count = 3
+        ami     ="ami-067c21fb1979f0b27"
+        instance_type ="t2.micro"
+        tags= {
+         Name = "example-instance-${count.index}"
+}
+}
+
+2.for each loop
+	=>It is used to create multiple resources with different configurations based on set of input values. 
+	=>for each parameter is used to specify a map or set of input values
+	=>Here we use local blocks for creating different configuration
+	vim main.tf
+	--
+	provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="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"
+}
+locals {
+  instances     = {
+        "web-1" = {
+         ami    = "ami-067c21fb1979f0b27"
+         instance_type  = "t2.micro"
+        },
+
+        "web-2" = {
+         ami    = "ami-0f5ee92e2d63afc18"
+         instance_type  ="t2.micro"
+        },
+        "web-3" = {
+         ami    = "ami-08e5424edfe926b43"
+        instance_type   ="t2.micro"
+        }
+}
+}
+ resource "aws_instance" "example" {
+  for_each      = local.instances
+  ami           =each.value.ami
+  instance_type =each.value.instance_type
+  tags  = {
+    Name = each.key
+}
+}
+
+
+
+
+
+
+

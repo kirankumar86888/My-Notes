@@ -1,0 +1,89 @@
+AWS EC2
+--------
+1.Elastic Compute Cloud
+2.It is the most demanded service
+3.EC2 is used to create the virtual machines(EC2 instances)/Virtual server
+4.EC2 instances are resizable (the instance type - increase or decrease like ram capicity , hardisk..etc)
+5.EC2 is the region specific service
+6.EC2 instance minimum billing period is 1 hour 
+7.EC2 is a paid service, t2 micro service is free tiere
+8.Free tier eligible for 1 year , and for 1month - 750 hours
+9.AWS will provide defualt storage and network
+10.For storage purpose we use Elastic Block Store Volumes(EBS)-hardisk
+	for Linux  - they 8gb by default
+	for windows - 30 gb by defualt
+	max size they provide is - 16 terra bytes
+11.For Network they use VPC(Virtual Private Network) 
+12.For Intsance for securily connectiion we use KeyPairs - Public key or private key (.PEM and .ppk)
+13.EC2 istancees has the security Groups - Will control the incomming and outgoing traffic we configure INBOUND and OUTBOUND RULES
+  for Linux -	For SSH- port no -22
+	        For HTTP-port no --80
+		For HTTPS -port no --443
+ for Windows
+		For RDP -port no -3389
+
+14.One security group can be used in differenct instances
+
+15.EC2 Instances Types
+	a. On demand Instances - Fixed Price(for hourlsy bases) - pay for use
+	b.Reserved instances-Adavance booking - long term commitment(1,2, 3 years)- Provides the discount 
+	c.spot instances - Like bidding process (High capacity for low prices) velampata
+	4.dedicated instances - this is pyhsical machine - very very costly-licence based software
+		
+16.by using the Bootsrap script we can launch the instance
+	In BootStrap script while luanching the only we will create the script for task and get the results
+	In advance setting - in launch instance - User data -
+		write the shell scrpt
+		#!/bin/bash
+		sudo su
+		yum update -y
+		yum install httpd -y
+		cd /var/www/html
+		echo "Amazon Web Services">index.html
+		service httpd start
+		chkconfig https on
+	and luanch the instance
+	We can see the results in website of using the ip address
+	after stoppping the instances only we can modifying the user data	
+
+
+ELASTIC IP
+==========
+	Elastic IP is Stactic IP address
+	1.IP is Internet Protocol
+	We have different types of IP
+		1.Private IP
+		2.Public IP
+		3.Elastic IP
+	2.Normally when we start and stop the instances the public IP address will get changed whwere as the private IP address is not changed
+	3.Elastic IP is used billing is generated
+	EC2 dashboard -ELastic IP - Allocate Elastic IP - generate- type public IP
+		Now associate the Elastic IP - here select the instance we have launched - now it will assign the standard IP address to created instance(webserver)
+
+		Now when stop and start the instances the public IP address will not get changed
+
+
+ADD USER :
+=========
+Default user - EC2 user we use to login the putty server
+
+By our name also we can login into ec2 instance
+
+->In putty 
+	sudo useradd madhu
+	sudo su - madhu
+	mkdir .ssh
+	ls -la
+	cd .ssh
+	touch authorized_keys
+	chmod 600 authorized_keys
+	sudo vim authorized_keys
+	copy and paste the pem key
+	:wq
+
+
+
+
+
+
+

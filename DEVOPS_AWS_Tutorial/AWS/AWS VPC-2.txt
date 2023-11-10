@@ -1,0 +1,65 @@
+AWS VPC-2
+---------
+VPc : Vitual Private CLoud - Region specific service
+
+CIDR : Classless InetrDomain Routing :
+--> How big network we required
+--> How many instances / resources, we gonna launch
+
+Subnet - An avialbility zone is traeted as Subnet
+
+Public Subnet : Internet facing subnet .. 
+Private Subnet : Non - Internet facing subnet..
+
+How big VPC we required ? Ans : 800 instances : 192.168.0.0/22
+How many subnets we require within the VPC..? Ans : 6 (2 public & 4 private)
+How many public subnets required within VPC..?192.168.0.0/26& 192.168.0.64/26
+How many private subnets required with in VPc..?192.168.0.128/25, 192.168.1.0/25, 192.168.1.128/25, 192.168.2.0/25
+Are u going to create any subnets in future..? Yes ( have some IPs for future use).
+192.168.2.128/25 ,192.168.3.0/25, 192.168.3.128/25
+
+ELB - 2 subnets (ap-south-2a & ap-south-2b)
+App - 2 subnets (ap-south-2a & ap-south-2b)
+DB - 2 subnets (ap-south-2a & ap-south-2b)
+
+Public subnets : Place one public-1 subnet in ap-south-1a and public subnet-2 in ap-south-1b
+Private subnets : Place private subnet-1 in ap-south-1a and another one in ap-south-1b
+
+Public subnet : Internet facing ... : ELB, jump/bastian Host...
+Private subnet : DBS, Application,WebServers...
+
+
+Steps 
+
+When we create the VPC , by default  a route table is created , Security Group and Network aCL is also created
+1.Create a VPC 
+2.Create a subnet - here and name and range , availability zone are given - for Eg we will give 6 subnet
+3.Create a Internet Gateway - provide the name - and attched to VPC (for 1VPC has only 1 inetrnet gatway)
+4.Create a Route table : Here the subnetes we created by default it will attach to the main route table - that is local root(target)
+while creating rote table we will give name and vpc attaching
+let us create a public route table, and private route table
+Now in Public route table under subnet association will add public subnets.Now to to become public route table we need add the internet gateway to enable the route for that under routes ->Edit routes->Add routes ->Target->Inetrnet gateway
+For public subnets - we need to enable the auto assign the public ip address ->Select the punlic subnet ->action->edit subnet setting ->Auto assign Ip setting - Enable->Save
+And In Private route table under subnet association will add private subnets- no need to add the intergatway( so that is is private)
+5.Enable DNS Hostname  : select VPC - >Action- Edit VPC setting -Enable DNS hostname -Save
+6.Create a flow logs -To monitor the traffic - Cloudwatch/s3 buckets(it can be done through VPC level or subnet level but when choose the subnet level that specific subnet we can observe the traffic in cloud watch)-vpc- create floe logs- all traffic- aggreation 1 min- cloud watch- provide the log grroup - iam role- log record format -aws defualt format -create flow log click
+7.Create a log group - in Cloud watch - create a name
+Internet Gateway: It provides the inetrbet to the VPC
+
+Create a policy for log group,createlog stream,describe and cretae log groups and put log events
+roles -aws service - ec2- created policy attached - provide role name(becuaese there is no label/ or name for flow logs) so we create in this way change the name service to vpc-flow-logs 
+In clod watch - log groups - give name - then create - now add this log group vpc flow log groups
+8.Let us launch instance -for public subnet -jump server - windows - t3 micro - public subnet- auto matic auto assign is enabled- let us create security group - anywhere- luanch instance
+9.Let us launch instance -for private subnet -app server - linux - t3 micro - private subnet- auto matic auto assign is diabled- let us create security group - anywhere- luanch instance
+
+Now connect to the public server jump server
+Now connect to private server- app server - to connect server from the public server only we can connect to private server
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,179 @@
+Date:23/08/2023
+Ansible:is a configuration management tool
+main components are in ansible Playbooks
+Ansible was written in python 
+agent less architecture
+push base mechanism
+using script is YAML---yet another markup language
+it have n no of modules using python 
+Ansible GUI--Ansible Tower(Drag and drop)
+inventory file required to config ansible
+acm and targetnode connection will be as ssh
+
+
+cheff/puppet---pull base mechanism and agent based/cook books/DSLscript(domain specific language/groovy script)
+
+
+sudo amazon-linux-extras install ansible2 -y
+yum install git python-pip-level openssl -y
+
+vi /etc/ansible/host
+add group name and ip address of node servers
+[dev]
+privateip1
+privateip2
+:wq
+
+open 
+vi /etc/ansible/ansible.cfg
+
+inventory 
+sudo_root   uncomment the both inventory and sudo root
+:wq
+
+useradding
+useradd ansible
+passwd ansible
+
+visudo
+add user at allow any user
+ansible and NOPASSWD: ALL
+:wq
+vi /etc/ssh/sshd_config
+password authentication give it as yes
+:wq
+
+connect target node
+sudo -i
+useradd ansible
+passwd ansible
+visudo
+allow root all
+add user credentials
+vi /etc/ssh/sshd_config
+:wq
+systemctl restart sshd in all instances
+
+go to master
+su - ansible
+
+go to nodes
+su - ansible for all nodes
+
+sudo vim /etc/ansible/hosts
+
+ansible all --list-hosts
+ansible all -a "ls"
+
+in master server
+ssh-keygen
+copy key
+
+
+ssh-copy-id ansible@localhost
+
+ssh-copy-id username@node1 privateip
+
+ssh ansible@node1 privateip
+
+Date:24/08/2023
+
+Ansibel-dhoc Commands:to perfom quicklyperations and it performs single tasks
+it can be run indivisually to perform quick popearations
+these are temporary commands
+modules are shippable commands
+
+ansible groupname -m(module) ping(module) -o(output)------it display the result in single line
+ex:ansible DEV -m ping -o
+or ansible privateip of ec2 -m ping -o
+
+ansible all -m shell -a date
+ansible all -m shell -a uptime
+
+Modules:
+ping----->to check the connectivity
+shell---->execute the commands
+yum----->package s/w install and uninstall  state=present
+copy---->copy the files
+service---->service start
+command---->commands in linux
+
+
+
+state=present----->install package
+state=absent----->uninstall package
+state=latest---->update package
+state=started---->to start the service
+
+ex:ansible dev -m yum -a "name=git state=present" --become
+ansible dev -m service -a "name=git state=present" --become
+ansible dev -m copy -a "src=/home/ansible/index.html dest=/var/www/html" --become
+ansible dev -m ansible.builtin.shell -a "echo 'New content to add' >> /home/ansible/file"
+
+
+
+
+ansible groupname -a "ls"
+ansible all -m ping 
+ansible all -m ping -o
+
+
+empty in ansible server
+
+target node server to copy
+
+ansible my_remote_node -m ansible.builtin.shell/lineinfile(only one line) -a "echo 'New content to add' >> /path/to/remote/file"------->add content in to that file from ansible server
+ansible <target_host> -m shell -a "ansible localhost -m blockinfile -a 'path=/path/to/remote/file block='''Your Content Block''' insertbefore=^marker$'"
+
+
+Date:25/08/2023
+
+ANSIBLE PLYABOOKS:
+
+Playbooks are written in YAML(yet another markup language) Language
+extension should be .yml or .yaml
+each playbook is composed of one or more modules in a list
+module is collection of configuarations
+we will use playbooks to write set of task those tasks should be performed by ansible
+playbook contains a list of tasks and task contains a list of modules
+module will execute entire playbook
+
+
+yaml starts with three ---(hyphen) symbols and end with three ... (dots)
+playbooks compose with different sections
+what are they
+1.host section------>defines the target machines on which playbooks should be run
+2.variable section---->based on our required we use this varibale section and this is optional section and can declare all the variables when need in playbooks
+3.task section------->it list out the all the tasks that should be executed on the target machine and it specifiy the use of modules and every task having name which give description 
+
+
+Playbook commands
+
+ansible-playbook playbokkname----->to run playbook
+ansible-playbook plyabookname --syntax-check---->to verify the perfect sytnatx and indendation
+ansible-playbook playbookname --check----->it is (dry run) command it performs 
+ansible-playbook playbookname-v-------/>display small information 
+ansible-playbook playbookname-vv------>display of huge amount of information
+ansible-playbook playbookname-vvv---->very huge amount of inform
+
+Date:26/08/2023
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

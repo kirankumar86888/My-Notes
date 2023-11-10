@@ -1,0 +1,55 @@
+In Default User :
+
+We install the Docker
+
+	=>sudo yum install docker -y
+
+Now check the docker version
+
+	=>docker version
+
+Client:
+ Version:           20.10.23
+ API version:       1.41
+ Go version:        go1.18.9
+ Git commit:        7155243
+ Built:             Tue Apr 11 22:56:36 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+
+It becomes the docker client becuase in this instance only we have installed the docker
+
+
+docker deamon - It is a background server
+
+
+Now check the status of the docker service
+
+	=>sudo service docker status 
+
+Now start the docker service
+
+	=>sudo service docker start
+
+Now 
+	=>  docker version
+(got the permission denied)
+
+	=>sudo docker version / sudo docker info 
+(we will get client and server info)
+
+So,Everytime we need to put sudo to get client and server info
+
+So now we no need to give the sudo to give info , so we need to add default user in docker group to get rid off permission denied error (sudo)
+
+
+	=> sudo usermod -aG docker ec2-user
+exit
+	
+
+
+		
+

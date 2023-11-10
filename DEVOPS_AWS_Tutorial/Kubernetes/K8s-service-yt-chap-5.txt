@@ -1,0 +1,54 @@
+Kubernetes servie-yt-chap-5
+----------------------------
+Deployment->ReplicasSet->pods
+Deployment wil create the replicasets and replica wil create the pods
+
+When the container is down automaticcaly a new container created that is actually the k8s does
+
+But problem when the acutual one does down a new container is getting created and then ip address also will get changed
+
+For that ipaddrees get changes automatically we have a solution of Services
+
+
+Deployment ->Service(it acts the load balancer)uses the component into the kubeproxy(it will forward the requestthe containers and it provieds the name of the service
+->Load balancing,->Service Discovering ->Expose to world
+
+1.Load balancing
+2.Service discovering(using  labels ans selctors)
+
+S->D->user1,user2,user3
+
+IP address -> Labels and selectors -for evry pod get created they will apply label which is common for all the pods
+
+service will do 
+first we wil create deployment  -inside that metadata we have label
+metadata;
+  label
+   app:payment
+3.Expose to external world :
+ :service can access the outside k8s cluster
+
+Service can be created in three ways
+	1.ClusterIp (by defualt brhaviour it can accesss inside the k8s cluster)benifits (loadbalancing,discobering)
+	2.NodePort :With in the network /organization(have the access fo nodes cluster)
+	3.LoadBalancer :it expose the application to external world-EKS->ELB-(public address)-It works on the clood platform
+======================================================
+1.created a deployement ,replicaset,pod (all are in  worker node 1) all yhi sdone kubernetes
+
+2.Services will create to watch on pods
+
+	if we craete a service as a cluster ip mode -the application is ccaeesed to the kubernetes cluster 
+
+	if we craete load balncing type service- cluster i son aws - eks it will elastic load balamnecr ip address/public ip address -cloud control manager (it will generate the public ip address) aws ->EKs-ELB->public
+User has internet access he can naccees the public aceess simply..
+
+	If we create node type ip service -> whoever the can access the worker nodes they can access pods/applications
+
+	If we craete cliuster type ip ->no access to any one(only they can accessto the pod)
+
+
+
+Eg  :amazon.com :- service - load balancer
+    :inside the oragazixation: service -node type
+   :clusterer ip :- service - cluster ip
+===========================================================

@@ -1,0 +1,359 @@
+Terraform Installation:
+=======================
+	1.Let us create a linux instance of name - Terraform
+	2.Connect the instance
+	3.sudo -i (go to root user)
+	4.terraform download link from website
+	5.wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
+	6.it is downloaded zip formt
+	7.Unzip the terraform <unzip terraform terraform_1.5.7_linux_amd64.zip>
+	8.unzip file will be downloaded
+	9.Remove the zip folder (rm -rf terraform_1.5.7_linux_amd64.zip)
+	10.Now we have move the terraform file to /usr/local/bin/terraform
+		<mv terraform /usr/local/bin/terraform)
+	11.Now thw set the configuration
+	12. ls -ltra (it will show thw hidden files)
+	13. check the .bashrc file available that is the configauration file
+	14.vim .bashrc
+		here we need to create user local bin path as we have created this path initially
+	15. add below lines at last
+		export PATH=$PATH:/usr/local/bin
+		exit and save
+	16. to check the changes are saved in confihuration file we need execute source file like
+		source .bashrc
+	17.If errors exists it display if not displays nothing
+	18.Now check the terrform version hereafter configuration
+	19.terraform --version
+        20 .Let us create IAM user and generate and access nad secret key for programatic access
+	21.Got to IAM in aws
+	22.create a user- username -<terra-user>
+	23.Check on I want to create an IAM user
+	24.Click on next
+	25.Click on Attach policies directly
+	26.Adrminstrative access
+	26.Click on next
+	27.create user
+	28.Now select the created user - Terra-user -selct the credential access
+	29.Click on Create access key
+	30.Select the command line interface and cgorm the acknowldegment and click on next
+	31.Give the tag description -terra-user
+	32.Now it will create the access key and secret key
+	33.Now in putty give the command
+		aws configure
+
+	34.Give the below details
+	    aws access key:******
+	    aws secret key  :*****
+	    defualt region name :-ap-south-1
+	    default output format :-table
+	35.Let us create a directory mkdir terraform
+	36.Check the terraform version
+	37. terraform --version
+
+	
+
+
+To create a Infratstucture of Tefform we have different sections
+	1.Provider Block
+	2.Resource Block
+	3.Variable Block/Specification Block (it is based on our requirement)
+
+1.Provider Block
+	-Here we need to provide the Cloud Palatform
+	-Need to provide the region of aws
+	-Need to provide the access and secret key of IAM User
+2.Resouce Block
+	-For actual task implementation (like we use 
+vpc,instance,s3)
+	-We can create n number of resuorce block
+3.Variable Block
+	-It is based on Resource Block we will craete the variables
+	-We can create n number of variable block
+
+===========================================================
+
+=>terraform script should be in with extension.tf
+	like main.tf  
+=>Here we use provider block and resource block
+
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+  ami ="ami-067c21fb1979f0b27"
+  instance_type ="t2.micro"
+  tags ={
+    Name = "WEB-SERVER"
+  }
+}
+
+
+
+
+=========================================================
+
+=>Let us use provider block, variable block and resource block
+
+	provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+  ami ="ami-06}c21fb1979f0b27"
+  instance_type = var.instance_type
+  tags ={
+    Name= "WEB-SERVER"
+  }
+}
+variable "instance_type"{
+description =" I am creating t2 micro server"
+type        = string
+default     ="t2.micro"
+}
+
+=> let us create a httpd instance 
+
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+  ami ="ami-0ff30663ed13c2290"
+  instance_type ="t2.micro"
+  tags={
+   Name ="httpd-server"
+}
+
+  #install and configure httpd on startup
+  user_data = <<-EOF
+        #!/bin/bash
+        sudo yum update -y
+        sudo yum install -y httpd
+        sudo systemctl start httpd
+        sudo systemctl enable httpd
+        echo "WELCOME TO DEVOPS COURSE FOR TERRAFORM " >/var/www/html/index.html
+        EOF
+
+	terrform init
+	terrafrom validate
+	terraform plan
+	terraform apply --auto-approve
+}
+
+
+=====================================>
+Let us create multiple instance of same type of web server creation through terraform
+
+=> 
+
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+  ami ="ami-0ff30663ed13c2290"
+  instance_type ="t2.micro"
+  count		= var.instance_count
+  tags={
+   Name ="web-server"
+}
+}
+ 
+variable "instance_count" {
+	description = "creatining the number of instances"
+	type	= number
+	default = 3
+}
+
+
+	terrform init
+	terrafrom validate
+	terraform plan
+	terraform apply --auto-approve
+=============================================================
+Let us create number of iam users through terraform 
+
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="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"
+}
+
+resource "aws_iam_user" "terraform_user1" {
+	count	= length(var.user_names)
+	name	=var.user_names[count.index]
+}
+variable "user_names" {
+	description = "creating IAM users"
+	type	= list(string)
+	default	= ["user1","user2","user3"]
+}
+	terrform init
+	terrafrom validate
+	terraform plan
+	terraform apply --auto-approve
+=============================================================
+ 
+Let us create 3 blocks , but provider and resource block in one configuration file and let us use the variable block in separete file
+
+Here craeted two files 
+	1.vim main.tf
+	2.vim variable.tf
+
+In main.tf
+==========
+	provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+        ami     = "ami-067c21fb1979f0b27"
+        instance_type   = var.instance_type
+        tags    = {
+        Name    ="server"
+}
+}
+
+In variable.tf
+==============
+variable "instance_type" {
+        description     ="craeting the instance"
+        type    = string
+        default = "t2.micro"
+}
+
+	-terraform validate
+	-terraform plan
+	-terraform apply
+
+A instance will be created
+=============================================================
+ Let us split the variable file into two files like , type and then value
+	1.main.tf - contains the provider and resource block
+	2.vim variable.tf - declare the instance_type block
+	3.vim terraform.tfvars - It contains instance_type values
+
+1.main.tf 
+==========
+variable "instance_type" {
+}
+[root@madhu terraform]# cat main.tf
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+        ami     = "ami-067c21fb1979f0b27"
+        instance_type   = var.instance_type
+        tags    = {
+        Name    ="server"
+}
+
+}
+
+2.variable.tf
+==============
+variable "instance_type" {
+}
+
+3.terraform.tfvars
+=================
+instance_type   = "t2.micro"
+
+
+
+=============================================================Let us create a instace - which contains main.tf, variable.tf,stage.tfvars,prod.tfvars here stage and prod two enviroment variable file 
+
+Y we do this -, for staging env they need - ythey have some requirement like t2.micro is sufficient
+where as - for production env they need - t2.medium intsnace type , so we here create a variable file delcare the instance and envrionment type and create two more file that stahe and prod vars file
+
+1. main.tf
+==========
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+        ami     = "ami-067c21fb1979f0b27"
+        instance_type   = var.instance_type
+        tags    = {
+        Name    ="server"
+}
+}
+
+2. variable.tf
+===============
+variable "instance_type" {
+}
+variable "environment_name" {
+}
+
+
+3. stage.tfvars
+===============
+instance_type = "t2.micro"
+environment_name        = "staging"
+
+4.prod.tfvars
+=============
+instance_type   = "t2.medium"
+environment_type= "production"
+
+	terrform validate
+	to dry run stage env
+	terraform plan -var-file="stage.tfvars"
+	to actual run of stage env
+	terraform apply -var-file="stage.tfvars"
+Now staging env instance created with t2.micro instance type
+
+	now destroy the previos terraform infrastructure
+	to dry run prod env
+	terraform plan -var-file="prod.tfvars"
+	to actual run of prod env
+	terraform apply -var-file="prod.tfvars"
+
+task - luanch instance 
+	add security group
+	add keypair attach
+=============================================================create an instance with security group and key_pair 
+
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+ resource "aws_instance" "example" {
+        ami     ="ami-067c21fb1979f0b27"
+        instance_type ="t2.micro"
+        key_name =aws_key_pair.example.key_name
+        vpc_security_group_ids = [aws_security_group.example.id]
+        tags= {
+         Name = "new_instance"
+}
+}
+ resource "aws_security_group" "example" {
+ name_prefix = "newinstannce_SG"
+        ingress {
+          from_port     = 22
+          to_port       = 22
+          protocol      = "tcp"
+          cidr_blocks   = ["0.0.0.0/0"]
+}
+}
+ resource "aws_key_pair" "example" {
+ key_name       ="example-key"
+ public_key     ="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCSuVYxF/dTUdM4NtDqxgtHJScyBZj61/DuZ8xXty2wz0HZAbtHTtQ9kWzeHW1L2XS8tTK8zk8+ancK7+6JociXk/N6wtTCRHQJ4p4fj+TUW0WV30t91vdc4xr4K7z7r+sDZ33xjmZRk63VcPTNmtPF7RtP/MyJrVIZpRemxhjv3lSgJtFSVBVGavEW1TLw9W1Vq2ldwb1hgo178IqLAudYfgc0dC24+ThbTnzH+EBcFbnCmsdDmFfqeGNStuBMux1sCoh0xjQ8hzsYGaTql5RDYc/6vHN4TqCKJ9ExhU4YxCinipMJZaSTx82jcm5fhgllBtNGB8mj0BiwbRy34aIB MumbaiPemkey"
+}
+
+ 
+
+
+

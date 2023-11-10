@@ -1,0 +1,57 @@
+Terraform Output Values
+=======================
+
+	=>To hide/display the sensitive information of aws resources(like ipaddress/security group info) in console 
+	=>here we  have some keywords
+	
+output: this keyword is used to define an output value in Terraform
+<output_name> : this is the name of the output value,It should be a unique identifier that can be used to refrence the value in oters parts of the terraform configuration
+value :this is used to specify the value that should be returned when the output is accesed.
+<descriptional> -optional
+[sensitive = <bool]:Is sensitive is true - it will display the data, if sensitive is false- it will not display the data
+
+For example :
+	in main.tf
+	==
+
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_instance" "example" {
+ ami    = "ami-067c21fb1979f0b27"
+ instance_type  ="t2.micro"
+        tags ={
+  Name = "my-instance"
+}
+}
+output "public_ip" {
+ value  = aws_instance.example.public_ip
+ sensitive = false
+}
+
+output "greeting" {
+ value  ="Hi Madhu"
+}
+
+		terraform validate
+		terraform plan
+		terraform apply --auto-approve
+==================================================
+
+provider "aws" {
+  region        ="ap-south-1"
+  access_key    ="AKIAVO3XMLTOFMG35PHE"
+  secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
+}
+resource "aws_Instance" "example" {
+ ami    =""
+ instance_type = "t2.micro"
+tags ={
+ Name = "NewIsntance"
+}
+}
+resource "aws_key_pair" "example" {
+ key_name       = "example-key"
+ publick_key    = file(

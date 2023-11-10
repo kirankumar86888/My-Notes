@@ -1,0 +1,265 @@
+ANSIBLE-PLAYBOOKS
+==================
+	->Playbooks in ansible are written in YAML Language
+	->the extension of created plyabooks is .yml/.yaml (yet another markup language)
+	->Each playbook is composed of one or more modules in a list (list of Modules)
+	-> Module is set of colection of configuarations
+	-> We will use playbooks to write set of tasks , those tasks should be performed by ansible
+	->playbooks contains a list of tasks and tasks contains list of modules
+	->Module will execute the entire playbook
+	-> yaml starts with three '---' 3 hyphen symbols (for creation of playbooks)
+	->yaml ends with three '...' 3 dots symbols
+	->playbook contains different sections
+	
+	1.host section
+	2.variable section
+	3.task section
+
+1.host section :
+	It defines the target machines on which the playbook need to be run
+	this is based on ansible host inventory file (we will specify the group name and list of ip address of target nodes)
+
+2.variable section :
+	Based on our requirement we need to use the variable section
+	this is optional section and declares all the variables which ared used in playbooks
+
+3.task section :
+	It lists out all the tasks that should be executed on the target machine/node
+	It specify the use of modules
+	every task has the name which is a small description 
+	
+				    dev1 node (IP address)
+
+
+host inventoy        Ansible Server 	
+file	
+
+
+				    dev2 node(IP address)
+	
+
+
+
+here ansible server through ssh connect we connect to dev1
+here ansible server through ssh connect we connect to dev2
+
+In dev1 contains 1 ip address
+
+In dev2 contains 1 ip address
+
+
+In ansible server we configure host inventory file
+	It contains group name and its ip-address (node 1 ipaddress and node2 ipaddress)
+
+In ansible server we create playbooks and created in yml format
+
+For eg we create an yaml file for person
+
+	---
+	name : madhu
+	gender : female
+	address : iuiouiou
+	  city : hgj
+	  state : hhghjghjg
+	  pincode : 989797
+	hobbies : 
+	   -dance
+	   -chatting
+
+create a playbook
+for Eg : vim test.yml
+
+		--- #TESTS PLAYBOOK
+		- hosts: dev
+		  user: ansible
+		  become: yes     (for root userpromotion)
+		  connection: ssh      
+
+(above four lines are called as host section)
+(based on our req we will create the variable section)
+		  tasks:
+		    - name: TREE PKG INSTALLATION
+		      action: yum name=tree state=present
+(above 3 lines are called as task section)
+
+now exit andsave
+
+cat test.yml
+
+-> now in ansible server
+
+	->ansible-playbook test.yml --syntax-check
+(to check perfect indention)
+
+	->ansible-playbook test.yml --check
+(dryrun - how the playbook runs but not executes really)
+
+
+->ansible-playbook test.yml -v 
+(to run the playbook in verbose provide the small amount of info)
+
+->ansible-playbook test.yml -vv
+(provide the huge amount of info) 
+
+->ansible-playbook test.yml -vvv
+(provide the  very huge amount of info) 
+
+->ansible-playbook test.yml 
+(to run the playbook provides for first time in yellow color) 
+
+second time if we run , it will provide the info in yellow color
+
+in dev node 1 
+
+execute tree
+provides the details of the files
+
+
+Create one more playbook
+
+task.yml
+	--- #TESTS PLAYBOOK
+		- hosts: dev
+		  user: ansible
+		  become: yes     (for root userpromotion)
+		  connection: ssh      
+
+(above four lines are called as host section)
+		  vars: 
+		   -pkgname: httpd
+(based on our req we will create the variable section)
+		  tasks:
+		    - name: HTTPD PKG INSTALLATION
+		      action: yum name='{{pkgname}}' state=present
+(above 3 lines are called as task section)
+(to uninstall we will mention absent in state like state=absent)
+
+cat task.yml
+ansible-playbook task.yml --syntax-check
+ansible-playbook task.yml (execute)
+
+one more playbook
+
+myfile.yml
+	
+	--- #TESTS PLAYBOOK -FILE CREATION
+		- hosts: dev
+		  user: ansible
+		  become: yes     (for root userpromotion)
+		  connection: ssh      
+
+(based on our req we will create the variable section)
+		  tasks:
+		    - name: CREATE A FILE
+		      file:
+			dest: saturday.txt
+			state: touch
+		    - name: CREATE A DIRECTORY
+		      file: 
+			dest: mydir
+			state: directory
+save and exit
+
+cat myfile.yml
+syntax check 
+ansible-playbook myfile.yml --syntax-check
+dry run
+ansible-playbook myfile.yml --check
+now eexceute the file
+ansible-playbook myfile.yml
+
+Now add the content into the file
+
+myfile.yml
+	
+	--- #TESTS PLAYBOOK -FILE CREATION
+		- hosts: dev
+		  user: ansible
+		  become: yes     (for root userpromotion)
+		  connection: ssh      
+
+(based on our req we will create the variable section)
+		  tasks:
+		    - name: CREATE A FILE
+		      file:
+			dest: saturday.txt
+			state: touch
+		    - name: CREATE A DIRECTORY
+		      file: 
+			dest: mydir
+			state: directory
+		    - name:WRITE THE CONTENT IN A FILE
+		      copy:
+			dest: saturday.txt
+			content: |
+			 this is saturday file
+			 created through playbook
+			 written by madhu
+(to create multiple lines we use '|')
+
+cat myfile.yml
+syntax check 
+ansible-playbook myfile.yml --syntax-check
+dry run
+ansible-playbook myfile.yml --check
+now eexceute the file
+ansible-playbook myfile.yml
+
+  
+Now create a loop playbook(adding users in a list)
+
+vim ansloop.yml	
+
+--- #TESTS PLAYBOOK -FILE CREATION
+		- hosts: dev
+		  user: ansible
+		  become: yes     (for root userpromotion)
+		  connection: ssh      
+
+(based on our req we will create the variable section)
+		  tasks:
+		    - name: ADDING USERS LIST
+		      user: name='{{item}}' state= present
+		      with_items:
+			-madhu
+			-sai
+			-sitha
+			-ram
+			-arjun
+			-run
+save and exit	      
+
+cat ansloop.yml
+syntax check 
+ansible-playbook ansloop.yml --syntax-check
+dry run
+ansible-playbook ansloop.yml --check
+now eexceute the file
+ansible-playbook ansloop.yml
+
+
+
+
+
+
+
+
+
+
+		  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

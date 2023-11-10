@@ -1,0 +1,801 @@
+git remote set-url origin https://<token>@github.com/<username>/<repository>.git
+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 
+Jenkins:
+========
+1.Jenkins is free and open source software
+2.Jenkins is developed in java language
+3.Jenkins is used to automate build and deployement
+4.To install Jenkins we need Java compulsory
+5.Using Jenkins we can achieve CI(Continous Integration) CD(Continous Deployment)(Continous Delivery)
+6.Previuosly Jenkins called as Hudson
+7.Jenkins developed by Kawaguchi in sun Micro system in 2004
+
+jenkins - takes the code from remote repository(github) and then build(compile) by maven it genearetes the war file ,code review(quality anaylsis)by sonar and upload/store the artifactory file (war file) by nexus,deploy the war file in tomcat server
+
+Totally done in automation
+ 
+We use CI and CD it is a methodlogy 
+
+Jenkina acts  as the heart of the DevOps
+
+Jenkins run on the defaultserver port no :8080 
+In Jenkins we will create a jobs and pipelines
+
+job - a set of steps to perform and build and deployment task
+It can be done two ways
+	->Free style project (GUI)
+	->Pipeline by scritping it can be done
+
+Now , /home/ec2-user
+cf0873d14ff748ab9c04a283898b0764
+
+cf0873d14ff748ab9c04a283898b0764
+
+
+In putty
+	->install java
+sudo amazon-linux-extras install java-openjdk11 -y
+	-> java --version
+	-> to setup jenkins we need a repository 
+
+go to jenkins redhat pavkagess to use the repository
+https://pkg.jenkins.io/redhat/
+
+-  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+-to get jenkins we use this commans
+-  sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key
+- to setup the key
+
+- sudo yum install -y (to install jenkins)
+- systemctl status jenkins (to check the status)
+-systemctl restart jenkins (to active tthe jenkins)
+
+Now to connect the to server copy the public ipaddress of the intsance followed by port number
+184.72.131.245 :8080
+
+To unlock Jenkins we use
+cat /var/lib/jenkins/secrets/initialAdminPassword 
+
+http://184.72.131.245:8080/
+
+
+Finall we will get the welcome jenkins page by giving username and its credentials
+
+Create a sample job in jenkins
+
+Jenkins Master and slave Concept:
+================================
+the jobs created in the path-
+
+--> var/lib/jenkins/workspace/hello-world
+->/var/lib/jenkins/workspace/MadhuJob
+
+
+In one jenkins server n number of jobs are created may get hanged becuase of heavy load
+So  lots of job created ,load has been increased, so we need RAM,More CPU's,memory and network need to increased
+
+So we use Jenkins Master and slave
+
+--> the main purpose ogf jenkins master and slave is to distribute the builds, jobs will be created in Master,jobs will run jenkins slave node
+
+
+
+Master -Jobs are created in Master
+slave/WorkerNode/nodes - Jobs are build/run in Node server
+
+Jenkins master key and slave node - for communication we use SSH type connection (SSH keygen)
+				-We use TCP/IP Protocol for communication pirpose
+			-
+For setting Master and slave concept we need
+
+	->Jenkins need to be installed , that server is known as Master only
+	-> Java installation is Mandatory
+
+In realtime worker nodes are called QA,Dev,Prod environments
+
+1 Master 		1 Slave   	1 Slave
+		
+1.First install java
+	sudo amazon-linux-extras install java-openjdk11 -y
+2. So we need jenkins key and repository
+	-  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+	--  sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key
+3. java --version
+4.sudo yum install jenkins -y
+5.systemctl restart jenkins
+6.Copy public ip address followed by portnumber 8080
+7.Unlock Jenkins by path ()
+8.Install suggested jenkins
+9.create a job on jenkins serverand build
+10.create one more instance - NODE 1
+11.first create a hostname in second instance
+	sudo hostname amzon-slave
+12. exec bash
+	- will get amazon slave ip
+13.First install java
+	sudo amazon-linux-extras install java-openjdk11 -y
+15. java --version
+
+16 . in master node
+		ssh-keygen (click on enter for file in key generate)
+		ls -ltra
+		cd .ssh/
+		ll
+		we have keys , we need 
+		sudo cat id_rsa.pub (will have key copy and paste in slave node)
+17. ls -ltra
+cd .ssh/
+ll
+authorised_key
+vim authorized_key
+paste the key 
+		
+18. jenkins dashboard coonect 
+now need set the slave node in manage jenkins
+->Manage jenkins
+	-Nodes and clouds
+	-by default - we have Built-In-Node will have that is master node
+	-now attach the slave node
+	-new node
+	-amazon-slave
+	-permanent agent
+	-create
+	No of execturots- no of slaves -1 
+	-Remote root directory - we need to specify slave node -1 homepath
+	-go to slave node -pwd
+	-/home/ec2-user
+	-Labels
+		amazon-slave (it appers in jenkins dashnord)
+	-launch method
+		luanch agents via SSh
+	-Host 
+		paste slave node private ipaddress(as it static)
+	-credentials
+		add
+		kind
+			ssh username with private key
+	ID(van give any name)optional
+		ec2-user
+	DESCRIPTION
+		ec2-user
+	private key
+		attach th pem key (is is created by instance  creation)
+	added
+	host jey verfivcatio stagey - Manually tusted
+save
+nodes-mazon slave -go to logs - succesfully created
+
+create a job in node slave
+ to run  partivular job in slave node
+	-configure
+		restrict where the project can be run
+		-label ecepression
+			amazon-slave
+			apply and save it 
+ now build - it will run in slave node
+
+now run the job in git hub account
+	-got to your repository
+	-copy the https url
+	-create the job (free style project)
+		-des
+		restrict where the project can be run
+		-label ecepression
+			amazon-slave-restric 
+
+		-source code Managememnt
+			-repository url
+		-branch  */master
+		-apply and save
+		- build now
+		-got faileure clone repo origin
+	- we need install the git in slave node
+
+configure - remove restriction to run master node
+
+
+task
+-----
+1.try with two slves
+2.hello-world java program run this program in slave node
+ and get output as helloworld though maven
+
+
+CRON JOBS(crontanguru-website)
+---------
+
+Are of two types
+The first two types PULL based mechanisms
+
+	1.Poll SCM  - 
+		-> Job will be triggered at specific time if code changes /made
+	2.Build Periodically
+		->Job will be triggered on specific time
+	
+Under configure 
+	-Build Triggers
+	-Build Periodically
+shedule
+	*/1 * * * *
+apply and save 
+
+Under Confugure
+	-Poll SCM
+shedule 
+		*/1 * * * *
+
+Push based Mechanism:
+	3.Webhooks :-
+		->job will be triggered immediately if code changes are made 
+		-> Here jenkins wiil be integrating with Git
+
+		-> Go to git hub ->settings ->Webhooks->Add webhook->PayloadUrl(jenkins dashboard url)-paste-followed by github-webhook - content type - application/json - apply and save
+	-Configure - Buils Triggers- Git hub webhook triggers Check- apply and save
+
+
+task :
+git hub- clone the url
+
+-made the changes in src code - add changes and commit and push
+
+Jenkins environment Variables:
+------------------------------
+variables - these are the containers which store the data and manipulates the data
+
+Local variables -  the variable which are used inside the block
+Global variables - the variable which are used outside the main method and inside the class
+
+in build step => echo ${global-var}
+manage jenkins- global properties ->name -global-var- value->my test global
+
+Create a job
+-New item - demo-fre style - buils step - exceute shell - insie that ->name = Madhu echo "Hello henkins , my name is ${name}"
+
+---------------------------
+To change the jenkins port number
+
+
+ls -ltra
+ cd /usr/lib
+cd systemd
+ll
+cd system
+ll
+to search apartivular file  - ls -l *jenkins*
+sudo vim jenkins.services file
+environment - 8181
+
+systemctl restart jenkins.service
+systemctl daemon-relod
+cd
+systemctl restart jenkins
+
+update-alteranatives --config java
+set to 11th version java
+sudo update-alternatives --config java
+
+
+--------------------------------------------------------
+JENKINS SERVER DEPLOYMENT
+=========================
+Build and deployment 
+
+jenkins - takes the code from remote repository(github) and then build(compile) by maven it genearetes the war file ,deploy the war file in tomcat server
+
+create a job - web app - freestye prject -ok
+description - deploying web application
+scm - git - repository url - if private 
+
+git install in the server /putty
+git -version
+build the job again
+
+
+through maven we need to build the process
+
+go to server/putty
+to install maven we need java
+sudo yum install java-1.8.0-openjdk. -y
+sudo yum install maven -y
+mvn --version (3.0.5)
+
+maven configuration
+--
+ManageJenkins-Tools -add maven - name maven3 -maven_home-usr/home/...
+
+
+
+generate the maven jar/war file
+---
+configure -buils tsep - invoke toplevel maven targets
+maven version-mven2 select
+goals- clean package
+apply and save
+
+if we deploy the in the same instance we need to change the port number (as apache and jenkins server port number is 8080)
+
+now deploy the war/jar file in apache tomcat server
+--------
+luanch a new instance - tomcat server and launch
+
+switch root user - sudo -i
+install java - sudo yum install java-1.8.0-openjdk -y
+
+dlcdn.apache.org
+
+go to tomcat folder - tomcat 9 - bin - apache -tomcat -9.0.79tar - copy link(tar) - wget paste the ur
+
+ll
+tar format got downloded
+untar the file -tar zxvf apache
+ll
+rm -rf apache..(tar file)
+have the only the untar file
+
+cd webapp
+ll
+cd manager
+ll
+cd META-INF
+ll
+vim context.xml
+
+to perform task - remove two lines allow value
+
+cd ..
+cd conf
+ll
+vim tomcat-user.xml
+to perform task - last 3 lies copy -rolename ="manager-gui",rolename ="manager-script",username=tomcat,password=''tpmcat roles ="manager-gui,manager-script"/
+
+ll
+cd..
+cd bin
+./startup.sh
+
+tomcat user- and password - tomcat and tomcat
+
+
+Jenkins server for the dployment 
+--------
+ManageJenkins -plugins - Available plugins -deploy to container - install without restart
+
+
+go -to job - configure for deploy now
+postbuild actions
+add
+deploy war/ear to a container
+**/*.war
+context-path (for display in application)
+projectname-spring3
+
+container
+add container - tomcat 9.x
+Credentails
+add jenkins
+Username with password
+username -tomcat
+password-tomcat
+ID - apache-tomcat-crdentials
+description - apache-tomcat-crdentials
+Tomcat URL address - ipadress:8080
+apply and save
+
+take webhook for autodeployment - paster the url of jenkins sahboard followed by github-webhook/
+application/json
+add webhook
+
+
+sample war project in github 
+
+-----------------------------------------
+To create users in jenkins
+
+manage jenkins - Security -Users- create user - give the details - 3 users create
+
+to resrict the users to perform
+
+Manage Jenkins- Security Authentication and Authorization -change to Matrix based security
+
+--------------------------------
+Jenkins PIPELINE:
+-------------------
+
+	->Jenkins pipeline is an automation solution  that lets you create simple or complex jobs
+
+	->Pipeline is set of steps to automate build and deployment
+
+	->In Jenkins we can create jobs in two ways
+		1.FreeStyle Project (GUI)
+		2.PIPELINE (Code)
+
+	-> Pipelines are used to create complex jobs
+
+	-> Jenkins Pipeline is a combination of plugins which automates number of tasks and makes the CI/CD efficient
+
+	->Pipelines can be created in two ways
+		1. Scripted Pipeline :- We will create a pipeline by writing script using python script /groovy script
+The groovy script is Domain Specific Language (DSL)
+
+		2. Declarative Pipeline :-Is easiet approach to create pipeline (coding knowledge is not required)
+
+	->PipeLine code we will keep inside a file called 'JenkinsFile'
+
+	->Jenkins file it is a part of Project repository
+
+	-> Traditionally , jenkins jobs are created using  jenkins UI inetrface is called FreeStyle Project
+
+	-> In Jenkins 2.0 version, jenkins introduced a new way to create jobs using the technique called PIPELINE
+
+	-> PIPELINE can have n number of stages
+		JENKINS PIPELINE
+			For ex We habe 5 staages based on our requirement
+
+1.Declarative Pipeline :- It is a sub sytem in Jenkins pipeline it provides simple syntax
+
+			:-Jenkins File start with 'PIPELINE' KeyWord
+			:-The Declarative Pipeline Syntax is
+
+pipeline {
+	agent any
+		stages{
+			stage('Welcome') {
+				Steps{
+					echo "Welcome to Jenkins"
+}
+}
+}
+}
+
+	pipeline keyword - 
+	agent any - specifies where the job to be run (will specify the particular Node to be run);it is a pipeline level, it is manadotory for  slave nodes
+	stages - it is a diferrent executable blocks atleast one stage block is mandaotory inside stages
+	stage - it contains the actual execution steps , it is to be defined inside the stgaes block
+	steps - it contains the actual build step (LOGIC), totally it is an implementaion ;it is mandaotory to have one steps block inside stage block
+
+
+
+Eg-
+Craete 1 st :firstjpob-freestyle-decription-execute shell - echo "first job done"
+Create 2nd Job :Second Job -freestyle- decription-execute shell - echo "second job done"
+date save and apply
+create 3rd job :Third Job -freestyle -decription-execute shell - echo "third job done"
+
+
+Through jenkins pipeline we will run the 3 jobs
+
+for refrence -pipline syntax
+
+dashboard - newitem -'mypipeline' -pipeline-ok
+for refrence -pipline syntax (build a job)-firstjob-generate
+
+
+pipeline -pipeline script
+
+pipeline{
+agent any{
+stages{
+stage{'first-job'}
+{
+steps{
+	build 'firstjob'
+}
+
+stage{'second-job'}
+{
+steps{
+	build 'secondjob'
+}
+stage{'third-job'}
+{
+steps{
+	build 'thirdjob'
+}
+}
+}
+}
+}
+} 
+	apply-save
+
+------------
+pipelinegit -pipeline -
+defination pipelinscript 
+	pipeline {
+agent any{
+stages{
+stage ('clone repo'){
+steps{
+	git branch :'main',url :'htpss..'
+}
+}
+}
+}
+
+(for pipeline syntac-go pipleine script - choode git - repository url-
+
+
+task - need 3 stages
+	-stage 1:source code clone
+	-stage 2: compile the source code
+	-stage 3 :generate the war file
+	-stage 4 :deployment
+
+
+
+
+Pipeline script for deployement 
+========================================================
+pipeline{
+    agent any
+    stages{
+        stage('clone-repo'){
+            steps{
+                git 'https://github.com/MAVEN-Projects/WebApp.git'
+            }
+        }
+        stage('compile-code'){
+            steps{
+                echo "compile the source code"
+                sh "mvn compile"
+            }
+        }
+        stage('generate-artifactory'){
+            steps{
+                echo "generate the war file"
+                sh "mvn package"
+            }
+        }
+        stage('deployment'){
+            steps{
+                echo "deploying the war file into tomcat server"
+                deploy adapters: [tomcat9(credentialsId: 'apache-tomcat-credentials', path: '', url: 'http://65.2.151.216:8080/')], contextPath: 'Maven', war: '**/*.war'
+                
+                
+            }
+        }
+       
+    }
+}
+===========================================================
+
+
+
+
+
+Email Notification
+-------------------
+1.We need a plugin email extenssion template
+
+Manage jenkins - available - email extension-plugin-install without restart
+Manage jenkins- system - Email Notification -SMTP server -smtp.gmail.com
+advanced- use SMTP authentication - iusername - reddy-madhumitha9550@gmail.com-paswword -
+Test configuration  by sending test e-mail-give check(for checking purpose) 
+Extended e-mail Notification - 
+SMTP server- smtp.gmail.com
+smtp port-465
+jenkins
+username with paasword
+
+username - reddymadhumitha9550@
+pawword - use the generated paassword
+Id-mail
+desc-mail
+click on use SSL
+
+additopnaly grrovy classpath - add
+
+always and succes
+
+
+To send the email notofication we need
+
+Go-To-Email -Manage ur google account -
+Security - 2-step Verification -is On
+enter in search bar -app paaswords- select tge app and device want..
+select app -others(jenkins)-generate the pawword- copy the password(only once it is visible)
+
+
+Go to email notofication account - used the password which we generated
+
+manage jenkins - syste
+
+apply and save 
+
+go to pipeline syntax :mail:mail
+mto -reddy-..
+subject-${CurrentBuild.result}
+Body-
+project.${env.JOB_NMAE}<br>build Number:${env.BUILD_NUMBER}<br> URL:${env.BUILD_URL}
+generate the script
+
+
+pipeline scripttr-
+pipeline{
+    agent any
+    stages{
+        stage('Clone Repo'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Milky19/mavenproject.git'
+            }
+        }
+        stage('Compile code'){
+            steps{
+                echo "compile source code"
+                sh "mvn compile"
+            }
+        }
+        stage('Generate Artifactory'){
+            steps{
+                echo "Generate war file"
+                sh "mvn package"
+            }
+            
+     
+        }
+    }
+    post{
+        always{
+            mail bcc: '', body: """'Project: ${env.JOB_NAME}<br/> Build Number: ${env.BUILD_NUMBER}<br/> RUL: ${env.BUILD_URL}'""", cc: '', from: '', replyTo: '', subject: '${currentBuild.result}', to: 'bommanahanvitha@gmail.com'
+        }
+    }
+    
+}
+under stages out of the stages block
+post{
+always{
+copy the }
+}
+
+
+go to vedio and do
+
+
+================================
+Jenkins shared libraries - re use the pipelinse script
+
+We can implement same pipeline script  in other project also
+
+
+jenkins-dashboard -
+Manage jenkins - system - global pipeline libraries
+
+name - Shared Libraries
+default version - 
+SCM - git url
+apply and save
+
+
+go vedio and watch
+
+==============================================
+
+Jenkins Invalid username and password
+---
+
+cd /var/lib/jenkins
+ll
+vim config.xml
+change to false
+<useSecurity>false
+save and exit
+restart jenkins
+cd /var/lib/jenkins
+sudo syemctl restart jenkins
+
+Manage jenkins - Security-Authentication
+
+Security realm - jenkins own user database
+apply and save
+
+=========================================================
+
+Scripted Pipeline:
+------------------
+ node {
+	stage (build){
+	===
+	===
+	}
+	stage (build){
+	===
+	===
+	}stage (build){
+	===
+	===
+	}
+}
+
+node{
+    stage('Build'){
+        echo "Building Project"
+    }
+    stage('Test'){
+        echo "Testing Project"
+    }
+    stage('Deploy'){
+        echo "Deploying Project"
+    }
+    stage('Release'){
+        echo "Releasing the Project"
+    }
+}
+
+node is a keyword - its a mechaanism which is a part  of jenkins envrionment and capable of executing the pipeline process
+	Node is a key part of scripted pipeline synatx
+Stage block is subset of task perform through entire pipeline like build,test,deployment stages which is used by many plugins to visualize the jenkins pipeline process
+
+----------------------------
+jenkins -parameters-job
+
+	Build parameters are used to supply input to run the job
+
+Types of Parameter
+	String Parameter
+	Choice Parameter
+	Boolean Parameter
+	File Parameter
+	Credential Parameter
+	Password Parameter
+	Multi Line String Parameter
+
+--------------------------------------
+
+JENKINS CLI - through shell
+
+CLI - Command Line Interface - 
+
+goto mnage jenkins- copy the http://13.233.196.185:8080/jnlpJars/jenkins-cli.jar
+
+--------------------------
+upstream and downstream jobs
+---------
+Here the first job used is upstream and next job is called downstream
+
+1.Build
+2.Test
+3.Deploy
+4.Release
+
+Create invidual freestyle jobs
+Now trigger 4 jobs at once
+we need a plugin to od the trigger
+Manage jenkins-plugins-avaliable plugins- build pipelibe 
+Create a New View
+Give the Name of the Job -Stream Job
+Type-Build Pipeline View
+Click on Build Triggers
+check on - Build after other projects are build
+give the job name u created
+save and apply
+same for all three jobs
+create a view and build and all the jobs will be triggered
+
+========================================================
+Jenkins will be integrated with
+1.Sonarqube for Quality analysis
+2.Docker for 
+3.Ansible 
+4.AWS S3 service 
+5.Terraform like provisional tool
+6.nexus for artifactory tool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

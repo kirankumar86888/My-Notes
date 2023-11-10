@@ -1,0 +1,59 @@
+SonarQube-Jenkins
+==================
+	=>SonarQube is continous code quality checking tool
+	=>By using sonarqube tool,we can do 'CODE REVIEW'
+ (checking Coding standards/Code conventions_
+	=>It performs 'CODE COVERAGE' (how many lines of source code is tested by using junit testcases) 
+	=>SonarQube is an open source software quality management tool
+	=>It will continious analyzie the quality of source code
+	=>It will generate code review report in html or pdf format
+	=>Basically Sonaqube is a web based tool
+	=>Sonarqube supports 29 programming languages
+	=>Initially sonarqube supports only java programming language
+	=>Then after it has supported multiple OS(29 programming languages) and it supports multiple Database(mysql,oracle,sql,postgres)
+	=>Sonarqube supports Duplications of code
+	=>Code quality gate reprsents a set of matrix to identify the project quality is passed or not
+	=>Default sonarqube port number is 9000
+
+Sonarqube Installation
+========================
+1.First install jenkins in the instance(follow jenkins installation file)
+2.Install another server for Sonarqube we need minimum 2 gb or 4 gb
+3.In Sonarqube server
+	->First give sudo yum update
+	->sudo amazon-linux-extras install java-openjdk11 -y
+	->java version
+4.Now install Sonarqube
+	->search sonarqube download from website
+	->wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.2.77730.zip
+	->unzip sonar
+	->ls normal sonar file
+	->cd sonarqube-9.9.2.77730
+	->ls
+	->go to bin folder
+	->cd bin
+	->ls
+	->shows different OS
+	->cd linux-x86-64
+	-> ls , now it will show sonar.sh file
+	->now run this command
+	 ./sonar.sh console
+5. In git hub create a project
+
+	->Fork this project in github
+https://github.com/Milky19/Jenkins-Sonarqube-Docker.git
+	->create a webhook for this project (setting ->webhook->add jenkins url followed by github-webhook -application/json -select invidiual request - select pull requests
+
+6. In jenkins create a job - freestyle project
+	-In source code management give the repository url
+	-add the webhook 
+	-build
+7. token of sonar70e0c50b56cadea369f6297980239daa69dc84db
+
+
+
+
+
+
+
+

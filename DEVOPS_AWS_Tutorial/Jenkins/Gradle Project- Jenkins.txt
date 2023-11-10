@@ -1,0 +1,27 @@
+Gradle Project
+================
+1.Create a gradle project in jenkins
+	->Go to jenkins
+	->Manage Jenkins
+	->Gradle
+	->add gradle
+	->install automatically
+2.Go to inside the Job 
+	->Pipleine
+
+	pipeline{
+    agent any
+    tools{
+        gradle "Gradle"
+    }
+    stages{
+        stage('Clone Repo'){
+            steps{
+                git 'https://github.com/mike-neck/gradle-sample-web.git'
+            }
+        }
+    }
+}
+
+	->General
+Discard old buils - Days to keep builds 1, Max # of builds to keep1
