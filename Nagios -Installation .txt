@@ -1,0 +1,95 @@
+Nagios -Installation :
+----------------------
+[for installation of Nagios follow this server ]
+	[https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/4/html/monitoring_ceph_with_nagios_guide/nagios-core-installation-and-configuration] 
+
+1.yum install -y httpd php php-cli gcc glibc glibc-common gd gd-devel net-snmp openssl openssl-devel wget unzip
+2.iptables -A INPUT -p tcp --dport 80 -j ACCEPT (configuting apache port number in iptable)
+
+3.Create a user and group for Nagios Core
+	useradd nagios
+	passwd nagios
+	groupadd nagcmd
+	usermod -a -G nagcmd nagios
+	usermod -a -G nagcmd apache
+
+4.Install Nagios Core and plugins'
+	wget --inet4-only https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.3.1.tar.gz
+	wget --inet4-only http://www.nagios-plugins.org/download/nagios-plugins-2.2.1.tar.gz
+	tar zxf nagios-4.3.1.tar.gz
+	tar zxf nagios-plugins-2.2.1.tar.gz
+	cd nagios-4.3.1
+
+5.Run ./configure:
+	./configure --with-command-group=nagcmd
+
+6.Compile the Nagios Core source code:
+	make all
+
+7.Install Nagios source code:
+	make install
+	make install-init
+	make install-config
+	make install-commandmode
+	make install-webconf
+
+8.Copy the event handlers and change their ownership:
+	cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/
+	chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers
+
+9.Run the pre-flight check:
+	/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+
+10.Make and install the Nagios Core plug-ins:
+	cd ../nagios-plugins-2.2.1
+	./configure --with-nagios-user=nagios --with-nagios-	group=nagios
+	make
+	make install
+
+11.Create a user for the Nagios Core user interface:
+	sudo htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+
+12. Starting the Nagios Core service
+	12.1 Add Nagios Core as a service and enable it:
+		chkconfig --add nagios
+		chkconfig --level 35 nagios on
+	12.2 Start the Nagios Core daemon and Apache:
+		systemctl start nagios
+		systemctl enable httpd
+		systemctl start httpd
+
+13. Logging into the Nagios Core server
+	http://IP_ADDRESS/nagios
+	http://piblic ip4 dns server /nagios [http://ec2-13-233-255-94.ap-south-1.compute.amazonaws.com/nagios/]
+
+14. Configuring the host [vim server.cfg] in nagios-plugins-2.2.1 path of root
+
+	define host {
+	host_name ec2-13-235-99-39.ap-south-1.compute.amazonaws.com
+	alias server1
+	address 172.31.32.223
+	max_check_attempts 3
+	check_period 24*7
+	check_command check-host-alive
+	contacts root
+	notification_interval 60
+	notification_period 24*7
+	}
+
+	syntax :
+	
+	
+	define host {
+	host_name <Public IPv4 DNS>
+	alias <server-name>
+	address <Private IPv4 addresses>
+	max_check_attempts <hoe many times>
+	check_period 24*7
+	check_command check-host-alive
+	contacts root
+	notification_interval 60
+	notification_period 24*7
+	}
+
+
+	

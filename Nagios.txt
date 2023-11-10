@@ -1,0 +1,24 @@
+Nagios
+------
+	-It is Monitoring Tool
+	->It is free and open source software for continous monitoring tool of the system or network infrastructure
+	->Other monitoring tools are splunk,librato,grafana
+	->In AWS we use Cloudwatch
+	->Nagios runs in the plugin called 'NRPE' Nagios Remote Plugin Executer
+	->Nagios developed in 1999 by Ethan with netstaint distributors 
+	->Due to trademarks issues in 2000 they renamed the project as 'NAGIOS'
+	->In 2019 ,Nagios realased as 1st commercial version
+	->In 2012, Nagios is renamed as 'Nagios Core' as open source tool
+	->Nagios runs on the port numbers like 5666,5667,5668
+	->Web Dashboard is so attractive so we used Nagios
+	->Detech all types of network and server type issues
+	->Nagios will reduce the downtime
+	->Nagios will automatically fix updates
+	->It is active monitoring of entered infrastructure
+	->Nagios tool called as old and latest tool becuase it provides the good logs and database systems
+	->It will send the alerts when there is conditions changes done in client servers 
+	-> In Nagios all files are configuaration files
+
+
+
+
