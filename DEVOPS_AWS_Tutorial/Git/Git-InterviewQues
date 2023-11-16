@@ -1,0 +1,145 @@
+Q1. What is Git? How is it used in DevOps?
+Git is a DevOps tool for source code management. It is a free and open-source version control system used to handle small to very large projects efficiently. Git is used to track changes in the source code, enabling multiple developers to work together on non-linear development.
+
+Q2. Mention the most commonly used Git commands and their functions.
+Your interviewer can ask you about the following commands individually, or you may have to draw comparisons between them. You must prepare this crucial Git interview question thoroughly. The following table enumerates some key commands and their functions:
+
+Git Commands and Functions
+
+git config: It configures the username and email address.
+
+git add: This command adds one or more files to the staging area.
+
+git add <file_name>: It specifically adds files one by one.
+
+git init: This command initializes an empty Git repository.
+
+git commit: It allows you to commit changes to the head but not to the remote repository.
+
+git stash: It provides a clean working directory for other tasks while pushing the current working directory state and index to the stack for future use.
+
+git stash drop: It deletes the stashed element (last-added stash item by default)  from the directory. Can also delete a specific topic included as an argument.
+
+git stash pop: It discards the specified stash (topmost stash by default) after applying it.
+
+git pull: It pulls innovation or commits from a specific branch of your central repository. It also updates your object branch in your local repository.
+
+git fetch: It pulls all new commits from the desired branch. It then saves it in a new branch in your local repository.
+
+git merge: It reflects the git fetch changes in your target branch. You can use git merge and specify the name of the other branch to bring it into the target branch.
+
+git branch - merged: This command records the branches merged into the present branch.
+
+git reset --mixed: You can use it for undoing changes of the working directory and the git index.
+
+git merge --abort: It stops the merge process and returns back to the state before the merging occurs.
+
+git revert: It creates a new commit to undo the changes of the previous commit. This command adds a new history without modifying the existing one.
+
+git reset: You can use this command for undoing the local changes done in the git repository. It operates on the git index, commit history, and the working directory.
+
+git status: It shows the difference between the working directory and the index.  
+
+git clone: It generates a copy of a current Git repository.
+
+git remote: It helps you create, view, and delete remotes associated with the local repository.
+
+git branch –d [head]: It simply deletes a branch.
+
+git branch -d <local_branch_name>: You can use this command to delete a branch locally.
+
+git push origin --delete <remote_branch_name>: You can use this command to delete a branch remotely.
+
+git reflog: It tracks every single change made in the repository references and maintains the branches/tags log history, and thus gets the name reflog (reference + log).
+
+git annotate [<options>] <file> [<revision>]: It annotates each line with information from the commit which introduced that change. It can also optionally annotate from a given revision.
+
+git cherry pick: It introduces certain commits from one branch into another branch within the repository.
+
+git bisect: It performs a binary search and detects the commit that introduced a bug or regression in the project’s history.
+
+Here are some basic Git interview questions that you can practice for your upcoming interview:
+
+How is Git different from SVN?
+What are the advantages of using Git?
+What are the limitations of Git?
+Are Git and GitHub the same?
+What is a Git repository?
+How can you create a Git repository?
+What is a bare repository?
+Why do we require branching in Git?
+What do you understand about the "Index" and "Staging Area" in GIT?
+What is a conflict in Git? How will you resolve it?
+Learn about how to become a DevOps engineer here.
+
+Advanced Git Interview Question and Answers
+Here are some advanced Git interview questions for senior developers to help you ace the challenging interview rounds.
+
+Q1. Why is it better to create an additional commit than amending an existing one?
+You must consider the following reasons while answering this Git interview question:
+
+The correct activity will devastate the recently saved commit. If you only change the commit message, it won't create a problem. However, if you modify the contents, there are more chances of excluding something important.
+If you abuse "git commit- amends," it can cause a small commit to increase and acquire inappropriate changes.
+Q2. Explain the different types of branching systems in Git.
+This Git interview question tests your branching knowledge with Git. You must elaborate on how you have utilized branching in your past activity. You can consider the following points while answering such Git interview questions:  
+
+Feature branching: A component branch model stores a majority of the changes for a specific element within a branch. The branch is converged into master when the item is tested and approved by automation.
+
+Task branching: This model allows each assignment to be actualized on its branch with the undertaking key included in the branch name.
+
+Release branching: You can clone the create branch that has procured enough features for a discharge to frame a release branch and begin the following discharge cycle. You cannot add new features after this point. It is the bug fixes, documentation age, and other release-oriented assignments that go in this branch.
+
+Q2. What is Subgit? Why would you use it?
+The tool that migrates SVN to Git is termed Subgit. It effectively detects the settings of your remote SVN repository and downloads SVN revisions. It then converts them to Git commits, thereby emerging as a stable solution for a company-wide migration from SVN to Git. The primary reasons for using Subgit are as follows:
+
+It is superior to git-svn.
+You need not change the infrastructure.
+It allows you to use all Git and all sub-version features.
+It provides a stress-free migration experience.
+What are the advantages of forking workflow?
+This is one of the most frequently asked Git interview questions. There are several advantages of the forking workflow over other popular git workflows, and you can compare them. You can highlight the following points while answering such Git interview questions.
+
+It gives you your own server-side repository rather than using a single server-side as the "central" codebase.
+It is ideal for public open-source projects.
+You can integrate contributions without requiring everybody to push to a single central repository that gives clean project history. You can push to your own server-side repositories as a developer, while the project maintainer can push to the official repository.
+Given below are some of the advanced Git interview questions for your practice:
+
+What are the various Git repository hosting functions?
+What is git is-tree?
+What are “hooks,” and what do they comprise of in Git?
+What is GitLab?
+What is DAG in Git?
+What is the role of Git pull origin master?
+What is the difference between fork and branch?
+Scenario-based Git Interview Questions
+How would you return a commit that has just been pushed and made open?
+How will you know if a branch has just been combined into a master in Git?
+How would you find a commit that broke something after a merge operation?
+What would you do to squash the last N commits into a single commit?
+How would you remove a file from Git without removing it from your file system?
+When would you choose "git rebase" instead of "git merge"?
+How can you configure a Git repository to run code sanity checking tools before making commits? How will it prevent them if the test fails?
+One of your team members accidentally deleted a branch and pushed the changes to the central git repository. How would you recover this branch, given that there are no other git repositories and no other teammates have a local copy?
+How would you copy a commit made in one branch to another branch?
+How would you set up a script to run every time a repository gets new commits through push?
+This completes the list of important Git interview questions that will help you assess your preparation and learn vital topics at the same time.
+
+FAQs on Git Interview Questions
+Q1. Which programming language should I prepare for Git interview questions?
+
+You should know that Git uses the C language primarily. It also uses Python, C++, Perl, and Tlc. You can choose any programming language for your coding interview, but your knowledge of these languages can give you an upper hand in the competition.
+
+Q2. How can you prepare for Git interview questions?
+
+You can prepare well for Git interview questions by practicing the answers to the most anticipated questions. You should practice as many coding problems as you can to nail the coding interview rounds. You can also enroll in mock interviews and preparation courses to ace your Git tech interview prep.
+
+Q3. How can I negotiate salary while answering Git interview questions?
+
+You must wait for the interviewer to give you a chance to put up questions. You can then utilize your negotiation skills to negotiate your salary at Git interviews.
+
+Q4. What is the best way to answer Git interview questions?
+
+Hiring managers from top tech companies suggest that you must think out loud to inform the interviewer of your thought process while answering coding questions. You should use the STAR method to answer scenario-based or behavioral Git interview questions.
+
+Q5. Which top tech companies use Git interview questions to select potential candidates?
+There are thousands of top tech companies that use Git in their tech stacks, including Airbnb, Netflix, Google, Facebook, Microsoft, Twitter, LinkedIn, Netflix, and Shopify. You should be prepared for Git interview questions when interviewing for software engineering positions in these companies.
