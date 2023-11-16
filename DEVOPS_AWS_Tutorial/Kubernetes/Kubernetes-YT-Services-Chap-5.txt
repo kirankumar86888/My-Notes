@@ -1,0 +1,189 @@
+Let have the kubenrestes cluster
+
+We use kops for creating the kubernetes cluster
+
+Kubectl get all ->
+deployment->replicaset->pod used for with in the kubernetes cluster
+
+So we go for services concept
+1.LoadBalncer
+2.Expose
+3.Service Discovery 
+
+lets a take a project of golang of abhisheck veeramal adocker zero to hero git hub
+
+1.cd examples
+cd pytho-web-app
+ls
+Here we have docker file and requiremts.txt
+Let us create deployemnt file and deploy into kubermetes cluster
+
+here is the docker file 
+
+FROM ubuntu
+
+WORKDIR /app
+
+COPY requirements.txt /app
+COPY devops /app
+
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    pip install -r requirements.txt && \
+    cd devops
+
+ENTRYPOINT ["python3"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+
+->Now run the container
+docker build -t abhishekf5/python-sample-app-demo:v1 .
+->Now the image is created
+->Now start the deployment
+
+vim deployement.yml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-python-app
+  labels:
+    app: sample-python-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-python-app
+  template:
+    metadata:
+      labels:
+        app: sample-python-app
+    spec:
+      containers:
+      - name: python-app
+        image: abhishekf5/python-sample-app-demo:v1
+        ports:
+        - containerPort: 80
+
+
+template is for pod and also used for services too
+
+->kubectl appy -f deployement.yml (deployemnt file is created)
+->kubectl get deploy(give the how many replicas are available)
+->kubectl get pods (showa the 2 pods created)
+->kubectl get pods -o wide (shows the pods info + ip address too)
+-->kubectl get pods -v=7( more info regarding pods how the request is accepted..)
+
+deployement ->replicaset->pod
+
+kubectl delete <1stpod name>
+automatically a new pod will be created 
+
+the problem is change in IP address when new is recreated so we go services
+service discovery mechanism - service was identifying IP address -Using Labels and Selectors concept comes - ip adress changes but it checks the label and selector
+
+kunectl get pods -0 wide
+curl -L http://172.17.0.5:8000/demo
+
+
+Kubernetes service ->With in the organization (we need to expose ip address to worker node) -NodePort Mode
+Outside the organization ->need to create the public IP address -Load Balancer Concept
+
+Service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-service
+spec:
+  type: NodePort
+  selector:
+    app.sample-python-app
+  ports:
+    - port: 80
+      # By default and for convenience, the `targetPort` is set to
+      # the same value as the `port` field.
+      targetPort: 8000
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane
+      # will allocate a port from a range (default: 30000-32767)
+      nodePort: 30007
+
+->copy the same name of template label and paste in the selector
+->targetport - is somethething  where the application is running
+
+
+->kubectl apply -f service.yml(service will be createrd)
+->kubectl get svc (now will get the services that is one is cluster IP  type nad Noder Port ) and port mapping will get (80:30007)
+
+->now connect to minikube ssh
+->curl -L http://<nodeIP(ec2istnaceIP>:30070/demo 
+
+now the application will be accessed
+
+Only worked with in Organix=zation(means only in the same laptop)
+
+->Now to access the outside world
+
+
+Service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-service
+spec:
+  type: LoadBalancer
+  selector:
+    app.sample-python-app
+  ports:
+    - port: 80
+      # By default and for convenience, the `targetPort` is set to
+      # the same value as the `port` field.
+      targetPort: 8000
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane
+      # will allocate a port from a range (default: 30000-32767)
+      LoadBalancer: 30007
+kubectl apply -f service.yml
+Kubectl gets svc
+curl -L http://<publicIP/demo
+
+Now we will go for Service Discovery Concept
+
+service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-service
+spec:
+  type: NodePort
+  selector:
+    app.sample-python-ap
+  ports:
+    - port: 80
+      nodePort: 30007
+
+and label and selector are different not given correct name  (selector:
+    app.sample-python-ap)
+Kubectl apply -f service.yml 
+
+
+-->Now will go for Load balancing :
+
+For traffice we use
+ KubeShark - Is a application for traffic analysis( API traffic, empowering its users to see with their own eyes what’s happening in all (hidden) corners of their K8s clusters.)
+
+To install Kube shark use ->
+sh (curl -Ls https://kubeshark.co/install)
+To run ->
+kubeshark tap
+Kuneshark tap -a (for all the namespaces)
+For Proxy ->
+kubeshark proxy(for reestablish the connection)
+For Clean ->
+kubeshark clean
+
+Localhost:8899 ->port number to access
+
+
