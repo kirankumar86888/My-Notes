@@ -1,0 +1,16 @@
+GitCommands
+------------
+git init - to create a gir repository ->.git folder us creater
+git status -> It will tell the untracked things
+git diff -> the changes done in that file
+git add calculator.sh 
+The main primary functiuonality of Git is tracking of all the files and versioning
+git commit -m "first commit"
+git log ->for history
+git remote add origin url
+gut push origin master
+
+git clone ->pull the code from git repository
+
+
+
