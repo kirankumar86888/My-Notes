@@ -1,0 +1,22 @@
+Ansible Interview Ques
+-----------------------
+1.What progamming language uses Ansible ?
+	Python and we can write our own modules
+
+2.Doe snasible support windoe=ws otr Linux- Support both windows(protocol for win rm used for connection) linux(for connectiuon we use SSH protocol)
+
+3.Difference betwween puppet and Ansible or chef , y ansible?
+
+4.Is ansible push orr pull mechanism >
+
+Push mechanism
+
+5.What programming laguge used in Ansible
+Yaml
+
+6.does ansible support all the aws 
+
+For ansible it does not matter the cloud  provider
+
+the matter is ->Public Ip address
+	      ->SSH Connection s

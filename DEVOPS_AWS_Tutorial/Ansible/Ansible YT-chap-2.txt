@@ -1,0 +1,103 @@
+Ansible YT-chap-2
+-----------------
+
+1.Install ansible in linux server
+  sudo apt update
+  sudo install ansible
+2.Verify  the version
+ ansible --version
+3.We need atleast two server one ansible server and target servers
+ For password less authentrication 
+ Copy Ip adress
+ ssh private ip address <public ip address>
+ the process :  For password less authentrication
+ ssh-keygen (it will generate public an dprivate key)
+ls  /home/ubuntu/.ssh
+  here will have pub key and private key ( id_rsa.pub, id_rsa)
+ cat id_rsa.pub (now copy the public key and paster the publuic key in the target server)
+
+server 2:
+1.ssh-keygen
+2.vim authorized_keys (paste the public rsa in here)
+
+
+/etc/ansible/hosts - where the inventory file exits by defualt 
+Now in ansible server ssh Ip address<target server> 
+Now able to connect to target server
+
+How to do u group the servers in inventory file and exceute the
+Invnetory files
+[dbservers]
+172.12.132.12
+172.98.99.08
+
+[webservers]
+172.32.44.34
+17.34.542
+
+
+Ansible adhoc Commands (for simple commands - one or 2 commands
+---------------------- 
+ ansible -i inventory <target ip address>
+ ansible -i inventory all 
+	(all ip address in iventory file)
+ ansible -i inventory all -m "shell" -a "touch devopsclass"
+	-m ->modules
+	-a ->argument - commad to execute
+
+Ansible Playbook: (For Multiple Commands)
+----------------------------------------
+->We need to install nginx and start the nginx
+
+writ ethe playbook
+
+vim nginx-playbook.yml
+
+---
+-name: Install andstart the nginx
+ hosts: all (it simple executes all servers in inventory file)
+ become: root (for root privelages access)
+ 
+ tasks:
+  -name: Install the nginx
+   apt: 
+    name: nginx
+    state: present
+  -name: Start the nginx
+   service: 
+     name: nginx
+     state: started
+
+'-' there may be list of tasks
+
+to run the commads
+ansible-playbook nginx-playbook.yml ->it will install and start the nginx (actual run)
+ansible-playbook -vvv  nginx-playbook.yml ->For more info (ssh connection,establish the connection...)
+
+Create 3 istances
+Instances will be created through Terraform
+Configure 1 instance as master through ansible
+Configure 2 other instances as worker through ansible
+
+
+
+Ansible roles:
+--------------
+->efficient way to write complex playbooks
+
+
+Ansible galaxy
+-----------------
+For structured
+ansible-galaxy role init kubernetes
+
+->ansible creates a bunch folders using this
+
+
+  meta/main.yml ->licence info and playbook info
+  defaults/mainyml ->store the variables(defulat file for variables)
+test/main.yml ->fir test
+handler/main.yml ->handling the xeceptions
+templates/main.yml ->for basic templating
+files
+

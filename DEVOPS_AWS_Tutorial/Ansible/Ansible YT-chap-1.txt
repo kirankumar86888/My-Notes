@@ -1,0 +1,45 @@
+Ansible YT-chap-1
+------------------
+Configuration Management :
+
+Is a way the configuration of the servers or Infrastructure
+
+Theses are the tasks where system adminstration do regulary for 100 servers for eg say
+
+1.Upgardes
+2.Secure Patches
+3.Installation 
+
+Configuration Management - it will manage the multiple servers
+
+We have tools like Puppet,Chef,Ansible,Salt ...etc
+
+We use ansible ->Most of the users are used
+
+Why Ansible ?
+
+Puppet 			
+
+	->Pull Mechanism mode 
+	->Agent (Master Slave Node)
+	-> Here we use Puppet Language
+
+Ansible
+
+	->Push Mechanism mode (ansible scripts  can be written in one script and and can be used in all other instances and no need to instanes in each and evry instance just need to be configure)
+	->agent Less Mode ( Name of the servers bu ip address or dns name in inventory file and password authenticationless is enabled)
+	->ansible Dynamic Inventory (It will auto detect the IP address whenever a new instance is created and it manages the servers)
+	->It supports windows and Linux is very easy has 
+very good modules
+	->Ansible is very 'Simple' we write Playbooks in 'Yaml'
+	->Using ansible Galaxy -We can write our own ansible modules  for your applications and any one can use those modules(share the modules)
+
+
+Limitations of Ansible :
+------------------------
+1. With Windows servers has slight difficult when compare with linux servers for ansible configuration
+
+2. Debugging Mode - That much easy for devops enginneer to understand
+
+3.Performnace - for 10000 servers  is low 
+
