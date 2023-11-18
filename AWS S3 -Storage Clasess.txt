@@ -1,0 +1,32 @@
+AWS S3 -Storage Clasess
+-----------------------
+When we upload a object in bucket we have the storage class
+
+We have muliple storage sclass
+Based on access the pattern we have the storage class(like how frequently we access the files)
+
+S3 Satndard->Frequently accessed data (more than once a month) with milliseconds access - availability zones (>=3) it maintained 3 copies of this file in backend
+
+Standard-IA -Infrequently accessed data (once a month) with milliseconds access - availability zones (>=3) it maintained 3 copies of this file in backend
+
+One Zone-IA -Recreatable, infrequently accessed data (once a month) stored in a single Availability Zone with milliseconds access - availability zones (1) it maintained 1 copies of this file in backend
+
+For Glacier - we need to restore and have to access
+
+Glacier Instant Retrieval - can access only once a quarter -0 Long-lived archive data accessed once a quarter with instant retrieval in milliseconds availability zones (>=3) it maintained 3 copies of this file in backend
+
+Glacier Flexible Retrieval (formerly Glacier) -Long-lived archive data accessed once a year with retrieval of minutes to hours - availability zones (>=3) it maintained 3 copies of this file in backend
+
+Glacier Deep Archive -Long-lived archive data accessed less than once a year with retrieval of hours -availability zones (>=3) it maintained 3 copies of this file in backend
+
+Glacier Data retrival :
+
+Bulk retrieval : Typically with in 5-12 hours
+Standard retrieval  : Typically within 3-5 hours.
+Expedited retrieval :typically within 1-5 min when retieving less than 250 MB
+
+
+
+Reduced redundancy -Not recommended -Noncritical, frequently accessed data with milliseconds access (not recommended as S3 Standard is more cost effective)
+
+

@@ -1,0 +1,6 @@
+AWS S3 Event Notifications :
+---------------------------
+
+Events Configuration with SNS:
+
+For notifications purpose

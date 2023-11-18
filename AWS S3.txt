@@ -1,0 +1,60 @@
+AWS S3(Simple Storage Service)
+------------------------------
+
+Understanding the fundamentals of Amazon S3
+- Setting up and configuring your S3 buckets
+- Mastering S3 security and access controls
+- Utilising S3 versioning and lifecycle policies
+- Integrating S3 with other AWS services
+- Implementing S3 Transfer Acceleration for faster uploads and downloads
+- Using S3 events and notifications for automation
+
+
+
+S3- Object based Storage:We cannot install/run any applications/os.
+1.Design to store objects
+2.bucket name should be unique accross the globe
+3.minimum size upload object(0 byte) and maximum size uplod single object (5 TB)
+4.By default we can create 100 buckets are created , this is the soft limit
+5.We can store unlimited data in a bucket
+6.No reprovisioning required
+7.Bicket name limitatioms
+	->Min vhar 3 , max char 63 length
+	->bucket name should be small and numeric
+	->bucket name should not start with  .
+	->Should not end with ., No adjasent ..
+	->Bucket name should not resemble IP address format(192.168,100,1)
+
+8,S3 is a global service, doesnt required region selection
+9.While creating we need to choose the region .Data phsically reside inside the region AZ's
+
+
+
+
+Making the objects to public(two ways by using ACL and buket policies)
+
+By using ACL making object to be public
+
+1.Go to the object permissions ->Block public access (bucket settings) ->make it as off
+2.Enable ACLs - To enable Acl ->Go to Permissions ->Object Ownership- click on ACLs enabled with acknowledgment and asave
+3.Now select the object - action- make public using ACL -click on make public 
+
+S3 Free tier Eligibility
+---------------------
+
+5GB standard Storage
+-->2000 PUT (upload) /20,000 Get (Download)
+
+S3 Pricing :
+------------
+->Based on 
+	->How much data we are storing
+	->How many Get /put operations are done
+	->Data retrivals
+
+
+
+
+
+
+

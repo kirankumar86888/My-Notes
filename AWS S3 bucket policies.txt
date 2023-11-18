@@ -1,0 +1,7 @@
+AWS S3 bucket policies:
+-----------------------
+
+IAM permissions are user level
+
+Rresource level acces - we use bucket level policies
+How to generate the bucket policies

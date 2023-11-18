@@ -1,0 +1,13 @@
+AWS S3 Replication
+------------------
+
+For backup purpose - we will replicate data 
+
+If we replicate the data same region - same region replication - no pay is thereIf we replicate the data another region - trans region replication - pay is there
+
+Automaticaly to replicate the data
+
+->Management ->replication rules ->create replication rule->(versioning should enabled both source and destination bucket)->mubai- asian replucation rule(rule name) ->Source bucket ->prefix nothing folder (only that data will replicate to destination bucket) ->Iam role(creater a new role)-storage class(target storage class)-Additional replicatiojn options(required check in)- click on save
+
+
+

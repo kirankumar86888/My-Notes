@@ -1,0 +1,22 @@
+AWS S3 Version
+--------------
+
+S3 bucket - Properties
+
+Before this -We have a file we done multiple edit to that file and uploaded - if use see we will have the lastest the doc only - not previous edited files files visible
+
+If we delte the file - there is no chance to get back that file 
+
+Bucket Versioning :
+
+->By Defualt versioning will be in suspended stage
+->when  versioning isenabled on bucket, if we delete an object
+
+Versioning :HIDE
+	->S3 will show most recent uploaded object only/current version objects
+	->We will get a Delete Marker
+	->To get object back /undo delete , Set version to SHOW ,Delete the delete markr
+
+Versioning :SHOW
+
+	->If we delete an object , it delete permanently

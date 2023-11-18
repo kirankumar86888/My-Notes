@@ -1,0 +1,55 @@
+AWS S3 Lifecycle rules
+----------------------
+
+Automaticalling does the following things 
+->Changing the Storage Class 
+->Expiring the object
+
+By using these two transion we can go for life cycle rule
+
+S3 standard
+
+S3 Standard IA
+
+s3Intelligient -tiering
+
+S3 one Zone -IA
+
+S3 Glacier Instant Retrieval
+
+S3 glacier Flexibal Retrieval
+
+S3 Glacier Deep Archive
+
+Here we can change the storage class from s3 stanadrd to S3 standard 1a/s3Intelligient -tiering/S3 one Zone -IA/S3 Glacier Instant Retrieval/S3 glacier Flexibal Retrieval/S3 Glacier Deep Archive
+
+Hre In the same way -s3Intelligient -tiering/S3 one Zone -IA/S3 Glacier Instant Retrieval/S3 glacier Flexibal Retrieval/S3 Glacier Deep Archive
+
+3rd -S3 one Zone -IA/S3 Glacier Instant Retrieval/S3 glacier Flexibal Retrieval/S3 Glacier Deep Archive
+
+4th - /S3 Glacier Instant Retrieval/S3 glacier Flexibal Retrieval/S3 Glacier Deep Archive
+
+5th - S3 glacier Flexibal Retrieval/S3 Glacier Deep Archive
+
+Like this we can forward selection of storage classes
+but from S3 Glacier Deep aechive to S3 stanadrdd we cannot go (backward process isn ot there) 
+
+
+steps:
+
+Create Lifecycle rule ->Lifecycle rule name ->Choose a rule scope )like apply to all objects /limit the scope)
+->Life cycle rule action
+check the below actions  as oer the convient
+
+Move current versions of objects between storage classes
+Move noncurrent versions of objects between storage classes
+Expire current versions of objects
+Permanently delete noncurrent versions of objects
+
+
+->Provide the Transition current versions of objects between storage classes
+From which storage class to what storage class
+
+->for non current versions alsoo -> provide the info if needed ->Transition noncurrent versions of objects between storage classes
+->with in how many days need to deleted the object provide info ->Expire current versions of objects
+->create rule
